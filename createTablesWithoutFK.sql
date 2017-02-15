@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `Results` (
 ) ;
 
 --
--- Dumping data for table `tours`
+-- Dumping data for table `Results`
 --
 INSERT INTO `Results` (`rId`, `Score`, `Date`) VALUES
 (1, 21, '2017-02-15');
