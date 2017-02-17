@@ -24,7 +24,7 @@ public class Quiz {
 
     public Quiz() {
     }
-
+//
     public Quiz(UUID id, String title, String module, Date dateCreated, boolean avaliable, List<Question> questions) {
         this.id = id;
         this.title = title;

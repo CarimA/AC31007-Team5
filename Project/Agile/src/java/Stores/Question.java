@@ -24,7 +24,7 @@ public class Question {
 
     public Question() {
     }
-
+//
     public Question(UUID id, int number, String question, Blob image, int points, List<Answer> answers) {
         this.id = id;
         this.number = number;
