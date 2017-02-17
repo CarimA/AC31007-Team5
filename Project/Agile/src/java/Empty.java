@@ -9,5 +9,5 @@
  * @author carimakeju
  */
 public class Empty {
-    
+    ///
 }
