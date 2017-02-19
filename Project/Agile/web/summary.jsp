@@ -12,6 +12,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form method="POST" action="Summary">
+            <ul>
+                <li>ID <input type="text" name="id"></li>
+                <li>Firstname <input type="text" name="firstname"></li>
+                <li>Lastname <input type="text" name="lastname"></li>
+                <li>Module <input type="text" name="module"></li>
+            </ul>
+            <input type="submit" value="Request">
+        </form>
     </body>
 </html>
