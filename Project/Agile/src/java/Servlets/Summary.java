@@ -25,6 +25,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import testpdf.createPdf;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
  *
@@ -98,21 +99,34 @@ public class Summary extends HttpServlet {
         PDPage page = document.getPage(0);
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
         //Begin the Content stream 
+      //Begin the Content stream 
       contentStream.beginText(); 
        
-      //Setting the font to the Content stream  
-      contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+      //Setting the font to the Content stream
+      contentStream.setFont( PDType1Font.TIMES_ROMAN, 16 );
+       
+      //Setting the leading
+      contentStream.setLeading(14.5f);
 
-      //Setting the position for the line 
-      contentStream.newLineAtOffset(50, 700);
+      //Setting the position for the line
+      contentStream.newLineAtOffset(25, 725);
 
-      String text = "Matric Number: " + id;
+      String text1 = "Maticulation number: " + id;
+      String text2 = "Firstname: " + firstname;
+      String text3 = "Lastname: " + lastname;
+      String text4 = "Module: " + module;
 
-      //Adding text in the form of string 
-      contentStream.showText(text);      
-
+      //Adding text in the form of string
+      contentStream. showText(text1);
+      contentStream.newLine();
+      contentStream. showText(text2);
+      contentStream.newLine();
+      contentStream. showText(text3);
+      contentStream.newLine();
+      contentStream. showText(text4);
       //Ending the content stream
       contentStream.endText();
+
 
       System.out.println("Content added");
 
