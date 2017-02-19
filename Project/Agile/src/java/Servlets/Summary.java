@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +27,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import testpdf.createPdf;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.awt.Desktop;
 
 /**
  *
@@ -76,7 +78,10 @@ public class Summary extends HttpServlet {
             session.setAttribute("lastname", lastname);
             session.setAttribute("module", module);
             rd = request.getRequestDispatcher("pdfsummary.jsp");
-            createPDF(id,firstname,lastname,module);
+            String filename = "summary";
+            String filepathname = System.getProperty("user.dir") + "\\" + filename + ".pdf";
+            createPDF(id,firstname,lastname,module,filepathname);
+            openPDF(filepathname);
         }
         else
         {
@@ -85,10 +90,10 @@ public class Summary extends HttpServlet {
         rd.forward(request, response);
         
     }
-    public void createPDF(String id, String firstname, String lastname, String module) throws IOException
+    public void createPDF(String id, String firstname, String lastname, String module, String filepathname) throws IOException
     {
          //Creating PDF document object 
-        PDDocument document = new PDDocument();  
+        PDDocument document = new PDDocument();  ;
         for (int i=0; i<3; i++) 
         {
             //Creating a blank page 
@@ -127,7 +132,6 @@ public class Summary extends HttpServlet {
       //Ending the content stream
       contentStream.endText();
 
-
       System.out.println("Content added");
 
       //Closing the content stream
@@ -136,21 +140,39 @@ public class Summary extends HttpServlet {
         try 
         {
             //Saving the document
-            document.save("C:/Users/Aleksandr/Desktop/test.pdf");
+            
+            document.save(filepathname);
         } 
         catch (IOException ex) 
         {
-            Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("PDF created");
+        System.out.println("PDF created" + filepathname);
         try 
         {
-            //Closing the document
+           //Closing the document
             document.close();
         } 
         catch (IOException ex) 
         {
             Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void openPDF(String filepathname)
+    {
+        try {
+            File file = new File(filepathname);
+            if (file.exists()) {
+                long startTime = System.currentTimeMillis();
+                Desktop.getDesktop().open(file);
+                long endTime = System.currentTimeMillis();
+                System.out.println("Total time taken to open file -> "+ file.getName() +" in "+ (endTime - startTime) +" ms");              
+            } else {
+                System.out.println("File not exits -> "+ file.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
