@@ -57,8 +57,13 @@ public class login extends HttpServlet {
         String pass = request.getParameter("pass");
         
         HttpSession session = request.getSession();
+        boolean loggedIn = false;
+        //Add salt-stuff, pretending passwords stored in plaintext for now
         
-        if (/*Login legit*/!user.equals("a")) {
+        
+        
+        
+        if (loggedIn) {
             String pos = "staff"; //GET POSITION
             session.setAttribute("username", user);
             session.setAttribute("position", pos);
