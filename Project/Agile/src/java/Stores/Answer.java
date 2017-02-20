@@ -15,15 +15,17 @@ public class Answer {
 //
     UUID id;
     int number;
+    String answer;
     String explanation;
     boolean right;
     
     public Answer() {
     }
 
-    public Answer(UUID id, int number, String explanation, boolean right) {
+    public Answer(UUID id, int number, String answer, String explanation, boolean right) {
         this.id = id;
         this.number = number;
+        this.answer = answer;
         this.explanation = explanation;
         this.right = right;
     }
@@ -44,6 +46,14 @@ public class Answer {
         this.number = number;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+    
     public String getExplanation() {
         return explanation;
     }
