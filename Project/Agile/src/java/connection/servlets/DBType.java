@@ -9,6 +9,8 @@ package connection.servlets;
  *
  * @author Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
  */
+
+
 public enum DBType {
 MYSQLDB
 }
