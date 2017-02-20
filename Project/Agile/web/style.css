@@ -11,3 +11,11 @@ and open the template in the editor.
 body {
     font-family: Verdana;
 }
+
+div.header {
+    text-align: center; 
+    padding: 1%;
+    background-color: black; 
+    opacity: 0.3; 
+    filter: alpha(opacity=30);
+}
