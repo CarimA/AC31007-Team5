@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 20-Feb-2017, 13:44:11
+    Document   : QuizOverview
+    Created on : 20-Feb-2017, 13:51:04
     Author     : danielward
 --%>
 
@@ -20,19 +20,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Quiz thing</title>
+        <title>Quiz Overview</title>
     </head>
     <%@include file="header.jsp"%>
     <body>
-        <h1>Quiz thing</h1>
-        <div>
-            <h3>Testing buttons, shhh</h3>
-            <a href = "QuizOverview.jsp" class = "btn btn-primary btn-lg" role = "button"> Quiz Overview </a>
-            <a href = "editQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> Quiz Edit </a>
-            <a href = "login.jsp" class = "btn btn-primary btn-lg" role = "button"> Login </a>
-            <a href = "pdfsummary.jsp" class = "btn btn-primary btn-lg" role = "button"> PDF Summary </a>
-            <a href = "summary.jsp" class = "btn btn-primary btn-lg" role = "button"> Summary </a>
-        </div>
+        <h1>Quiz Overview</h1>
     </body>
     <%@include file="footer.jsp"%>
 </html>
