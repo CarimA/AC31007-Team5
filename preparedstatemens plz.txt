@@ -1,0 +1,7 @@
+get all quizes by module
+get login via name
+get quiz via id/name/modules???
+get all questions for a quiz
+get all completed quizzes
+
+http://silva.computing.dundee.ac.uk/2016-agileteam5/AC31007-Team5/Project/Agile/web/
