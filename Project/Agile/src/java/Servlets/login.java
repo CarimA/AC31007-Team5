@@ -6,8 +6,11 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import Models.LoginModel;
+import Stores.Person;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,21 +55,21 @@ public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd;
+        LoginModel lm = new LoginModel();
         
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         
         HttpSession session = request.getSession();
-        boolean loggedIn = false;
+        Person person = lm.checkLogin(user, pass);
         //Add salt-stuff, pretending passwords stored in plaintext for now
         
         
         
         
-        if (loggedIn) {
+        if (person == null) {
             String pos = "staff"; //GET POSITION
-            session.setAttribute("username", user);
-            session.setAttribute("position", pos);
+            session.setAttribute("person", person);
             if (true) {
                 rd = request.getRequestDispatcher("page.jsp");
             } else {

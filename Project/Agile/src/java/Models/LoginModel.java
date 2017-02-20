@@ -7,6 +7,7 @@ package Models;
 
 import Stores.Person;
 import java.sql.*;
+import java.util.UUID;
 
 /**
  *
@@ -30,15 +31,21 @@ public class LoginModel {
     public Person checkLogin(String user, String pass) {
         Person person = null;
         try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(
-                "SELECT * FROM person where pId = ?");
+            //ADD MATRIC ID TO DATABASE
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where Matric = ?");
+            statement.setString(1, user);
+            ResultSet rs = statement.executeQuery();
             
-
             if (rs.next()) {
                 if (rs.getString("Password").equals(pass)) {
                     person = new Person();
-                    //Add fields
+                    
+                    UUID id;
+                    id = (UUID) rs.getObject("pId");
+                    person.setId(id);
+                    person.setName(rs.getString("Name"));
+                    person.setEmail(rs.getString("Email"));
+                    person.setPosition(rs.getString("Position"));
                 }
                 
             }
