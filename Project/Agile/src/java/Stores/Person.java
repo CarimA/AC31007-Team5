@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public class Person {
     UUID id;
-    String firstname;
+    String name;
     String password;
     String email;
     String position;
@@ -21,10 +21,10 @@ public class Person {
     {
         
     }
-    public Person(UUID id, String firstname,String password, String email,String position, String salt)
+    public Person(UUID id, String name,String password, String email,String position, String salt)
     {
         this.id = id;
-        this.firstname = firstname;
+        this.name = name;
         this.password = password;
         this.email = email;
         this.position = position;
@@ -39,15 +39,15 @@ public class Person {
         this.id = id;
     }
     
-    public String getFirstname(String firstname) {
-        return firstname;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setName(String firstname) {
+        this.name = firstname;
     }
     
-    public String getPassword(String password) {
+    public String getPassword() {
         return password;
     }
 
@@ -55,7 +55,7 @@ public class Person {
         this.password = password;
     }
     
-    public String getEmail(String email) {
+    public String getEmail() {
         return email;
     }
 
@@ -63,15 +63,15 @@ public class Person {
         this.email = email;
     }
     
-    public String getPosition(String position) {
+    public String getPosition() {
         return position;
     }
 
-    public void setModule(String position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 
-    public String getSalt(String salt) {
+    public String getSalt() {
         return salt;
     }
 
