@@ -39,7 +39,7 @@ public void executeSQL() {
    try {
      Statement statement = connection.createStatement();
      ResultSet rs = statement.executeQuery(
-       "SELECT * FROM person");
+       "SELECT * FROM answer");
      while (rs.next()) {
        System.out.println(rs.getString(1));
 }
