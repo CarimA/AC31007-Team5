@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form method="POST" action="Summary">
+        <form method="POST" action="StudentSummary">
             <ul>
                 <li>ID <input type="text" name="id"></li>
                 <li>Firstname <input type="text" name="firstname"></li>

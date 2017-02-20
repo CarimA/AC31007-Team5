@@ -5,6 +5,8 @@
  */
 package Servlets;
 
+import connection.servlets.TestCon;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -28,13 +30,15 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import testpdf.createPdf;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.awt.Desktop;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
  * @author Aleksandr
  */
-@WebServlet(name = "Summary", urlPatterns = {"/Summary"})
-public class Summary extends HttpServlet {
+@WebServlet(name = "StudentSummary", urlPatterns = {"/StudentSummary"})
+public class StudentSummary extends HttpServlet {
     
     
     /**
@@ -63,6 +67,7 @@ public class Summary extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         RequestDispatcher rd;
         String id = request.getParameter("id");
         String firstname = request.getParameter("firstname");
@@ -78,10 +83,10 @@ public class Summary extends HttpServlet {
             session.setAttribute("lastname", lastname);
             session.setAttribute("module", module);
             rd = request.getRequestDispatcher("pdfsummary.jsp");
-            String filename = "summary";
-            String filepathname = System.getProperty("user.dir") + "\\" + filename + ".pdf";
-            createPDF(id,firstname,lastname,module,filepathname);
-            openPDF(filepathname);
+            //String filename = "summary";
+            //String filepathname = System.getProperty("user.dir") + "\\" + filename + ".pdf";
+            //createPDF(id,firstname,lastname,module,filepathname);
+            //openPDF(filepathname);
         }
         else
         {
