@@ -20,11 +20,19 @@
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
             
             %>
+            <form method="POST" action="EditQuiz">
             <h1>Quiz <%=quiz.getTitle()%></h1>
+            <p>Edit title</p>
+            <input type="text" name="title">
             <h2>Module <%=quiz.getModule()%></h2>
+            <p>Edit module</p>
+            <input type="text" name="module">
             <h2>Created <%=quiz.getDateCreated()%></h2>
             <h2>Avaliable <%=quiz.isAvaliable()%></h2>
+            <p>Edit Avaliablity</p>
+            <input type="checkbox" name="avaliable">
             
+            </form>
             <ul> Questions
         <%
             Iterator<Question> iter;
