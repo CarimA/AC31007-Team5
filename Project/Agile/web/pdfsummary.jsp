@@ -13,5 +13,15 @@
     </head>
     <body>
         Summary is ready... Download link...
+        <%
+            String[] explanation = request.getParameterValues("Explanation");
+            if (explanation != null) {
+        %>
+        <ul>
+            <li><%= explanation %></li>
+        </ul>
+        <%
+            }
+        %>
     </body>
 </html>

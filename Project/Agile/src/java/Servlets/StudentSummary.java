@@ -5,7 +5,7 @@
  */
 package Servlets;
 
-import connection.servlets.TestCon;
+import java.sql.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -40,6 +40,11 @@ import java.sql.SQLException;
 @WebServlet(name = "StudentSummary", urlPatterns = {"/StudentSummary"})
 public class StudentSummary extends HttpServlet {
     
+    Connection connection;
+    
+    public StudentSummary() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+}
     
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -67,7 +72,16 @@ public class StudentSummary extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        try {
+            connectToDB();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM answer");
+            while (rs.next()) {
+            System.out.println("Database output: " + rs.getString(3));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentSummary.class.getName()).log(Level.SEVERE, null, ex);
+        }
         RequestDispatcher rd;
         String id = request.getParameter("id");
         String firstname = request.getParameter("firstname");
@@ -180,6 +194,12 @@ public class StudentSummary extends HttpServlet {
             e.printStackTrace();
         }
     }
+    
+    public void connectToDB() throws SQLException {
+     connection = DriverManager.getConnection(
+       "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+  }
+
 
     /**
      * Returns a short description of the servlet.

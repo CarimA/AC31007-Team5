@@ -6,6 +6,14 @@
 package Servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +28,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "PdfSummary", urlPatterns = {"/PdfSummary"})
 public class PdfSummary extends HttpServlet {
-
+    
+    Connection connection;
+    
+    public PdfSummary() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    Class.forName("com.mysql.jdbc.Driver").newInstance();
+}
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,9 +58,23 @@ public class PdfSummary extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("pdfsummary.jsp");
+        
+        try {
+            connectToDB();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM answer");
+            String explanation = rs.getString(3);
+            System.out.println ("Explanation: " + explanation);
+            //while (rs.next()) {
+            //System.out.println("Database output: " + rs.getString("Answer"));
+            //rs.getString("Answer");
+            request.setAttribute("Explanation", explanation);
+            //}
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentSummary.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         rd.forward(request, response);
-        
-        
     }
 
     /**
@@ -73,5 +101,10 @@ public class PdfSummary extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    public void connectToDB() throws SQLException {
+     connection = DriverManager.getConnection(
+       "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+  }
 
 }
