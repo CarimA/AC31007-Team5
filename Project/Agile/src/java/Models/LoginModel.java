@@ -47,7 +47,18 @@ public class LoginModel {
         }
     }
     
-    public boolean registerUser(String userID, String password, String displayName, String email, String position) {
-        return true;
+    public User registerUser(String userID, String password, String displayName, String email, String position) {
+        try {
+            return User.register(connection, userID, password, displayName, email, position);
+        } catch (UsernameInvalidException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (PasswordInvalidException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }

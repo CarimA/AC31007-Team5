@@ -78,7 +78,7 @@ public class User {
     
     public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {        
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person where pId = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             
@@ -108,7 +108,7 @@ public class User {
         }
     }
     
-    public static User register(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {    
+    public static User register(Connection connection, String id, String password, String displayName, String email, String position) throws UsernameInvalidException, PasswordInvalidException, SQLException {    
         // check ID isn't taken
         
         // check password requirements (todo)
@@ -118,30 +118,34 @@ public class User {
         // return new user instance
         
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person where pId = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             
-            if (!rs.next()) {
+            if (rs.next()) {
                 throw new UsernameInvalidException();
             }
 
-            String hashedPassword = rs.getString("Password");
-            String displayName = rs.getString("DisplayName");
-            String salt = rs.getString("Salt");
-            String email = rs.getString("Email");
-            String position = rs.getString("Position");
-
             rs.close();
             statement.close();
-            connection.close();
-        
-            User u = new User(id, displayName, hashedPassword, salt, email, position);
-            if (u.checkPassword(password)) {
-                return u;
-            } else {
+            
+            if (false/*ADD PASSWORD VALIDITY CHECK*/) {
                 throw new PasswordInvalidException();
             }
+            
+            User user = new User(id, displayName, password, email, position);
+            String salt = user.getSalt();
+            
+            statement = connection.prepareStatement("INSERT INTO Person (pId, DisplayName, Password, Email, Position, Salt) values (?, ?, ?, ?, ?, ?)");
+            statement.setString(1, id);
+            statement.setString(2, displayName);
+            statement.setString(3, password);
+            statement.setString(4, email);
+            statement.setString(5, position);
+            statement.setString(6, salt);
+            statement.executeQuery();
+            
+            return user;
         }
         catch (UsernameInvalidException | PasswordInvalidException ex) {
             throw ex;
