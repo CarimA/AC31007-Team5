@@ -19,6 +19,15 @@ public class User {
     private String salt;
     private Position position;
     
+    public User() { }
+    public User(String username, String password, String email, Position position) {
+        setId(UUID.randomUUID());
+        setUsername(username);
+        setPassword(password);
+        setEmail(email);
+        setPosition(position);
+    }
+    
     // getters
     public UUID getId() { return id; }
     public String getUsername() { return username; }
@@ -31,13 +40,15 @@ public class User {
     public void setId(UUID id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { 
-        // set a new salt
-        
+        // set a new random salt
+        setSalt(UUID.randomUUID().toString());
+                
         // hash the password
         
         // store new password
         this.password = password; 
     }
+    public void setSalt(String salt) { this.salt = salt; }
     public void setEmail(String email) { this.email = email; }
     public void setPosition(Position position) { this.position = position; }
     
