@@ -34,7 +34,7 @@
                 <br/>
                 <p>Answer is <%=a.isRight()%></p>
                 <p>Set right answer</p>
-                <input type=checkbox name="right" value="right"> This is the correct answer.
+                <input type=checkbox name="right" value="right" <%if(a.isRight()){%>checked="checked"<%}%>> This is the correct answer.
                 <br/>
                 <input type="submit" value="Submit">
                 </form>
