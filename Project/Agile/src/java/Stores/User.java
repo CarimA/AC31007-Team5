@@ -5,8 +5,13 @@
  */
 package Stores;
 
+import Exception.PasswordInvalidException;
+import Exception.UsernameInvalidException;
 import Misc.Helpers;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.UUID;
 
 /**
@@ -19,13 +24,21 @@ public class User {
     private String password;
     private String email;
     private String salt;
-    private Position position;
+    private String position;
     
-    public User() { }
-    public User(String id, String displayName, String password, String email, Position position) {
+    private User() { }
+    private User(String id, String displayName, String password, String email, String position) {
         setId(id);
         setDisplayName(displayName);
-        setPassword(password);
+        setNewPassword(password);
+        setEmail(email);
+        setPosition(position);
+    }
+    private User(String id, String displayName, String hashedPassword, String salt, String email, String position) {
+        setId(id);
+        setDisplayName(displayName);
+        setPassword(hashedPassword);
+        setSalt(salt);
         setEmail(email);
         setPosition(position);
     }
@@ -36,12 +49,15 @@ public class User {
     private String getPassword() { return password; }
     public String getEmail() { return email; }
     private String getSalt() { return salt; }
-    public Position getPosition() { return position; }
+    public String getPosition() { return position; }
     
     // setters
     private void setId(String id) { this.id = id; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
-    public void setPassword(String password) { 
+    public void setPassword(String password) {
+        
+    }
+    public void setNewPassword(String password) { 
         // set a new random salt
         setSalt(UUID.randomUUID().toString());
                 
@@ -53,18 +69,83 @@ public class User {
     }
     private void setSalt(String salt) { this.salt = salt; }
     public void setEmail(String email) { this.email = email; }
-    public void setPosition(Position position) { this.position = position; }
+    public void setPosition(String position) { this.position = position; }
     
     public enum Position {
         Student,
         Staff
     };
     
-    public static User login(Connection connection, String id, String password) {
+    public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {        
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            
+            if (!rs.next()) {
+                throw new UsernameInvalidException();
+            }
+
+            String hashedPassword = rs.getString("Password");
+            String displayName = rs.getString("DisplayName");
+            String salt = rs.getString("Salt");
+            String email = rs.getString("Email");
+            String position = rs.getString("Position");
+
+            rs.close();
+            statement.close();
+            connection.close();
         
-        User u = new User(
-                
-        )
+            User u = new User(id, displayName, hashedPassword, salt, email, position);
+            if (u.checkPassword(password)) {
+                return u;
+            } else {
+                throw new PasswordInvalidException();
+            }
+        }
+        catch (UsernameInvalidException | PasswordInvalidException ex) {
+            throw ex;
+        }
+    }
+    
+    public static User register(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {    
+        // check ID isn't taken
+        
+        // check password requirements (todo)
+        
+        // insert user into table
+        
+        // return new user instance
+        
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            
+            if (!rs.next()) {
+                throw new UsernameInvalidException();
+            }
+
+            String hashedPassword = rs.getString("Password");
+            String displayName = rs.getString("DisplayName");
+            String salt = rs.getString("Salt");
+            String email = rs.getString("Email");
+            String position = rs.getString("Position");
+
+            rs.close();
+            statement.close();
+            connection.close();
+        
+            User u = new User(id, displayName, hashedPassword, salt, email, position);
+            if (u.checkPassword(password)) {
+                return u;
+            } else {
+                throw new PasswordInvalidException();
+            }
+        }
+        catch (UsernameInvalidException | PasswordInvalidException ex) {
+            throw ex;
+        }
     }
     
     public boolean checkPassword(String password) {

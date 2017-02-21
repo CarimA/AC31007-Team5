@@ -5,9 +5,13 @@
  */
 package Models;
 
+import Exception.PasswordInvalidException;
+import Exception.UsernameInvalidException;
 import Stores.User;
 import java.sql.*;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,41 +32,22 @@ public class LoginModel {
         }
     }
     
-    public User checkLogin(String user, String pass) {
-        User person = null;
+    public User checkLogin(String username, String password) {
         try {
-            //ADD MATRIC ID TO DATABASE
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
-            statement.setString(1, user);
-            ResultSet rs = statement.executeQuery();
-            
-            if (rs.next()) {
-                if (rs.getString("Password").equals(pass)) {
-                    person = new User();
-                    
-                    String id;
-                    id = rs.getString("pId");
-                    person.setId(id);
-                    person.setName(rs.getString("Name"));
-                    person.setEmail(rs.getString("Email"));
-                    person.setPosition(rs.getString("Position"));
-                }
-                
-            }
-            
-            rs.close();
-            statement.close();
-            connection.close();
-            
-            return person;
-            
-        }
-       catch(SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
-            System.out.println("SQLState:     " + e.getSQLState());
-            System.out.println("VendorError:  " + e.getErrorCode());
+            return User.login(connection, username, password);
+        } catch (UsernameInvalidException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (PasswordInvalidException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
     
+    public boolean registerUser(String userID, String password, String displayName, String email, String position) {
+        return true;
+    }
 }
