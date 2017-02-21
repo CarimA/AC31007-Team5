@@ -65,9 +65,6 @@ public class register extends HttpServlet {
         HttpSession session = request.getSession();
         User user = lm.registerUser(userID, pass, displayName, email, position);
         
-        
-        
-        
         if (user != null) {
             session.setAttribute("person", user);
             if (user.getPosition() == "Staff") {

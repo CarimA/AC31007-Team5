@@ -63,9 +63,6 @@ public class login extends HttpServlet {
         HttpSession session = request.getSession();
         User user = lm.checkLogin(userID, pass);
         
-        
-        
-        
         if (user != null) {
             session.setAttribute("person", user);
             if (user.getPosition() == "Staff") {

@@ -22,7 +22,7 @@
                 <li>Position <input type="radio" name="position" value="Staff"> Staff 
                 <input type="radio" name="position" value="Student"> Student </li>
             </ul>
-            <input type="submit" value="Login">
+            <input type="submit" value="Register User">
         </form>
     </body>
 </html>
