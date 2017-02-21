@@ -32,7 +32,7 @@ public class LoginModel {
         Person person = null;
         try {
             //ADD MATRIC ID TO DATABASE
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where Matric = ?");
             statement.setString(1, user);
             ResultSet rs = statement.executeQuery();
             

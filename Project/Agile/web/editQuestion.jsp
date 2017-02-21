@@ -27,11 +27,11 @@
         <p>Edit Question</p>
          <%// change this%>
         <form method="POST" action="EditQuiz">
-        <input type="text" name="question">
+        <input type="text" name="question<%=q.getNumber()%>">
         <p>Edit Image</p>
-        <input type="file" name="image">
+        <input type="file" name="image<%=q.getNumber()%>">
         <p>Edit points</p>
-        <input type="number" name="points" min="1" max="100">
+        <input type="number" name="points<%=q.getNumber()%>" min="1" max="100">
         <input type="submit" value="Submit">
         </form>
         <br/>
