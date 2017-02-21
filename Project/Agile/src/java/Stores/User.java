@@ -11,6 +11,7 @@ import Misc.Helpers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.UUID;
 
 /**
@@ -29,7 +30,15 @@ public class User {
     public User(String id, String displayName, String password, String email, String position) {
         setId(id);
         setDisplayName(displayName);
-        setPassword(password);
+        setNewPassword(password);
+        setEmail(email);
+        setPosition(position);
+    }
+    public User(String id, String displayName, String hashedPassword, String salt, String email, String position) {
+        setId(id);
+        setDisplayName(displayName);
+        setPassword(hashedPassword);
+        setSalt(salt);
         setEmail(email);
         setPosition(position);
     }
@@ -45,7 +54,10 @@ public class User {
     // setters
     private void setId(String id) { this.id = id; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
-    public void setPassword(String password) { 
+    public void setPassword(String password) {
+        
+    }
+    public void setNewPassword(String password) { 
         // set a new random salt
         setSalt(UUID.randomUUID().toString());
                 
@@ -64,7 +76,7 @@ public class User {
         Staff
     };
     
-    public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException {        
+    public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {        
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
             statement.setString(1, id);
@@ -84,7 +96,7 @@ public class User {
             statement.close();
             connection.close();
         
-            User u = new User(id, displayName, password, email, position);
+            User u = new User(id, displayName, hashedPassword, salt, email, position);
             if (u.checkPassword(password)) {
                 return u;
             } else {
