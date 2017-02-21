@@ -45,6 +45,7 @@ public class DBConnect {
         }
     }
     
+    //This doesn't work yet, will fix when i can be aresed.
     public ResultSet getResults(String query)
     {
         Connection connection;
