@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : 17-Feb-2017, 13:12:46
+    Document   : register
+    Created on : 21-Feb-2017, 14:25:30
     Author     : jimiwesterholm
 --%>
 
@@ -12,13 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <form method="POST" action="login">
             <ul>
                 <li>ID <input type="text" name="userID"></li>
                 <li>Password <input type="password" name="pass"></li>
+                <li>Name <input type="text" name="name"></li>
+                <li>Email <input type="text" name="email"></li>
+                <li>Position <input type="radio" name="position" value="Staff"> Staff 
+                <input type="radio" name="position" value="Student"> Student </li>
             </ul>
             <input type="submit" value="Login">
         </form>
     </body>
 </html>
+

@@ -10,7 +10,6 @@ import Models.LoginModel;
 import Stores.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.UUID;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author jimiwesterholm
  */
-@WebServlet(urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(urlPatterns = {"/register"})
+public class register extends HttpServlet {
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -39,7 +38,7 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
         rd.forward(request, response);
     }
 
@@ -59,9 +58,12 @@ public class login extends HttpServlet {
         
         String userID = request.getParameter("userID");
         String pass = request.getParameter("pass");
+        String displayName = request.getParameter("name");
+        String email = request.getParameter("email");
+        String position = request.getParameter("position");
         
         HttpSession session = request.getSession();
-        User user = lm.checkLogin(userID, pass);
+        User user = lm.registerUser(userID, pass, displayName, email, position);
         
         
         
