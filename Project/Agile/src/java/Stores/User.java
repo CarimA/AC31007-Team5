@@ -45,4 +45,8 @@ public class User {
         Student,
         Staff
     };
+    
+    public boolean checkPassword(String password) {
+        return true;
+    }    
 }
