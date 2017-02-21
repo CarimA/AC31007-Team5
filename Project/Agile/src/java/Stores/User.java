@@ -19,6 +19,7 @@ public class User {
     private String salt;
     private Position position;
     
+    // getters
     public UUID getId() { return id; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
@@ -26,7 +27,21 @@ public class User {
     public String getSalt() { return salt; }
     public Position getPosition() { return position; }
     
-    enum Position {
+    // setters
+    public void setId(UUID id) { this.id = id; }
+    public void setUsername(String username) { this.username = username; }
+    public void setPassword(String password) { 
+        // set a new salt
+        
+        // hash the password
+        
+        // store new password
+        this.password = password; 
+    }
+    public void setEmail(String email) { this.email = email; }
+    public void setPosition(Position position) { this.position = position; }
+    
+    public enum Position {
         Student,
         Staff
     };
