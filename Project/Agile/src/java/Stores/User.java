@@ -13,7 +13,7 @@ import java.util.UUID;
  * @author carimakeju
  */
 public class User {
-    private UUID id;
+    private String id;
     private String username;
     private String password;
     private String email;
@@ -21,8 +21,8 @@ public class User {
     private Position position;
     
     public User() { }
-    public User(String username, String password, String email, Position position) {
-        setId(UUID.randomUUID());
+    public User(String id, String username, String password, String email, Position position) {
+        setId(id);
         setUsername(username);
         setPassword(password);
         setEmail(email);
@@ -30,7 +30,7 @@ public class User {
     }
     
     // getters
-    public UUID getId() { return id; }
+    public String getId() { return id; }
     public String getUsername() { return username; }
     private String getPassword() { return password; }
     public String getEmail() { return email; }
@@ -38,7 +38,7 @@ public class User {
     public Position getPosition() { return position; }
     
     // setters
-    private void setId(UUID id) { this.id = id; }
+    private void setId(String id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { 
         // set a new random salt
