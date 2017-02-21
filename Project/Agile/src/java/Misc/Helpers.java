@@ -1,3 +1,5 @@
+package Misc;
+
 
 import java.security.MessageDigest;
 
@@ -11,7 +13,7 @@ import java.security.MessageDigest;
  *
  * @author carimakeju
  */
-public class Helpers {
+public final class Helpers {
     // from http://stackoverflow.com/a/25243174
     public static String sha256(String base) {
     try{

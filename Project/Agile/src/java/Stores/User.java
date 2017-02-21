@@ -5,6 +5,7 @@
  */
 package Stores;
 
+import Misc.Helpers;
 import java.util.UUID;
 
 /**
@@ -31,24 +32,25 @@ public class User {
     // getters
     public UUID getId() { return id; }
     public String getUsername() { return username; }
-    public String getPassword() { return password; }
+    private String getPassword() { return password; }
     public String getEmail() { return email; }
-    public String getSalt() { return salt; }
+    private String getSalt() { return salt; }
     public Position getPosition() { return position; }
     
     // setters
-    public void setId(UUID id) { this.id = id; }
+    private void setId(UUID id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { 
         // set a new random salt
         setSalt(UUID.randomUUID().toString());
                 
         // hash the password
+        String hashedPassword = Helpers.sha256(password + getSalt());
         
         // store new password
-        this.password = password; 
+        this.password = hashedPassword; 
     }
-    public void setSalt(String salt) { this.salt = salt; }
+    private void setSalt(String salt) { this.salt = salt; }
     public void setEmail(String email) { this.email = email; }
     public void setPosition(Position position) { this.position = position; }
     
