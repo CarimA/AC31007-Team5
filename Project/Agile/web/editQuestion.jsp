@@ -17,6 +17,11 @@
         <%
             
             Question q = (Question) request.getAttribute("Question");
+            if(q == null){
+                %>
+                <p>No question selected</p>
+        <%
+            }else{
         %>
         <p><%= q.getNumber()%> <%=q.getQuestion()%>> Worth <%=q.getPoints()%> points</p>
         <p>Edit Question</p>
@@ -47,7 +52,7 @@
     <%
             }
 
-            
+}
             
         %>
             </ul>
