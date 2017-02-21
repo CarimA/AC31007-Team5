@@ -5,7 +5,7 @@
  */
 package Models;
 
-import Servlets.TestCon;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,6 +14,9 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Stores.*;
+import com.mysql.jdbc.Blob;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
@@ -85,8 +88,38 @@ public class DBConnect {
                 q.setTitle((rs.getString("Title")));
                 q.setModule ((rs.getString("Module")));
                 q.setDateCreated((rs.getDate("DateCreated")));
-                //UUID uid = UUID.fromString(rs.getString("Id"));
-                //q.setId(uid);
+                UUID uid = UUID.fromString(rs.getString("qId"));
+                q.setId(uid);
+                
+                PreparedStatement state = connection.prepareStatement("Select * from question where QuizID = ?");
+                state.setString(1, rs.getString("qId"));
+                ResultSet sr = state.executeQuery();
+                
+                List<Question> qs = new ArrayList<>();
+                while(sr.next()){
+                    Question quest = new Question();
+                    quest.setId(UUID.fromString(sr.getString("qId")));
+                    quest.setNumber(sr.getInt("Number"));
+                    quest.setQuestion(sr.getString("Question"));
+                    quest.setPoints(sr.getInt("points"));
+                    quest.setImage((Blob) sr.getBlob("image"));
+                    
+                    List<Answer> as = new ArrayList<>();
+                    PreparedStatement s = connection.prepareStatement("Select * from answer where QuestionID = ?");
+                    s.setString(1,sr.getString("qId"));
+                    ResultSet r = s.executeQuery();
+                    while(r.next()){
+                        Answer a = new Answer();
+                        a.setId(UUID.fromString(r.getString("aId")));
+                        a.setNumber(r.getInt("Number"));
+                        a.setExplanation(query);
+                        a.setRight(r.getBoolean("Right"));
+                        as.add(a);
+                    }
+                    quest.setAnswers(as);
+                    qs.add(quest);
+                }
+                q.setQuestions(qs);
                 quizzes.add(q);
                 
             }
