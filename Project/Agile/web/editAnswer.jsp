@@ -16,7 +16,11 @@
         <%
             
                 Answer a = (Answer) request.getAttribute("Answer");
-            
+                if(a == null){
+                    %>
+                    <p>No answer selected</p>
+                    <%
+                }else{
                 %>
                 
                 <form method="POST" action="edit">
@@ -34,6 +38,7 @@
                 <br/>
                 <input type="submit" value="Submit">
                 </form>
-                       
+                       <%}
+                       %>
     </body>
 </html>

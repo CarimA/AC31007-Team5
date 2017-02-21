@@ -18,7 +18,11 @@
             // get the quiz
             // change this
             Quiz quiz = (Quiz) request.getAttribute("Quiz");
-            
+            if(quiz == null){
+                %>
+                <p>No quiz selected</p>
+        <%
+            }else{
             %>
             <form method="POST" action="EditQuiz">
             <h1>Quiz <%=quiz.getTitle()%></h1>
@@ -43,7 +47,7 @@
 
         %>
         <li><a href="/EditQuestion/<%=q.getId()%>">Edit question <%=q.getNumber()%></a></li>
-        <% }
+        <% }}
 %>
     </ul>
         
