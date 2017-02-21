@@ -7,6 +7,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -92,7 +93,23 @@ public class EditQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String[] args = request.getRequestURI().split("/");
+        
+        if(args[1].equals("/EditQuiz")){
+            String title = request.getParameter("title");
+            String module = request.getParameter("module");
+            String available = request.getParameter("available");
+        }
+        else if(args[1].equals("/EditQuestion")){
+            String question = request.getParameter("question");
+            String image = request.getParameter("image");
+            int points = parseInt(request.getParameter("available"));
+        }
+        else if(args[1].equals("/EditAnswer")){
+            String answer = request.getParameter("answer");
+            String explanation = request.getParameter("explanation");
+            String right = request.getParameter("right");
+        }
     }
 
     /**

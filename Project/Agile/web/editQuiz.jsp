@@ -33,7 +33,7 @@
             <input type="text" name="module">
             <h2>Created <%=quiz.getDateCreated()%></h2>
             <h2>Avaliable <%=quiz.isAvaliable()%></h2>
-            <p>Edit Avaliablity</p>
+            <p>Edit Availablity</p>
             <input type="checkbox" name="avaliable">
             
             </form>

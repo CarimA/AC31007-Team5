@@ -6,6 +6,7 @@
 package Stores;
 
 import Misc.Helpers;
+import java.sql.Connection;
 import java.util.UUID;
 
 /**
@@ -14,16 +15,16 @@ import java.util.UUID;
  */
 public class User {
     private String id;
-    private String username;
+    private String displayName;
     private String password;
     private String email;
     private String salt;
     private Position position;
     
     public User() { }
-    public User(String id, String username, String password, String email, Position position) {
+    public User(String id, String displayName, String password, String email, Position position) {
         setId(id);
-        setUsername(username);
+        setDisplayName(displayName);
         setPassword(password);
         setEmail(email);
         setPosition(position);
@@ -31,7 +32,7 @@ public class User {
     
     // getters
     public String getId() { return id; }
-    public String getUsername() { return username; }
+    public String getDisplayName() { return displayName; }
     private String getPassword() { return password; }
     public String getEmail() { return email; }
     private String getSalt() { return salt; }
@@ -39,7 +40,7 @@ public class User {
     
     // setters
     private void setId(String id) { this.id = id; }
-    public void setUsername(String username) { this.username = username; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
     public void setPassword(String password) { 
         // set a new random salt
         setSalt(UUID.randomUUID().toString());
@@ -58,6 +59,13 @@ public class User {
         Student,
         Staff
     };
+    
+    public static User login(Connection connection, String id, String password) {
+        
+        User u = new User(
+                
+        )
+    }
     
     public boolean checkPassword(String password) {
         String hashedPassword = Helpers.sha256(password + getSalt());
