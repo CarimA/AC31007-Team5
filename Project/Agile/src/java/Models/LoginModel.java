@@ -32,7 +32,7 @@ public class LoginModel {
         Person person = null;
         try {
             //ADD MATRIC ID TO DATABASE
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where Matric = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
             statement.setString(1, user);
             ResultSet rs = statement.executeQuery();
             
@@ -40,8 +40,8 @@ public class LoginModel {
                 if (rs.getString("Password").equals(pass)) {
                     person = new Person();
                     
-                    UUID id;
-                    id = (UUID) rs.getObject("pId");
+                    String id;
+                    id = rs.getString("pId");
                     person.setId(id);
                     person.setName(rs.getString("Name"));
                     person.setEmail(rs.getString("Email"));
