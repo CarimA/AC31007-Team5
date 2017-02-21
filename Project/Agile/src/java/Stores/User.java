@@ -5,6 +5,8 @@
  */
 package Stores;
 
+import Exception.PasswordInvalidException;
+import Exception.UsernameInvalidException;
 import Misc.Helpers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,48 +64,36 @@ public class User {
         Staff
     };
     
-    public static User login(Connection connection, String id, String password) {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
-        statement.setString(1, user);
-        ResultSet rs = statement.executeQuery();
-        
-        String hashedPassword = rs.getString("Password");
-        String salt = rs.getString("Salt");
-        String email = rs.getString("Email");
-        
-        
-        
+    public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException {        
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
             
-            if (rs.next()) {
-                if (rs.getString("Password").equals(pass)) {
-                    person = new User();
-                    
-                    String id;
-                    id = rs.getString("pId");
-                    person.setId(id);
-                    person.setName(rs.getString("Name"));
-                    person.setEmail(rs.getString("Email"));
-                    person.setPosition(rs.getString("Position"));
-                }
-                
+            if (!rs.next()) {
+                throw new UsernameInvalidException();
             }
-            
+
+            String hashedPassword = rs.getString("Password");
+            String displayName = rs.getString("DisplayName");
+            String salt = rs.getString("Salt");
+            String email = rs.getString("Email");
+            String position = rs.getString("Position");
+
             rs.close();
             statement.close();
             connection.close();
-            
-            return person;
-            
-        String displayName;
-        String salt;
-        String email;
-        Position position;
         
-        User u = new User(
-                
-                id,
-                
-        )
+            User u = new User(id, displayName, password, email, position);
+            if (u.checkPassword(password)) {
+                return u;
+            } else {
+                throw new PasswordInvalidException();
+            }
+        }
+        catch (UsernameInvalidException | PasswordInvalidException ex) {
+            throw ex;
+        }
     }
     
     public boolean checkPassword(String password) {
