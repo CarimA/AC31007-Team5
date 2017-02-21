@@ -5,10 +5,22 @@
  */
 package Stores;
 
+import java.util.UUID;
+
 /**
  *
  * @author carimakeju
  */
 public class User {
+    private UUID id;
+    private String username;
+    private String password;
+    private String email;
+    private String salt;
+    private Position position;
     
+    enum Position {
+        Student,
+        Staff
+    };
 }
