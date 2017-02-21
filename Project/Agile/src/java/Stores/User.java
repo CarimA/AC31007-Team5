@@ -19,6 +19,13 @@ public class User {
     private String salt;
     private Position position;
     
+    public UUID getId() { return id; }
+    public String getUsername() { return username; }
+    public String getPassword() { return password; }
+    public String getEmail() { return email; }
+    public String getSalt() { return salt; }
+    public Position getPosition() { return position; }
+    
     enum Position {
         Student,
         Staff
