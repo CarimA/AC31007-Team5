@@ -26,15 +26,15 @@ public class User {
     private String salt;
     private String position;
     
-    public User() { }
-    public User(String id, String displayName, String password, String email, String position) {
+    private User() { }
+    private User(String id, String displayName, String password, String email, String position) {
         setId(id);
         setDisplayName(displayName);
         setNewPassword(password);
         setEmail(email);
         setPosition(position);
     }
-    public User(String id, String displayName, String hashedPassword, String salt, String email, String position) {
+    private User(String id, String displayName, String hashedPassword, String salt, String email, String position) {
         setId(id);
         setDisplayName(displayName);
         setPassword(hashedPassword);
@@ -77,6 +77,46 @@ public class User {
     };
     
     public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {        
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            
+            if (!rs.next()) {
+                throw new UsernameInvalidException();
+            }
+
+            String hashedPassword = rs.getString("Password");
+            String displayName = rs.getString("DisplayName");
+            String salt = rs.getString("Salt");
+            String email = rs.getString("Email");
+            String position = rs.getString("Position");
+
+            rs.close();
+            statement.close();
+            connection.close();
+        
+            User u = new User(id, displayName, hashedPassword, salt, email, position);
+            if (u.checkPassword(password)) {
+                return u;
+            } else {
+                throw new PasswordInvalidException();
+            }
+        }
+        catch (UsernameInvalidException | PasswordInvalidException ex) {
+            throw ex;
+        }
+    }
+    
+    public static User register(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {    
+        // check ID isn't taken
+        
+        // check password requirements (todo)
+        
+        // insert user into table
+        
+        // return new user instance
+        
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
             statement.setString(1, id);
