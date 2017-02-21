@@ -7,7 +7,7 @@ package Servlets;
  */
 
 import Models.LoginModel;
-import Stores.Person;
+import Stores.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
@@ -57,19 +57,18 @@ public class login extends HttpServlet {
         RequestDispatcher rd;
         LoginModel lm = new LoginModel();
         
-        String user = request.getParameter("user");
+        String userID = request.getParameter("userID");
         String pass = request.getParameter("pass");
         
         HttpSession session = request.getSession();
-        Person person = lm.checkLogin(user, pass);
+        User user = lm.checkLogin(userID, pass);
         //Add salt-stuff, pretending passwords stored in plaintext for now
         
         
         
         
-        if (person == null) {
-            String pos = "staff"; //GET POSITION
-            session.setAttribute("person", person);
+        if (user == null) {
+            session.setAttribute("person", user);
             if (true) {
                 rd = request.getRequestDispatcher("page.jsp");
             } else {

@@ -5,7 +5,7 @@
  */
 package Models;
 
-import Stores.Person;
+import Stores.User;
 import java.sql.*;
 import java.util.UUID;
 
@@ -28,8 +28,8 @@ public class LoginModel {
         }
     }
     
-    public Person checkLogin(String user, String pass) {
-        Person person = null;
+    public User checkLogin(String user, String pass) {
+        User person = null;
         try {
             //ADD MATRIC ID TO DATABASE
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
@@ -38,7 +38,7 @@ public class LoginModel {
             
             if (rs.next()) {
                 if (rs.getString("Password").equals(pass)) {
-                    person = new Person();
+                    person = new User();
                     
                     String id;
                     id = rs.getString("pId");
