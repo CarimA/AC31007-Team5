@@ -39,5 +39,35 @@ public class QuizModel {
         return quiz;
     }
     
+    public void CreateQuiz(String title, String module){
+        int id = 0;
+        try {
+            Connection connection = DriverManager.getConnection(
+       "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module, DateCreated) values (?, ?, ?)");
+            statement.setString(1, title);
+            statement.setString(2, module);
+            //Date date = new Date(); SHould work?
+            //statement.setString(3, date);
+            statement.execute();
+            
+            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Title, Module, DateCreated) values (?, ?, ?)");
+            statement.setString(1, title);
+            statement.setString(2, module);
+            //Date date = new Date(); SHould work?
+            //statement.setString(3, date);
+            
+            statement.execute();
+            statement.close();
+            connection.close();
+            
+        }
+        catch(SQLException e)
+        {
+            
+        }
+    }
+    
 
 }
