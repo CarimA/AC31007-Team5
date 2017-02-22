@@ -25,7 +25,15 @@ import sun.security.ssl.Debug;
  *
  * @author finlaybrooker
  */
-@WebServlet(name = "EditQuiz", urlPatterns = {"/EditQuiz","/EditQuestion","/EditAnswer"})
+@WebServlet(name = "EditQuiz", urlPatterns = {
+    "/EditQuiz",
+    "/EditQuestion",
+    "/EditAnswer",
+    "/EditQuiz/*",
+    "/EditQuestion/*",
+    "/EditAnswer/*"
+        
+})
 public class EditQuiz extends HttpServlet {
 
     /**
@@ -71,15 +79,17 @@ public class EditQuiz extends HttpServlet {
         //System.out.println(args[0]);
         System.out.println(args[1]);
         System.out.println(args[2]);
-        //if(args[2].equals("/EditQuiz")){
+        System.out.println(args[3]);
+        if(args[2].equals("EditQuiz")){
             Quiz quiz = new Quiz();
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
             DBConnect db = new DBConnect();
-            Vector<Quiz> temp = db.getQuizes("Select * from quiz where qId = 1");
+            String query = "Select * from quiz where qId = " + args[3];
+            Vector<Quiz> temp = db.getQuizes(query);
             System.out.println(temp.size());
             quiz = temp.elementAt(0);
             
@@ -87,17 +97,17 @@ public class EditQuiz extends HttpServlet {
             request.setAttribute("Quiz",quiz);
             
             rd.forward(request, response);
-        //}
-        //else if(args[1].equals("/EditQuestion")){
+        }
+        else if(args[2].equals("EditQuestion")){
             // get question with id depicted in url
             //Question q = GetQuestion(args[2]);
             //request.setAttribute("Question", q);
-        //}
-        //else if(args[1].equals("/EditAnswer")){
+        }
+        else if(args[2].equals("EditAnswer")){
             // get answer with id depicted in url
             //Answer a = GetAnswer(args[2]);
             //request.setAttribute("Answer", a);
-        //}
+        }
         
         //processRequest(request, response);
     }
