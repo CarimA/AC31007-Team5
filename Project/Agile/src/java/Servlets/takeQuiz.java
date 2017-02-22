@@ -6,13 +6,17 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import Models.QuizModel;
+import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,31 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/takeQuiz"})
 public class takeQuiz extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet takeQuiz</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet takeQuiz at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -59,7 +38,13 @@ public class takeQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        QuizModel qm = new QuizModel();
+        
+        Quiz quiz = qm.fetchQuiz((int) request.getAttribute("quiz"));
+        session.setAttribute("quiz", null);
+        RequestDispatcher rd = request.getRequestDispatcher("");
+        rd.forward(request, response);
     }
 
     /**
@@ -73,7 +58,7 @@ public class takeQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**

@@ -4,6 +4,7 @@
     Author     : jimiwesterholm
 --%>
 
+<%@page import="Stores.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +13,26 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
+        <%
+            User user = (User) session.getAttribute("person");
+            if (user == null || user.getPosition().equals("staff")) {
+                response.sendRedirect("index.jsp");
+            }
+            
+            int i = 0;
+            boolean done = false;
+        %>
+        <h1><%quiz.getTitle%></h1>
+        <%
+            while (!done) {
+                //Get question + answers
+                
+        %>
+        
+        
+        <%
+            }
+        %>
     </body>
 </html>
