@@ -53,7 +53,7 @@ public class DBConnect {
         }
     }
     
-    /*//This doesn't work yet, will fix when i can be aresed.
+    //This doesn't work yet, will fix when i can be aresed.
     public ResultSet getResults(String query)
     {
         Connection connection;
@@ -137,12 +137,12 @@ public class DBConnect {
             return quizzes;  
         }
     }
-    */
+    
     public static void main(String[] args)
     {
         DBConnect d = new DBConnect();
         d.connectToDb();
-        /*Vector<Quiz> q = d.getQuizes("Select * from quiz");
+        Vector<Quiz> q = d.getQuizes("Select * from quiz");
         System.out.println(q.size());
         for(Quiz w : q)
         {
@@ -150,7 +150,7 @@ public class DBConnect {
             System.out.println(w.getModule());
             System.out.println(w.getTitle());
             System.out.println(w.getId());
-        }*/
+        }
    }    
 }
 

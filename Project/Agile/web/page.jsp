@@ -4,7 +4,7 @@
     Author     : jimiwesterholm
 --%>
 
-<%@page import="Stores.Person"%>
+<%@page import="Stores.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
     </head>
     <body>
         <%
-            Person user = (Person) session.getAttribute("person");
+            User user = (User) session.getAttribute("person");
             if (!user.getPosition().equals("staff")) {
                 response.sendRedirect("login.jsp");
             }
