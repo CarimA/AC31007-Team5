@@ -39,7 +39,7 @@ public class QuizModel {
         return quiz;
     }
     
-    public void CreateQuiz(String title, String module){
+    public int CreateQuiz(String title, String module){
         int id = 0;
         try {
             Connection connection = DriverManager.getConnection(
@@ -58,14 +58,18 @@ public class QuizModel {
             //Date date = new Date(); SHould work?
             //statement.setString(3, date);
             
-            statement.execute();
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                id = rs.getInt("qId");
+            }
             statement.close();
             connection.close();
-            
+            return id;
         }
         catch(SQLException e)
         {
-            
+           return 0; 
         }
     }
     
