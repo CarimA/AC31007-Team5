@@ -32,13 +32,19 @@
             <p>Edit module</p>
             <input type="text" name="module">
             <h2>Created <%=quiz.getDateCreated()%></h2>
-            <h2>Avaliable <%=quiz.isAvaliable()%></h2>
-            <p>Edit Availablity</p>
-            <input type="checkbox" name="avaliable" <%if(quiz.isAvaliable()){%>checked="checked"<%}%>>
+            <h2>Available <%=quiz.isAvaliable()%></h2>
+            <p>Edit Availability</p>
+            <p>Make available?</p> <input type="checkbox" name="avaliable" <%if(quiz.isAvaliable()){%>checked="checked"<%}%>>
             
             </form>
             <ul> Questions
         <%
+            
+            if(quiz.getQuestions().isEmpty()){
+                %>
+                <p>This Quiz has no questions</p>
+        <%
+            }
             Iterator<Question> iter;
             
             iter = quiz.getQuestions().iterator();
