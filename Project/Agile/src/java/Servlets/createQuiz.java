@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Models.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,14 +26,19 @@ public class createQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher r;
         
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        RequestDispatcher rd;
+        String title = request.getParameter("title");
+        String module = request.getParameter("module");
+        QuizModel qm = new QuizModel();
+        int QuizID = qm.CreateQuiz(title, module);
+        //todo: link the id to the create question page with rd;
+        rd = request.getRequestDispatcher("createQuestion/" + QuizID); //Is this right for a get?
     }
 
 }
