@@ -4,7 +4,7 @@
     Author     : carimakeju
 --%>
 
-<%@tag description="Consistency Wrapper Tag" pageEncoding="UTF-8"%>
+<%@tag description="Consistency Wrapper Tag" pageEncoding="UTF-8" import="Stores.*" %>
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
 
@@ -24,6 +24,20 @@
                 <div class="dynamic-column grow">
                     <ul>
                         <li><a href="#">Home</a></li>
+                        <%
+                            User user = (User)(request.getAttribute("person"));
+                            if (user == null) {
+                        %>
+                        <li><a href="/Login">Login</a></li>
+                        <li><a href="/Register">Register</a></li>
+                        <%
+                            }
+                            else {
+                        %>
+                        <li><a href="#">Hello, ${user.getDisplayName()}</a></li>
+                        <%
+                            }
+                        %>
                         <jsp:invoke fragment="header"/>
                     </ul>
                 </div>

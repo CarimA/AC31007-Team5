@@ -32,15 +32,15 @@ header h1 {
 
 header ul {
     list-style: none;
-    display: inline;
+    text-align: right;
 }
 
 header ul li {
-    
+    display: inline !important;
 }
 
 header ul li a {
-    
+    padding: 1em;
 }
 
 
