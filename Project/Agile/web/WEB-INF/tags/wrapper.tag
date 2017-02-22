@@ -28,7 +28,7 @@
                             User user = (User)(request.getAttribute("person"));
                             if (user == null) {
                         %>
-                        <li><a href="/Login">Login</a></li>
+                        <li><a href="/Agile/Login">Login</a></li>
                         <li><a href="/Register">Register</a></li>
                         <%
                             }

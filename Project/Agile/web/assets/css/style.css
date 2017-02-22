@@ -43,7 +43,9 @@ header ul li a {
     padding: 1em;
 }
 
-
+input[type=text] {
+    padding: 0.5em;
+}
 
 /* Larger than mobile */
 @media (min-width: 400px) {}
