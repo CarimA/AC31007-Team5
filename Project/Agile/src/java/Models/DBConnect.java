@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Stores.*;
-import com.mysql.jdbc.Blob;
+//import com.mysql.jdbc.Blob;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +102,7 @@ public class DBConnect {
                     quest.setNumber(sr.getInt("Number"));
                     quest.setQuestion(sr.getString("Question"));
                     quest.setPoints(sr.getInt("points"));
-                    quest.setImage((Blob) sr.getBlob("image"));
+                    //quest.setImage((Blob) sr.getBlob("image"));
                     
                     List<Answer> as = new ArrayList<>();
                     PreparedStatement s = connection.prepareStatement("Select * from answer where QuestionID = ?");

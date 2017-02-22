@@ -5,7 +5,7 @@
  */
 package Stores;
 
-import com.mysql.jdbc.Blob;
+//import com.mysql.jdbc.Blob;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,18 +18,18 @@ public class Question {
     int id;
     int number;
     String question;
-    Blob image;
+    //Blob image;
     int points;
     List<Answer> answers;
 
     public Question() {
     }
 //
-    public Question(int id, int number, String question, Blob image, int points, List<Answer> answers) {
+    public Question(int id, int number, String question, /* Blob image, */ int points, List<Answer> answers) {
         this.id = id;
         this.number = number;
         this.question = question;
-        this.image = image;
+        //this.image = image;
         this.points = points;
         this.answers = answers;
     }
@@ -50,13 +50,13 @@ public class Question {
         this.number = number;
     }
 
-    public Blob getImage() {
+    /*public Blob getImage() {
         return image;
     }
 
     public void setImage(Blob image) {
         this.image = image;
-    }
+    }*/
     
     public String getQuestion() {
         return question;
