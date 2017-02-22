@@ -23,6 +23,6 @@ function myFunction() {
         ljdpjdofkfd
         kfdjgpsjefdf</p>
         
-        <button onclick="myFunction()">Print this page</button>
+        <button onclick="myFunction()">Print Summary</button>
     </body>
 </html>
