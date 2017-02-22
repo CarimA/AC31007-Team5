@@ -39,6 +39,7 @@ public class createQuiz extends HttpServlet {
         int QuizID = qm.CreateQuiz(title, module);
         //todo: link the id to the create question page with rd;
         rd = request.getRequestDispatcher("createQuestion/" + QuizID); //Is this right for a get?
+        //Do i even want a get? just pass along a quiz object?
     }
 
 }
