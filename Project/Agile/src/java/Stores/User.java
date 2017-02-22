@@ -137,6 +137,8 @@ public class User {
             statement.setString(6, salt);
             statement.executeQuery();
             
+            connection.close();
+            
             return user;
         }
         catch (UsernameInvalidException | PasswordInvalidException ex) {
