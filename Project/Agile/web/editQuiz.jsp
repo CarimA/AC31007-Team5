@@ -34,7 +34,7 @@
             <h2>Created <%=quiz.getDateCreated()%></h2>
             <h2>Avaliable <%=quiz.isAvaliable()%></h2>
             <p>Edit Availablity</p>
-            <input type="checkbox" name="avaliable">
+            <input type="checkbox" name="avaliable" <%if(quiz.isAvaliable()){%>checked="checked"<%}%>>
             
             </form>
             <ul> Questions

@@ -88,7 +88,7 @@ public class DBConnect {
                 q.setTitle((rs.getString("Title")));
                 q.setModule ((rs.getString("Module")));
                 q.setDateCreated((rs.getDate("DateCreated")));
-                UUID uid = UUID.fromString(rs.getString("qId"));
+                int uid = rs.getInt("qId");
                 q.setId(uid);
                 
                 PreparedStatement state = connection.prepareStatement("Select * from question where QuizID = ?");
@@ -98,7 +98,7 @@ public class DBConnect {
                 List<Question> qs = new ArrayList<>();
                 while(sr.next()){
                     Question quest = new Question();
-                    quest.setId(UUID.fromString(sr.getString("qId")));
+                    quest.setId(sr.getInt("qId"));
                     quest.setNumber(sr.getInt("Number"));
                     quest.setQuestion(sr.getString("Question"));
                     quest.setPoints(sr.getInt("points"));
@@ -110,7 +110,7 @@ public class DBConnect {
                     ResultSet r = s.executeQuery();
                     while(r.next()){
                         Answer a = new Answer();
-                        a.setId(UUID.fromString(r.getString("aId")));
+                        a.setId(r.getInt("aId"));
                         a.setNumber(r.getInt("Number"));
                         a.setExplanation(query);
                         a.setRight(r.getBoolean("Right"));
@@ -142,6 +142,8 @@ public class DBConnect {
     {
         DBConnect d = new DBConnect();
         Vector<Quiz> q = d.getQuizes("Select * from quiz");
+        //Vector<Quiz> q = d.getQuizes("Select * from quiz where qId = 1");
+        
         System.out.println(q.size());
         for(Quiz w : q)
         {

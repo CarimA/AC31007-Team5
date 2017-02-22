@@ -5,14 +5,21 @@
  */
 package Servlets;
 
+import Models.DBConnect;
+import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sun.security.ssl.Debug;
 
 /**
  *
@@ -59,23 +66,38 @@ public class EditQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("We got to here");
         String[] args = request.getRequestURI().split("/");
-        
-        if(args[1].equals("/EditQuiz")){
-            // get quiz with id depicted in url
-            //Quiz quiz = GetQuiz(args[2]);
-            //request.setAttribute("Quiz", quiz);
+        //System.out.println(args[0]);
+        System.out.println(args[1]);
+        System.out.println(args[2]);
+        //if(args[2].equals("/EditQuiz")){
+            Quiz quiz = new Quiz();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else if(args[1].equals("/EditQuestion")){
+            DBConnect db = new DBConnect();
+            Vector<Quiz> temp = db.getQuizes("Select * from quiz where qId = 1");
+            System.out.println(temp.size());
+            quiz = temp.elementAt(0);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
+            request.setAttribute("Quiz",quiz);
+            
+            rd.forward(request, response);
+        //}
+        //else if(args[1].equals("/EditQuestion")){
             // get question with id depicted in url
             //Question q = GetQuestion(args[2]);
             //request.setAttribute("Question", q);
-        }
-        else if(args[1].equals("/EditAnswer")){
+        //}
+        //else if(args[1].equals("/EditAnswer")){
             // get answer with id depicted in url
             //Answer a = GetAnswer(args[2]);
             //request.setAttribute("Answer", a);
-        }
+        //}
         
         //processRequest(request, response);
     }

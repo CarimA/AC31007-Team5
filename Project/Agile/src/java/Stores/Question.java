@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 public class Question {
     
-    UUID id;
+    int id;
     int number;
     String question;
     Blob image;
@@ -25,7 +25,7 @@ public class Question {
     public Question() {
     }
 //
-    public Question(UUID id, int number, String question, Blob image, int points, List<Answer> answers) {
+    public Question(int id, int number, String question, Blob image, int points, List<Answer> answers) {
         this.id = id;
         this.number = number;
         this.question = question;
@@ -34,11 +34,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
     

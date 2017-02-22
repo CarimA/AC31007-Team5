@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 public class Answer {
 //
-    UUID id;
+    int id;
     int number;
     String answer;
     String explanation;
@@ -22,7 +22,7 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(UUID id, int number, String answer, String explanation, boolean right) {
+    public Answer(int id, int number, String answer, String explanation, boolean right) {
         this.id = id;
         this.number = number;
         this.answer = answer;
@@ -30,11 +30,11 @@ public class Answer {
         this.right = right;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 

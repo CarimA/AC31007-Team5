@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 public class Quiz {
     
-    UUID id;
+    int id;
     String title;
     String module;
     Date dateCreated;
@@ -25,7 +25,7 @@ public class Quiz {
     public Quiz() {
     }
 //
-    public Quiz(UUID id, String title, String module, Date dateCreated, boolean avaliable, List<Question> questions) {
+    public Quiz(int id, String title, String module, Date dateCreated, boolean avaliable, List<Question> questions) {
         this.id = id;
         this.title = title;
         this.module = module;
@@ -66,11 +66,11 @@ public class Quiz {
         this.avaliable = avaliable;
     }
    
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
