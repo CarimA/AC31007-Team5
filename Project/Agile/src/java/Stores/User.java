@@ -26,7 +26,10 @@ public class User {
     private String salt;
     private String position;
     
-    public User() { }
+
+   public  User() { }
+
+
     private User(String id, String displayName, String password, String email, String position) {
         setId(id);
         setDisplayName(displayName);
