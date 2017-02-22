@@ -10,6 +10,8 @@ import Exception.UsernameInvalidException;
 import Stores.User;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,4 +85,46 @@ public class UserTest {
             throw ex;
         }
     }
+    
+    @Test(expected = UsernameInvalidException.class)
+    public void checkRegisterUsernameTakenShouldFail() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
+        Connection connection = connect();
+        try {
+            User user = User.register(connection, "id-test", "123", "321", "email", "pos");
+            assertEquals(user, null);
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    @Test(expected = PasswordInvalidException.class)
+    public void checkRegisterPasswordInvalidShouldFail() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
+        // TODO: implement password requirements
+        assertEquals(true, true);
+    }
+    
+    
+    @Test
+    public void checkRegisterShouldPass() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
+        Connection connection = connect();
+        try {
+            User user = User.register(connection, "id-test2", "123", "321", "email", "pos");
+            assertNotNull(user);
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+        
+        connection = connect();
+        
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM person where pId = ?");
+        statement.setString(1, "id-test2");
+        
+        statement.execute();
+        
+        statement.close();
+        connection.close();
+    }
+    
 }
