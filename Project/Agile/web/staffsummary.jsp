@@ -25,6 +25,11 @@
     </head>
     <%@include file="header.jsp"%>
     <body>
+        <%
+            user = (User) session.getAttribute("person");
+            if (user.getPosition().equals("student")) {
+                response.sendRedirect("index.jsp");
+        } %>
         <h1>Staff Summary</h1>
         <div>
             <h3>Testing buttons, shhh</h3>

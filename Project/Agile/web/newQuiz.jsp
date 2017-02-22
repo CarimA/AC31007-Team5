@@ -24,6 +24,11 @@
     </head>
     <%@include file="header.jsp"%>
     <body>
+        <%
+            user = (User) session.getAttribute("person");
+            if (user.getPosition().equals("student")) {
+                response.sendRedirect("index.jsp");
+        } %>
         <h1>New quiz needs doing</h1>
         <div>
             <a href = "index.jsp" class = "btn btn-primary btn-lg" role = "button"> Home </a>

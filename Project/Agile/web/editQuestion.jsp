@@ -15,6 +15,10 @@
     </head>
     <body>
         <%
+            User user = (User) session.getAttribute("person");
+            if (user.getPosition().equals("student")) {
+                response.sendRedirect("index.jsp");
+            }
             
             Question q = (Question) request.getAttribute("Question");
             if(q == null){

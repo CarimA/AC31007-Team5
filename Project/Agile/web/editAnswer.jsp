@@ -4,6 +4,7 @@
     Author     : finlaybrooker
 --%>
 
+<%@page import="Stores.User"%>
 <%@page import="Stores.Answer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,6 +15,10 @@
     </head>
     <body>
         <%
+                User user = (User) session.getAttribute("person");
+                if (user.getPosition().equals("student")) {
+                    response.sendRedirect("index.jsp");
+                }
             
                 Answer a = (Answer) request.getAttribute("Answer");
                 if(a == null){
