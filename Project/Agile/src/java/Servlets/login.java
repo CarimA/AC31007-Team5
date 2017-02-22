@@ -65,10 +65,10 @@ public class login extends HttpServlet {
         
         if (user != null) {
             session.setAttribute("person", user);
-            if (user.getPosition() == "Staff") {
-                rd = request.getRequestDispatcher("page.jsp");
+            if (user.getPosition() .equals("Staff") ) {
+                rd = request.getRequestDispatcher("index.jsp");
             } else {
-                rd = request.getRequestDispatcher("page.jsp");
+                rd = request.getRequestDispatcher("index.jsp");
             }
         } else {
             rd = request.getRequestDispatcher("login.jsp");

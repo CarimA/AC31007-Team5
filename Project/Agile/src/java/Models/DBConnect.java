@@ -141,6 +141,7 @@ public class DBConnect {
     public static void main(String[] args)
     {
         DBConnect d = new DBConnect();
+        d.connectToDb();
         Vector<Quiz> q = d.getQuizes("Select * from quiz");
         //Vector<Quiz> q = d.getQuizes("Select * from quiz where qId = 1");
         
