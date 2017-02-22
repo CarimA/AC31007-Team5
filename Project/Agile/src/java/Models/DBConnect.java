@@ -116,9 +116,13 @@ public class DBConnect {
                         a.setRight(r.getBoolean("Right"));
                         as.add(a);
                     }
+                    r.close();
+                    s.close();
                     quest.setAnswers(as);
                     qs.add(quest);
                 }
+                sr.close();
+                state.close();
                 q.setQuestions(qs);
                 quizzes.add(q);
                 
