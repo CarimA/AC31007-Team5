@@ -4,10 +4,13 @@ input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointe
 
 /* additional modifications */
 .row{
-    display: flex
+    display: flex;
+    align-items: center;
+    align-content: center;
 }
 
 .dynamic-column {
+    margin: 1em;
 }
 
 .grow {

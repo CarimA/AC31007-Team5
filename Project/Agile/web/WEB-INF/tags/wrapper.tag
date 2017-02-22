@@ -12,12 +12,22 @@
     <head>
         <title>Quiz</title>
         
-        <link rel="stylesheet" href="assets/css/skeleton.min.css" />
-        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="../assets/css/skeleton.min.css" />
+        <link rel="stylesheet" href="../assets/css/style.css" />
     </head>
     <body>
         <header class="container">
-            <jsp:invoke fragment="header"/>
+            <div class="row">
+                <div class="dynamic-column">
+                    <h1>Quiz Thing</h1>
+                </div>
+                <div class="dynamic-column grow">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <jsp:invoke fragment="header"/>
+                    </ul>
+                </div>
+            </div>
         </header>
         <section class="container">
             <jsp:doBody/>    

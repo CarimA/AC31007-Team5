@@ -21,6 +21,29 @@ on small devices, paste the mobile query code up in the buttons section and styl
 there.
 */
 
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Pangolin');
+
+body { font-family: 'PT Sans', sans-serif !important; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Pangolin', cursive; }
+
+header h1 {
+    font-size: 3em;
+}
+
+header ul {
+    list-style: none;
+    display: inline;
+}
+
+header ul li {
+    
+}
+
+header ul li a {
+    
+}
+
+
 
 /* Larger than mobile */
 @media (min-width: 400px) {}
