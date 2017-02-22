@@ -73,6 +73,33 @@ public class DBConnect {
         }
     }
     
+    public Question getQuestion(String id){
+        Connection connection;
+        Question q = new Question();
+        try {
+            connection = DriverManager.getConnection(
+       "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+            PreparedStatement statement = connection.prepareStatement("Select * from question where qId = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next()){
+                q.setQuestion(rs.getString("Question"));
+                q.setNumber(rs.getInt("Number"));
+                q.setPoints(rs.getInt("points"));
+            }
+            
+            rs.close();
+            statement.close();
+            connection.close();
+            return q;
+        }
+        catch(SQLException e) {
+         return q;  
+        }
+        
+    }
+    
     public Vector<Quiz> getQuizes(String query)
     {
         Connection connection;

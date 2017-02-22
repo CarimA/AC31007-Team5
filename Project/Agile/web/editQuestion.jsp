@@ -15,10 +15,10 @@
     </head>
     <body>
         <%
-            User user = (User) session.getAttribute("person");
-            if (user.getPosition().equals("student")) {
-                response.sendRedirect("index.jsp");
-            }
+            //User user = (User) session.getAttribute("person");
+            //if (user.getPosition().equals("student")) {
+            //    response.sendRedirect("index.jsp");
+            //}
             
             Question q = (Question) request.getAttribute("Question");
             if(q == null){
@@ -27,7 +27,7 @@
         <%
             }else{
         %>
-        <p><%= q.getNumber()%> <%=q.getQuestion()%>> Worth <%=q.getPoints()%> points</p>
+        <p><%= q.getNumber()%> <%=q.getQuestion()%> Worth <%=q.getPoints()%> points</p>
         <p>Edit Question</p>
          <%// change this%>
         <form method="POST" action="EditQuiz">
@@ -41,11 +41,11 @@
         <br/>
         <%// change this%>
         <%
-            if(q.getAnswers().isEmpty()){
+            if(q.getAnswers() == null || q.getAnswers().isEmpty()){
                 %>
                 <p>This Question has no answers</p>
         <%
-            }
+            }else{
             Iterator<Answer> iterator;
             iterator = q.getAnswers().iterator();%>
             <ul>Answers
@@ -59,7 +59,7 @@
                 <li><a href="/EditAnswer/<%=a.getId()%>">Edit Question <%=q.getNumber()%></a></li>
                        
     <%
-            }
+            }}
 
 }
             
