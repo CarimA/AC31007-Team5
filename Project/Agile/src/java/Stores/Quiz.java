@@ -87,7 +87,6 @@ public class Quiz {
     }
     
     
-    
     public static Quiz fetch(Connection connection, int id) throws SQLException {
         Quiz q = new Quiz();
         
@@ -104,6 +103,8 @@ public class Quiz {
         Date dc = rs.getDate("DateCreated");
         int available = rs.getInt("Available");
         
+        rs.close();
+        statement.close();
         
         if (available == 0) {
             q.setAvailable(false);
@@ -115,12 +116,34 @@ public class Quiz {
         q.setDateCreated(dc);
         q.setModule(module);
         q.setTitle(title);
+        q.fetchQuestions(connection);
         
         
-        rs.close();
-        statement.close();
         connection.close();
         
         return q;
+    }
+    
+    
+        public void fetchQuestions(Connection connection) throws SQLException  {
+        List<Question> questionList = null;
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ?");
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next()) {
+            Question temp = new Question();
+            temp.setId(rs.getInt("qId"));
+            temp.setNumber(rs.getInt("Number"));
+            temp.setQuestion(rs.getString("Question"));
+            temp.setPoints(rs.getInt("Points"));
+            temp.setAnswers(temp.fetchAnswers(connection, id));
+            
+            //Get image as well?
+            
+            questionList.add(temp);
+        }
+        
+        setQuestions(questionList);
     }
 }

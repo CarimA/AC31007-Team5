@@ -6,6 +6,10 @@
 package Stores;
 
 //import com.mysql.jdbc.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +54,7 @@ public class Question {
         this.number = number;
     }
 
+    
     /*public Blob getImage() {
         return image;
     }
@@ -81,6 +86,25 @@ public class Question {
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
-    
+        
+    public List<Answer> fetchAnswers(Connection connection, int id) throws SQLException {
+        List<Answer> answerList = null;
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM answer where QuestionID = ?");
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next()) {
+            Answer a = new Answer();
+            a.setId(rs.getInt("aId"));
+            a.setNumber(rs.getInt("Number"));
+            a.setExplanation(rs.getString("Explanation"));
+            a.setAnswer(rs.getString("AnswerText"));
+            a.setRight(rs.getBoolean("Right"));
+            answerList.add(a);
+        }
+        
+        return answerList;
+        
+    }
     
 }
