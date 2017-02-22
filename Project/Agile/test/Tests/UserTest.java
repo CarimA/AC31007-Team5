@@ -5,8 +5,16 @@
  */
 package Tests;
 
+import Exception.PasswordInvalidException;
+import Exception.UsernameInvalidException;
 import Stores.User;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
 /**
@@ -30,5 +38,49 @@ public class UserTest {
         
         // check that passwords are correctly hashing and returning false for a mismatch
         assertEquals(user.checkPassword("test2"), false);
+    }
+    
+    private Connection connect() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+        return DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+    }
+    
+    @Test(expected = UsernameInvalidException.class)
+    public void checkLoginWithoutUsernameShouldFail() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
+        Connection connection = connect();
+        
+        try {
+            User user = User.login(connection, "", "");
+            assertEquals(user, null);
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    @Test(expected = PasswordInvalidException.class)
+    public void checkLoginWithIncorrectPasswordShouldFail() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
+        Connection connection = connect();
+        
+        try {
+            User user = User.login(connection, "id-test", "test-password1");
+            assertEquals(user, null);
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
+    }
+    
+    @Test
+    public void checkLoginWithCorrectPasswordShouldPass() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
+        Connection connection = connect();
+        
+        try {
+            User user = User.login(connection, "id-test", "test-password");
+            assertNotNull(user);
+        }
+        catch (Exception ex) {
+            throw ex;
+        }
     }
 }
