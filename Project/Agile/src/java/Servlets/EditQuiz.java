@@ -123,7 +123,15 @@ public class EditQuiz extends HttpServlet {
         else if(args[2].equals("EditAnswer")){
             Answer a = new Answer();
             // get answer with id depicted in url
-            //Answer a = GetAnswer(args[2]);
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            DBConnect db = new DBConnect();
+            
+            a = db.getAnswer(args[3]);
+            //Answer a = GetAnswer(args[3]);
             RequestDispatcher rd = request.getRequestDispatcher("/editAnswer.jsp");
             request.setAttribute("Answer", a);
             rd.forward(request, response);
