@@ -114,17 +114,16 @@ public class User {
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             
-            if (rs.next()) {
+            if (rs.isBeforeFirst()) {
                 throw new UsernameInvalidException();
             }
 
             rs.close();
-            statement.close();
             
             if (false/*ADD PASSWORD VALIDITY CHECK*/) {
                 throw new PasswordInvalidException();
             }
-            
+            System.out.println("11111111");
             User user = new User(id, displayName, password, email, position);
             String salt = user.getSalt();
             
@@ -135,20 +134,22 @@ public class User {
             statement.setString(4, email);
             statement.setString(5, position);
             statement.setString(6, salt);
-            statement.executeQuery();
+            statement.execute();
             
+            statement.close();
             connection.close();
             
             return user;
         }
-        catch (UsernameInvalidException | PasswordInvalidException ex) {
+        catch (/*UsernameInvalidException | */PasswordInvalidException ex) {
+            System.out.println("AAAAA");
             throw ex;
         }
     }
     
     public boolean checkPassword(String password) {
-        /*String hashedPassword = Helpers.sha256(password + getSalt());
-        return (getPassword().equals(hashedPassword));*/
-        return true;
+        String hashedPassword = Helpers.sha256(password + getSalt());
+        return (getPassword().equals(hashedPassword));
+
     }    
 }
