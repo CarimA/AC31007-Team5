@@ -13,7 +13,7 @@
         if (user != null) {
             //response.sendRedirect("login.jsp");
     %>
-    <a href = "logout.jsp" class = "btn btn-primary btn-lg" role = "button"> Log out </a>
+    <a href = "logout" class = "btn btn-primary btn-lg" role = "button"> Log out </a>
     <% } else { %>
     <a href = "login.jsp" class = "btn btn-primary btn-lg" role = "button"> Login </a>
     <% } %>
