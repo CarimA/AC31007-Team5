@@ -25,8 +25,8 @@ function myFunction() {
         
         <button onclick="myFunction()">Print Summary</button>
         
-        <button>Send summary by email</button>
-        <form method="POST" action="summary">
+        <form method="POST" action="StudentSummary">
+            <input type="submit" value="Submit">
         </form>
     </body>
 </html>
