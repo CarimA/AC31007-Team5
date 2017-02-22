@@ -42,6 +42,8 @@ public class takeQuiz extends HttpServlet {
         QuizModel qm = new QuizModel();
         
         Quiz quiz = qm.fetchQuiz((int) request.getAttribute("quiz"));
+        
+        
         session.setAttribute("quiz", null);
         RequestDispatcher rd = request.getRequestDispatcher("");
         rd.forward(request, response);

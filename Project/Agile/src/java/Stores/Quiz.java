@@ -86,6 +86,8 @@ public class Quiz {
         this.questions = questions;
     }
     
+    
+    
     public static Quiz fetch(Connection connection, int id) throws SQLException {
         Quiz q = new Quiz();
         
