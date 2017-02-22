@@ -71,14 +71,10 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public void setPosition(String position) { this.position = position; }
     
-    public enum Position {
-        Student,
-        Staff
-    };
     
     public static User login(Connection connection, String id, String password) throws UsernameInvalidException, PasswordInvalidException, SQLException {        
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person where pId = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             
@@ -109,16 +105,12 @@ public class User {
     }
     
     public static User register(Connection connection, String id, String password, String displayName, String email, String position) throws UsernameInvalidException, PasswordInvalidException, SQLException {    
-        // check ID isn't taken
         
         // check password requirements (todo)
         
-        // insert user into table
-        
-        // return new user instance
         
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Person where pId = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             
@@ -154,6 +146,6 @@ public class User {
     
     public boolean checkPassword(String password) {
         String hashedPassword = Helpers.sha256(password + getSalt());
-        return (getPassword() == hashedPassword);
+        return (getPassword().equals(hashedPassword));
     }    
 }
