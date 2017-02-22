@@ -28,7 +28,7 @@
          <%// change this%>
         <form method="POST" action="EditQuiz">
         <input type="text" name="question">
-        <p>Edit Image</p>
+        <p>Edit Image</p><img src="/Agile/Thumb/<%//q.getImage()%>"></a><br/>
         <input type="file" name="image">
         <p>Edit points</p>
         <input type="number" name="points" min="1" max="100">
@@ -36,7 +36,12 @@
         </form>
         <br/>
         <%// change this%>
-        <img src="/Agile/Thumb/<%=q.getImage()%>"></a><br/><%
+        <%
+            if(q.getAnswers().isEmpty()){
+                %>
+                <p>This Question has no answers</p>
+        <%
+            }
             Iterator<Answer> iterator;
             iterator = q.getAnswers().iterator();%>
             <ul>Answers
