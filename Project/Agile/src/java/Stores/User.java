@@ -26,7 +26,7 @@ public class User {
     private String salt;
     private String position;
     
-    private User() { }
+    public User() { }
     private User(String id, String displayName, String password, String email, String position) {
         setId(id);
         setDisplayName(displayName);
@@ -55,7 +55,7 @@ public class User {
     private void setId(String id) { this.id = id; }
     public void setDisplayName(String displayName) { this.displayName = displayName; }
     public void setPassword(String password) {
-        
+        this.password = password;
     }
     public void setNewPassword(String password) { 
         // set a new random salt
