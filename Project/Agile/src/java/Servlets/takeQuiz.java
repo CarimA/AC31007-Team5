@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  * @author jimiwesterholm
  */
 @WebServlet(urlPatterns = {"/takeQuiz"})
-public class takeQuiz extends HttpServlet {
+public class TakeQuiz extends HttpServlet {
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

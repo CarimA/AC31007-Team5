@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jimiwesterholm
  */
-@WebServlet(name = "page", urlPatterns = {"/page"})
-public class page extends HttpServlet {
+@WebServlet(name = "page", urlPatterns = {"/Page"})
+public class Page extends HttpServlet {
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
