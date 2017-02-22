@@ -93,8 +93,8 @@ public class EditQuiz extends HttpServlet {
             }
             DBConnect db = new DBConnect();
             String query = "Select * from quiz where qId = " + args[3];
-            Vector<Quiz> temp = db.getQuizes(query);
-            //System.out.println(temp.size());
+            Vector<Quiz> temp = db.getQuizzes(query);
+            System.out.println(temp.size());
             quiz = temp.elementAt(0);
             
             RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");

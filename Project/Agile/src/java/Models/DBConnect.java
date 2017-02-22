@@ -100,7 +100,8 @@ public class DBConnect {
         
     }
     
-    public Vector<Quiz> getQuizes(String query)
+
+    public Vector<Quiz> getQuizzes(String query)
     {
         Connection connection;
         Vector<Quiz> quizzes = new Vector<Quiz>();
@@ -169,7 +170,7 @@ public class DBConnect {
     {
         DBConnect d = new DBConnect();
         d.connectToDb();
-        Vector<Quiz> q = d.getQuizes("Select * from quiz");
+        Vector<Quiz> q = d.getQuizzes("Select * from quiz");
         //Vector<Quiz> q = d.getQuizes("Select * from quiz where qId = 1");
         
         System.out.println(q.size());

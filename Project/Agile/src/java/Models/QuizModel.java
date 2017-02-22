@@ -28,15 +28,7 @@ public class QuizModel {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
-            
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quiz where qId = ?");
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-            
-            if (!rs.next()) {
-                System.out.println("Quiz not found");
-            }
-            
+            quiz = Quiz.fetch(connection, id);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
