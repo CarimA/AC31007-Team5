@@ -72,24 +72,12 @@ public class StudentSummary extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            connectToDB();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM answer");
-            while (rs.next()) {
-            System.out.println("Database output: " + rs.getString(3));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentSummary.class.getName()).log(Level.SEVERE, null, ex);
-        }
         RequestDispatcher rd;
         String id = request.getParameter("id");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String module = request.getParameter("module");
-        
-        HttpSession session = request.getSession(); 
-        
+        HttpSession session = request.getSession();
         if (id!=""&&firstname!=""&&lastname!=""&&module!="")
         {
             session.setAttribute("id", id);
@@ -97,6 +85,7 @@ public class StudentSummary extends HttpServlet {
             session.setAttribute("lastname", lastname);
             session.setAttribute("module", module);
             rd = request.getRequestDispatcher("pdfsummary.jsp");
+            // Code part to create pdf on the use.dir
             //String filename = "summary";
             //String filepathname = System.getProperty("user.dir") + "\\" + filename + ".pdf";
             //createPDF(id,firstname,lastname,module,filepathname);
