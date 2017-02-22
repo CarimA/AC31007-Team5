@@ -127,10 +127,11 @@ public class User {
             User user = new User(id, displayName, password, email, position);
             String salt = user.getSalt();
             
+            
             statement = connection.prepareStatement("INSERT INTO Person (pId, DisplayName, Password, Email, Position, Salt) values (?, ?, ?, ?, ?, ?)");
             statement.setString(1, id);
             statement.setString(2, displayName);
-            statement.setString(3, password);
+            statement.setString(3, user.getPassword());
             statement.setString(4, email);
             statement.setString(5, position);
             statement.setString(6, salt);
@@ -141,7 +142,7 @@ public class User {
             
             return user;
         }
-        catch (/*UsernameInvalidException | */PasswordInvalidException ex) {
+        catch (UsernameInvalidException | PasswordInvalidException ex) {
             throw ex;
         }
     }
