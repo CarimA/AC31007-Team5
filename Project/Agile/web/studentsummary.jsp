@@ -24,5 +24,9 @@ function myFunction() {
         kfdjgpsjefdf</p>
         
         <button onclick="myFunction()">Print Summary</button>
+        
+        <button>Send summary by email</button>
+        <form method="POST" action="summary">
+        </form>
     </body>
 </html>

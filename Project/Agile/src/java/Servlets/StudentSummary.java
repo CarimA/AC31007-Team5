@@ -33,6 +33,7 @@ import java.awt.Desktop;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 /**
  *
  * @author Aleksandr
@@ -73,116 +74,119 @@ public class StudentSummary extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd;
-        String id = request.getParameter("id");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String module = request.getParameter("module");
-        HttpSession session = request.getSession();
-        if (id!=""&&firstname!=""&&lastname!=""&&module!="")
-        {
-            session.setAttribute("id", id);
-            session.setAttribute("firstname", firstname);
-            session.setAttribute("lastname", lastname);
-            session.setAttribute("module", module);
-            rd = request.getRequestDispatcher("pdfsummary.jsp");
+        //HttpSession session = request.getSession();
+        rd = request.getRequestDispatcher("studentsummary.jsp");
+        rd.forward(request, response);
+        
+        //String id = request.getParameter("id");
+        //String firstname = request.getParameter("firstname");
+        //String lastname = request.getParameter("lastname");
+        //String module = request.getParameter("module");
+        //if (id!=""&&firstname!=""&&lastname!=""&&module!="")
+        //{
+           //session.setAttribute("id", id);
+            //session.setAttribute("firstname", firstname);
+            //session.setAttribute("lastname", lastname);
+            //session.setAttribute("module", module);
+            //rd = request.getRequestDispatcher("pdfsummary.jsp");
             // Code part to create pdf on the use.dir
             //String filename = "summary";
             //String filepathname = System.getProperty("user.dir") + "\\" + filename + ".pdf";
             //createPDF(id,firstname,lastname,module,filepathname);
             //openPDF(filepathname);
-        }
-        else
-        {
-            rd = request.getRequestDispatcher("summary.jsp");
-        }
-        rd.forward(request, response);
+        //}
+        //else
+        //{
+            //rd = request.getRequestDispatcher("summary.jsp");
+        //}
+        //rd.forward(request, response);
         
     }
-    public void createPDF(String id, String firstname, String lastname, String module, String filepathname) throws IOException
-    {
-         //Creating PDF document object 
-        PDDocument document = new PDDocument();  ;
-        for (int i=0; i<3; i++) 
-        {
-            //Creating a blank page 
-            PDPage blankPage = new PDPage();
-            //Adding the blank page to the document
-            document.addPage( blankPage );
-        } 
-        PDPage page = document.getPage(0);
-        PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        //Begin the Content stream 
-      //Begin the Content stream 
-      contentStream.beginText(); 
-       
-      //Setting the font to the Content stream
-      contentStream.setFont( PDType1Font.TIMES_ROMAN, 16 );
-       
-      //Setting the leading
-      contentStream.setLeading(14.5f);
-
-      //Setting the position for the line
-      contentStream.newLineAtOffset(25, 725);
-
-      String text1 = "Maticulation number: " + id;
-      String text2 = "Firstname: " + firstname;
-      String text3 = "Lastname: " + lastname;
-      String text4 = "Module: " + module;
-
-      //Adding text in the form of string
-      contentStream. showText(text1);
-      contentStream.newLine();
-      contentStream. showText(text2);
-      contentStream.newLine();
-      contentStream. showText(text3);
-      contentStream.newLine();
-      contentStream. showText(text4);
-      //Ending the content stream
-      contentStream.endText();
-
-      System.out.println("Content added");
-
-      //Closing the content stream
-      contentStream.close();
-
-        try 
-        {
-            //Saving the document
-            
-            document.save(filepathname);
-        } 
-        catch (IOException ex) 
-        {
-           Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("PDF created" + filepathname);
-        try 
-        {
-           //Closing the document
-            document.close();
-        } 
-        catch (IOException ex) 
-        {
-            Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void openPDF(String filepathname)
-    {
-        try {
-            File file = new File(filepathname);
-            if (file.exists()) {
-                long startTime = System.currentTimeMillis();
-                Desktop.getDesktop().open(file);
-                long endTime = System.currentTimeMillis();
-                System.out.println("Total time taken to open file -> "+ file.getName() +" in "+ (endTime - startTime) +" ms");              
-            } else {
-                System.out.println("File not exits -> "+ file.getAbsolutePath());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void createPDF(String id, String firstname, String lastname, String module, String filepathname) throws IOException
+//    {
+//         //Creating PDF document object 
+//        PDDocument document = new PDDocument();  ;
+//        for (int i=0; i<3; i++) 
+//        {
+//            //Creating a blank page 
+//            PDPage blankPage = new PDPage();
+//            //Adding the blank page to the document
+//            document.addPage( blankPage );
+//        } 
+//        PDPage page = document.getPage(0);
+//        PDPageContentStream contentStream = new PDPageContentStream(document, page);
+//        //Begin the Content stream 
+//      //Begin the Content stream 
+//      contentStream.beginText(); 
+//       
+//      //Setting the font to the Content stream
+//      contentStream.setFont( PDType1Font.TIMES_ROMAN, 16 );
+//       
+//      //Setting the leading
+//      contentStream.setLeading(14.5f);
+//
+//      //Setting the position for the line
+//      contentStream.newLineAtOffset(25, 725);
+//
+//      String text1 = "Maticulation number: " + id;
+//      String text2 = "Firstname: " + firstname;
+//      String text3 = "Lastname: " + lastname;
+//      String text4 = "Module: " + module;
+//
+//      //Adding text in the form of string
+//      contentStream. showText(text1);
+//      contentStream.newLine();
+//      contentStream. showText(text2);
+//      contentStream.newLine();
+//      contentStream. showText(text3);
+//      contentStream.newLine();
+//      contentStream. showText(text4);
+//      //Ending the content stream
+//      contentStream.endText();
+//
+//      System.out.println("Content added");
+//
+//      //Closing the content stream
+//      contentStream.close();
+//
+//        try 
+//        {
+//            //Saving the document
+//            
+//            document.save(filepathname);
+//        } 
+//        catch (IOException ex) 
+//        {
+//           Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println("PDF created" + filepathname);
+//        try 
+//        {
+//           //Closing the document
+//            document.close();
+//        } 
+//        catch (IOException ex) 
+//        {
+//            Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    
+//    public void openPDF(String filepathname)
+//    {
+//        try {
+//            File file = new File(filepathname);
+//            if (file.exists()) {
+//                long startTime = System.currentTimeMillis();
+//                Desktop.getDesktop().open(file);
+//                long endTime = System.currentTimeMillis();
+//                System.out.println("Total time taken to open file -> "+ file.getName() +" in "+ (endTime - startTime) +" ms");              
+//            } else {
+//                System.out.println("File not exits -> "+ file.getAbsolutePath());
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     
     public void connectToDB() throws SQLException {
      connection = DriverManager.getConnection(
