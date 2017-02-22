@@ -17,7 +17,7 @@ public class UserTest {
     @Test
     public void checkPasswordComparisonA() {
         User user = new User();
-        user.setPassword("test");
+        user.setNewPassword("test");
         
         // check that passwords are correctly hashing and returning true for a match
         assertEquals(user.checkPassword("test"), true);
@@ -26,7 +26,7 @@ public class UserTest {
     @Test
     public void checkPasswordComparisonB() {
         User user = new User();
-        user.setPassword("test");
+        user.setNewPassword("test");
         
         // check that passwords are correctly hashing and returning false for a mismatch
         assertEquals(user.checkPassword("test2"), false);
