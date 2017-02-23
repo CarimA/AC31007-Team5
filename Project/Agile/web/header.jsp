@@ -11,7 +11,7 @@
     <%
         User user = (User) session.getAttribute("person");
         if (user != null) { %>
-        <a href = "logout" class = "btn btn-primary btn-lg" role = "button"> Log out </a>
+        <a href = "Logout" class = "btn btn-primary btn-lg" role = "button"> Log out </a>
     <% } else { %>
         <a href = "login.jsp" class = "btn btn-primary btn-lg" role = "button"> Login </a>
     <% } %>
