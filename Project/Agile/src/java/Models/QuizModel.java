@@ -26,9 +26,7 @@ public class QuizModel {
         Quiz quiz = null;
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
-            quiz = Quiz.fetch(connection, id);
+            quiz = Quiz.fetch(Helpers.connect(), id);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

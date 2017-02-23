@@ -7,6 +7,7 @@ package Models;
 
 import Exception.PasswordInvalidException;
 import Exception.UsernameInvalidException;
+import Misc.Helpers;
 import Stores.User;
 import java.sql.*;
 import java.util.UUID;
@@ -26,9 +27,7 @@ public class LoginModel {
     
     public User checkLogin(String username, String password) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
-            return User.login(connection, username, password);
+            return User.login(Helpers.connect(), username, password);
         } catch (UsernameInvalidException ex) {
             Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -46,9 +45,7 @@ public class LoginModel {
     
     public User registerUser(String userID, String password, String displayName, String email, String position) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
-            return User.register(connection, userID, password, displayName, email, position);
+            return User.register(Helpers.connect(), userID, password, displayName, email, position);
         } catch (UsernameInvalidException ex) {
             Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
             return null;

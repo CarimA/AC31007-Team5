@@ -87,6 +87,7 @@ public class EditQuiz extends HttpServlet {
         if(args[2].equals("EditQuiz")){
             Quiz quiz = new Quiz();
             try {
+                // TODO: what?
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
