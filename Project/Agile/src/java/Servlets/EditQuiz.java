@@ -160,7 +160,10 @@ public class EditQuiz extends HttpServlet {
             String available = request.getParameter("available");
             System.out.println(available);
             boolean a;
-            if(available.equals("on")){
+            if(available == null){
+                a = false;
+            }
+            else if(available.equals("on")){
                 a = true;
             }
             else{
@@ -189,6 +192,21 @@ public class EditQuiz extends HttpServlet {
             String right = request.getParameter("right");
             int answerID = parseInt(request.getParameter("AnswerID"));
             // qm.updateAnswer(answer,explanation,right,answerID):
+            System.out.println(right);
+            boolean a;
+            if(right == null){
+                a = false;
+            }
+            else if(right.equals("on")){
+                a = true;
+            }
+            else{
+                a = false;
+            }
+            System.out.println(a);
+            QuizModel qm = new QuizModel();
+            qm.updateAnswer(answerID, answer, explanation, a);
+            response.sendRedirect("/Agile/EditAnswer/" +answerID);
         }
     }
 

@@ -66,7 +66,7 @@ public class QuizModel {
             statement.executeUpdate();
             statement.close();
             System.out.println(available);
-            
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -91,18 +91,56 @@ public class QuizModel {
             }
             if(points != 0){
                 PreparedStatement statement;
-                statement = connection.prepareStatement("UPDATE question SET points = ? WHERE qId = ?"); 
+                statement = connection.prepareStatement("UPDATE question SET Points = ? WHERE qId = ?"); 
                 statement.setInt(1, points);
                 statement.setInt(2, id);
                 statement.executeUpdate();
                 statement.close();
             }
-            
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void updateAnswer(int id,String answer,String explanation,boolean right){
+        Connection connection;
+        System.out.println(right);
+        try {
+            connection = Helpers.connect();
+            
+            if(!answer.equals("")){
+                PreparedStatement statement;
+                statement = connection.prepareStatement("UPDATE answer SET AnswerText = ? WHERE aId = ?");
+                statement.setString(1, answer);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+                statement.close();
+                
+            }
+            if(!explanation.equals("")){
+                PreparedStatement statement;
+                statement = connection.prepareStatement("UPDATE answer SET Explanation = ? WHERE aId = ?"); 
+                statement.setString(1, explanation);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+                statement.close();
+            }
+            PreparedStatement statement;
+            statement = connection.prepareStatement("UPDATE answer SET `Right` = ? WHERE aId = ?"); 
+            statement.setBoolean(1, right);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public int CreateQuiz(String title, String module){
