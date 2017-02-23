@@ -158,17 +158,30 @@ public class EditQuiz extends HttpServlet {
             String title = request.getParameter("title");
             String module = request.getParameter("module");
             String available = request.getParameter("available");
+            System.out.println(available);
+            boolean a;
+            if(available.equals("on")){
+                a = true;
+            }
+            else{
+                a = false;
+            }
+            System.out.println(a);
             int quizID = parseInt(request.getParameter("QuizID"));
             QuizModel qm = new QuizModel();
-            qm.updateQuiz(quizID,title,module,parseBoolean(available));
+            qm.updateQuiz(quizID,title,module,a);
+            System.out.println(available);
             response.sendRedirect("/Agile/EditQuiz/"+quizID);
         }
         else if(args[2].equals("EditQuestion")){
             String question = request.getParameter("question");
-            String image = request.getParameter("image");
-            int points = parseInt(request.getParameter("available"));
+            //String image = request.getParameter("image");
+            int points = parseInt(request.getParameter("points"));
             int questionID = parseInt(request.getParameter("QuestionID"));
             // qm.updateQuestion(question,image,points,questionID):
+            QuizModel qm = new QuizModel();
+            qm.updateQuestion(questionID, question, points);
+            response.sendRedirect("/Agile/EditQuestion/"+questionID);
         }
         else if(args[2].equals("EditAnswer")){
             String answer = request.getParameter("answer");

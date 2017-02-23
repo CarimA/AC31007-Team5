@@ -37,18 +37,66 @@ public class QuizModel {
     
     public void updateQuiz(int id,String title,String module,boolean available){
         Connection connection;
+        System.out.println(available);
         try {
             connection = Helpers.connect();
             
-            
+            if(!title.equals("")){
                 PreparedStatement statement;
-                statement = connection.prepareStatement("UPDATE quiz SET Title = ?, Module = ?, Available = ? WHERE qId = ?");
+                statement = connection.prepareStatement("UPDATE quiz SET Title = ? WHERE qId = ?");
                 statement.setString(1, title);
-                statement.setString(2, module);
-                statement.setBoolean(3, available);
-                statement.setInt(4, id);
+                statement.setInt(2, id);
                 statement.executeUpdate();
                 statement.close();
+                System.out.println(available);
+            }
+            if(!module.equals("")){
+                PreparedStatement statement;
+                statement = connection.prepareStatement("UPDATE quiz SET Module = ? WHERE qId = ?"); 
+                statement.setString(1, module);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+                statement.close();
+                System.out.println(available);
+            }
+            PreparedStatement statement;
+            statement = connection.prepareStatement("UPDATE quiz SET Available = ? WHERE qId = ?"); 
+            statement.setBoolean(1, available);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+            statement.close();
+            System.out.println(available);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateQuestion(int id,String question,int points){
+        Connection connection;
+        
+        try {
+            connection = Helpers.connect();
+            
+            if(!question.equals("")){
+                PreparedStatement statement;
+                statement = connection.prepareStatement("UPDATE question SET Question = ? WHERE qId = ?");
+                statement.setString(1, question);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+                statement.close();
+                
+            }
+            if(points != 0){
+                PreparedStatement statement;
+                statement = connection.prepareStatement("UPDATE question SET points = ? WHERE qId = ?"); 
+                statement.setInt(1, points);
+                statement.setInt(2, id);
+                statement.executeUpdate();
+                statement.close();
+            }
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
