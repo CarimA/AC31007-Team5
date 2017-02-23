@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jimiwesterholm
  */
-@WebServlet(urlPatterns = {"/Register"})
+@WebServlet(name = "Register", urlPatterns = {"/Register"})
 public class Register extends HttpServlet {
 
 
@@ -67,10 +67,10 @@ public class Register extends HttpServlet {
         
         if (user != null) {
             session.setAttribute("person", user);
-            if (user.getPosition() == "Staff") {
-                rd = request.getRequestDispatcher("page.jsp");
+            if ("Staff".equals(user.getPosition())) {
+                rd = request.getRequestDispatcher("index.jsp");
             } else {
-                rd = request.getRequestDispatcher("page.jsp");
+                rd = request.getRequestDispatcher("index.jsp");
             }
         } else {
             rd = request.getRequestDispatcher("login.jsp");
@@ -78,6 +78,8 @@ public class Register extends HttpServlet {
         rd.forward(request, response);
     }
 
+  
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -87,5 +89,7 @@ public class Register extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
 
 }

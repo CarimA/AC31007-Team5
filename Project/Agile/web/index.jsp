@@ -32,6 +32,7 @@
             <a href = "login.jsp" class = "btn btn-primary btn-lg" role = "button"> Login </a>
             <a href = "pdfsummary.jsp" class = "btn btn-primary btn-lg" role = "button"> PDF Summary </a>
             <a href = "summary.jsp" class = "btn btn-primary btn-lg" role = "button"> Summary </a>
+            <a href = "register.jsp" class = "btn btn-primary btn-lg" role = "button"> Summary </a>
         </div>
     </body>
     <%@include file="footer.jsp"%>
