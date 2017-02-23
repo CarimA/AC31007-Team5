@@ -157,16 +157,22 @@ public class EditQuiz extends HttpServlet {
             String title = request.getParameter("title");
             String module = request.getParameter("module");
             String available = request.getParameter("available");
+            int quizID = parseInt(request.getParameter("QuizID"));
+            // qm.updateQuiz(title,module,available,quizID):
         }
         else if(args[1].equals("/EditQuestion")){
             String question = request.getParameter("question");
             String image = request.getParameter("image");
             int points = parseInt(request.getParameter("available"));
+            int questionID = parseInt(request.getParameter("QuestionID"));
+            // qm.updateQuestion(question,image,points,questionID):
         }
         else if(args[1].equals("/EditAnswer")){
             String answer = request.getParameter("answer");
             String explanation = request.getParameter("explanation");
             String right = request.getParameter("right");
+            int answerID = parseInt(request.getParameter("AnswerID"));
+            // qm.updateAnswer(answer,explanation,right,answerID):
         }
     }
 

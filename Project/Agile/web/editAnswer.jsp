@@ -43,6 +43,7 @@
                 <p>Set right answer</p>
                 <input type=checkbox name="right" <%if(a.isRight()){%> checked="checked" <%}%> value="right"> This is the correct answer.
                 <br/>
+                <input type="hidden" name="AnswerID" value="<%=a.getId()%>">
                 <input type="submit" value="Submit">
                 </form>
                        <%}

@@ -37,6 +37,8 @@
         <input type="file" name="image">
         <p>Edit points</p>
         <input type="number" name="points" min="1" max="100">
+        <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
+        
         <input type="submit" value="Submit">
         </form>
         <br/>

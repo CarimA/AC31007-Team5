@@ -40,7 +40,8 @@
             <h2>Available <%=quiz.isAvailable()%></h2>
             <p>Edit Availability</p>
             <p>Make available?</p> <input type="checkbox" name="avaliable" <%if(quiz.isAvailable()){%>checked="checked"<%}%>>
-            
+            <input type="hidden" name="QuizID" value="<%=quiz.getId()%>">
+            <input type ="submit" value="Submit">
             </form>
             <ul> Questions
         <%
