@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Register</h1>
-        <form method="POST" action="register">
+        <form method="POST" action="Register">
             <ul>
                 <li>ID <input type="text" name="userID"></li>
                 <li>Password <input type="password" name="pass"></li>
