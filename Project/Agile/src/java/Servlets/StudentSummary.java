@@ -87,34 +87,35 @@ public class StudentSummary extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd;
-       
-             //try {
-             //Class.forName("com.mysql.jdbc.Driver");
-             //connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
-             //Statement statement = connection.createStatement();
-             //PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
-             // ResultSet rs = statement.executeQuery();
-             //String email = rs.getString("Email");
-             //sendEmail(email);
-             //System.out.println(email);
-             //while (rs.next())
-             //{
-             //System.out.println(rs.getString(1));
-             //}
+       /**
+             try {
+             Class.forName("com.mysql.jdbc.Driver");
+             connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+             Statement statement = connection.createStatement();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM person where pId = ?");
+             ResultSet rs = statement.executeQuery();
+             String email = rs.getString("Email");
+             sendEmail(email);
+             System.out.println(email);
+             while (rs.next())
+             {
+             System.out.println(rs.getString(1));
+             }
              
-             //rs.close();
-             //statement.close();
-             //connection.close();
-             //}
+             rs.close();
+             statement.close();
+             connection.close();
+             }
              
-             //catch(SQLException e) {
-             //System.out.println("Summary not sent");
-             //String email = "";
-             //sendEmail(email);
-             //}
-             //catch (ClassNotFoundException ex) {
-             //Logger.getLogger(StudentSummary.class.getName()).log(Level.SEVERE, null, ex);
-             //}
+             catch(SQLException e) {
+             System.out.println("Summary not sent");
+             String email = "";
+             sendEmail(email);
+             }
+             catch (ClassNotFoundException ex) {
+             Logger.getLogger(StudentSummary.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             **/
              sendEmail();
        
         

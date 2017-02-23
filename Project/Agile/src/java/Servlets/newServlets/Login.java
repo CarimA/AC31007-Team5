@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author carimakeju
  */
-@WebServlet(name = "Login", urlPatterns = { "/new/Login" })
+@WebServlet(name = "Login", urlPatterns = { "/Login" })
 public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

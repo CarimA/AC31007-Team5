@@ -14,6 +14,7 @@
         
         <link rel="stylesheet" href="../assets/css/skeleton.min.css" />
         <link rel="stylesheet" href="../assets/css/style.css" />
+        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
     </head>
     <body>
         <header class="container">
@@ -44,6 +45,15 @@
             </div>
         </header>
         <section class="container">
+            <%
+                String error = (String)request.getAttribute("error");
+                if (!(error == null)) {
+            %>
+            <p class="error"><i class="fa fa-bug" aria-hidden="true"></i> ${error}</p>
+            <%
+                    request.setAttribute("error", null);
+                }
+            %>
             <jsp:doBody/>    
         </section>
         <footer class="container">
