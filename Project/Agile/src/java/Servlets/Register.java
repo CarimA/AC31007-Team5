@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jimiwesterholm
  */
-@WebServlet(name = "Register", urlPatterns = {"/oldRegister"})
+@WebServlet(name = "oldRegister", urlPatterns = {"/oldRegister"})
 public class Register extends HttpServlet {
 
 
@@ -38,6 +38,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("message", "");
         RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
         rd.forward(request, response);
     }
@@ -56,24 +57,40 @@ public class Register extends HttpServlet {
         RequestDispatcher rd;
         LoginModel lm = new LoginModel();
         
+        String message = "";
+        
         String userID = request.getParameter("userID");
         String pass = request.getParameter("pass");
         String displayName = request.getParameter("name");
         String email = request.getParameter("email");
         String position = request.getParameter("position");
         
+        if (userID.length() != 9) {
+            message = "ID must be 9 characters long./n";
+            request.setAttribute("message", message);
+            rd = request.getRequestDispatcher("register.jsp");
+            rd.forward(request, response);
+        }
+        
+        if(/*PASSWORD CHECKS*/true) {
+            message = message + "Password must be X";
+            request.setAttribute("message", message);
+            rd = request.getRequestDispatcher("register.jsp");
+            rd.forward(request, response);
+        }
+        
         HttpSession session = request.getSession();
         User user = lm.registerUser(userID, pass, displayName, email, position);
         
         if (user != null) {
-            session.setAttribute("person", user);
+            session.setAttribute("user", user);
             if ("Staff".equals(user.getPosition())) {
                 rd = request.getRequestDispatcher("index.jsp");
             } else {
                 rd = request.getRequestDispatcher("index.jsp");
             }
         } else {
-            rd = request.getRequestDispatcher("login.jsp");
+            rd = request.getRequestDispatcher("register.jsp");
         }
         rd.forward(request, response);
     }

@@ -18,20 +18,22 @@
     <jsp:body>
         <div class="row">
             <div class="six columns">
-                <h2>Log In</h2>
-                <div class="row">
-                    <div class="twelve columns">
-                        <input type="text" class="u-full-width" placeholder="Your User ID or Matriculation Number" />
+                <form method="POST" action="Login">
+                    <h2>Log In</h2>
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="id" type="text" class="u-full-width" placeholder="Your User ID or Matriculation Number" />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="twelve columns">
-                        <input type="password" class="u-full-width" placeholder="Your Password" />
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="password" type="password" class="u-full-width" placeholder="Your Password" />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <a href="#" class="button">Log In</a>
-                </div>
+                    <div class="row">
+                        <input class="button" type="submit" value="Log In">
+                    </div>
+                </form>
             </div>
             
             <div class="six columns">

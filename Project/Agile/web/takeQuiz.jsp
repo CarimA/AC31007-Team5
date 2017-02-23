@@ -15,7 +15,7 @@
     <body>
         
         <%
-            User user = (User) session.getAttribute("person");
+            User user = (User) session.getAttribute("user");
             if (user == null || user.getPosition().equals("staff")) {
                 response.sendRedirect("index.jsp");
             }

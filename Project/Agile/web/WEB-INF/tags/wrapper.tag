@@ -12,30 +12,30 @@
     <head>
         <title>Quiz</title>
         
-        <link rel="stylesheet" href="../assets/css/skeleton.min.css" />
-        <link rel="stylesheet" href="../assets/css/style.css" />
-        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/skeleton.min.css" />
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     </head>
     <body>
         <header class="container">
             <div class="dynamic-row">
                 <div class="dynamic-column">
-                    <h1>Quiz Thing</h1>
+                    <h1><a href="/Agile/Home">Quiz Thing</a></h1>
                 </div>
                 <div class="dynamic-column grow">
                     <ul>
-                        <li><a href="Agile/new/Home">Home</a></li>
                         <%
-                            User user = (User)(request.getAttribute("person"));
+                            User user = (User)(request.getSession().getAttribute("user"));
                             if (user == null) {
                         %>
-                        <li><a href="/Agile/new/Login">Login</a></li>
-                        <li><a href="/Agile/new/Register">Register</a></li>
+                        <li><a href="/Agile/Login">Login</a></li>
+                        <li><a href="/Agile/Register">Register</a></li>
                         <%
                             }
                             else {
                         %>
-                        <li><a href="#">Hello, ${user.getDisplayName()}</a></li>
+                        <li>Hello, ${user.getDisplayName()}</li>
+                        <li><a href="/Agile/Logout">Log Out</a></li>
                         <%
                             }
                         %>
@@ -49,7 +49,7 @@
                 String error = (String)request.getAttribute("error");
                 if (!(error == null)) {
             %>
-            <p class="error"><i class="fa fa-bug" aria-hidden="true"></i> ${error}</p>
+            <p id="error-message" class="error" onclick="this.parentElement.removeChild(document.getElementById('error-message'));"><i class="fa fa-bug" aria-hidden="true"></i> ${error}<span>(Click anywhere on this error message to close it)</span></p>
             <%
                     request.setAttribute("error", null);
                 }
