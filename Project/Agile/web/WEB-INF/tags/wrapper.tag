@@ -12,9 +12,9 @@
     <head>
         <title>Quiz</title>
         
-        <link rel="stylesheet" href="assets/css/skeleton.min.css" />
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/Agile/assets/css/skeleton.min.css" />
+        <link rel="stylesheet" href="/Agile/assets/css/style.css" />
+        <link rel="stylesheet" href="/Agile/assets/css/font-awesome.min.css">
     </head>
     <body>
         <header class="container">
