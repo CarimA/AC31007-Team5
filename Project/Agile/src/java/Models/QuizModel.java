@@ -5,6 +5,7 @@
  */
 package Models;
 
+import Misc.Helpers;
 import Stores.Quiz;
 import java.sql.*;
 import java.util.logging.Level;
@@ -24,7 +25,6 @@ public class QuizModel {
     
     public Quiz fetchQuiz(int id) {
         Quiz quiz = null;
-        
         try {
             quiz = Quiz.fetch(Helpers.connect(), id);
         } catch (ClassNotFoundException ex) {
@@ -40,8 +40,7 @@ public class QuizModel {
     public int CreateQuiz(String title, String module){
         int id = 0;
         try {
-            Connection connection = DriverManager.getConnection(
-       "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+            Connection connection = Helpers.connect();
             PreparedStatement statement;
             statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module, DateCreated) values (?, ?, ?)");
             statement.setString(1, title);
@@ -68,6 +67,9 @@ public class QuizModel {
         catch(SQLException e)
         {
            return 0; 
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
         }
     }
     
