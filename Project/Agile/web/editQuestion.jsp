@@ -57,7 +57,7 @@
             
                 %>
                 <%// change this%>
-                <li><a href="/EditAnswer/<%=a.getId()%>">Edit Answer <%=q.getNumber()%></a></li>
+                <li><a href="/Agile/EditAnswer/<%=a.getId()%>">Edit Answer <%=q.getNumber()%></a></li>
                        
     <%
             }}
@@ -66,6 +66,8 @@
             
         %>
             </ul>
+            
+        <h3>Go back to <a href="/Agile/EditQuiz/<%=QuizID%>">Quiz</a></h3>
            
     </body>
 </html>

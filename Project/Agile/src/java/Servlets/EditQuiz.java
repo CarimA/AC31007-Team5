@@ -6,6 +6,7 @@
 package Servlets;
 
 import Models.DBConnect;
+import Models.QuizModel;
 import Stores.Answer;
 import Stores.Question;
 import Stores.Quiz;
@@ -86,18 +87,8 @@ public class EditQuiz extends HttpServlet {
         System.out.println(args[3]);
         if(args[2].equals("EditQuiz")){
             Quiz quiz = new Quiz();
-            try {
-                // TODO: what?
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            DBConnect db = new DBConnect();
-            String query = "Select * from quiz where qId = " + args[3];
-            Vector<Quiz> temp = db.getQuizzes(query);
-            System.out.println(temp.size());
-            quiz = temp.elementAt(0);
-            
+            QuizModel qm = new QuizModel();
+            quiz = qm.fetchQuiz(parseInt(args[3]));
             RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
             request.setAttribute("Quiz",quiz);
             
@@ -106,34 +97,40 @@ public class EditQuiz extends HttpServlet {
         else if(args[2].equals("EditQuestion")){
             // get question with id depicted in url
             Question q = new Question();
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
+            Quiz quiz = new Quiz();
+            QuizModel qm = new QuizModel();
+            quiz = qm.fetchQuiz(parseInt(args[3]));
+            for(int i=0;i<quiz.getQuestions().size();i++){
+                if(quiz.getQuestions().get(i).getId() == parseInt(args[3])){
+                    q= quiz.getQuestions().get(i);
+                    break;
+                }
             }
-            DBConnect db = new DBConnect();
-            
-            q = db.getQuestion(args[3]);
-            System.out.println(q.getQuestion());
-            System.out.println(q.getNumber());
-            System.out.println(q.getPoints());
             RequestDispatcher rd = request.getRequestDispatcher("/editQuestion.jsp");
+            request.setAttribute("QuizID",quiz.getId());
             request.setAttribute("Question", q);
             rd.forward(request, response);
         }
         else if(args[2].equals("EditAnswer")){
             Answer a = new Answer();
-            // get answer with id depicted in url
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
+            Question q = new Question();
+            Quiz quiz = new Quiz();
+            QuizModel qm = new QuizModel();
+            quiz = qm.fetchQuiz(parseInt(args[3]));
+            for(int i=0;i<quiz.getQuestions().size();i++){
+                q = quiz.getQuestions().get(i);
+                for(int j =0;j<q.getAnswers().size();j++){
+                if(q.getAnswers().get(j).getId() == parseInt(args[3])){
+                    a = q.getAnswers().get(j);
+                    break;
+                }
             }
-            DBConnect db = new DBConnect();
+            }
             
-            a = db.getAnswer(args[3]);
             //Answer a = GetAnswer(args[3]);
             RequestDispatcher rd = request.getRequestDispatcher("/editAnswer.jsp");
+            request.setAttribute("QuizID",quiz.getId());
+            request.setAttribute("QuestionID", q.getId());
             request.setAttribute("Answer", a);
             rd.forward(request, response);
         }

@@ -47,5 +47,6 @@
                 </form>
                        <%}
                        %>
+                       <h3>Go back to <a href="/Agile/EditQuestion/<%=QuestionID%>">Question</a></h3>
     </body>
 </html>
