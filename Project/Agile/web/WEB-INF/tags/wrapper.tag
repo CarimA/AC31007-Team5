@@ -57,6 +57,7 @@
             <jsp:doBody/>    
         </section>
         <footer class="container">
+            Something should be here eventually
             <jsp:invoke fragment="footer"/>
         </footer>
     </body>

@@ -51,7 +51,7 @@ header {
 
 footer {
     margin: 1em auto;
-    margin-top: 1px solid #e1e1e1;
+    border-top: 1px solid #e1e1e1;
 }
 
 header h1 {
@@ -97,6 +97,19 @@ input[type=text] {
 .row-center {
     text-align: center;
     line-height: 2.5em;
+}
+
+.quiz-row {
+    
+}
+
+.quiz-row:hover {
+    background: #0FA0CE;
+    color: #fff;
+}
+
+.quiz-alt {
+    background: #eee;
 }
 
 /* Larger than mobile */
