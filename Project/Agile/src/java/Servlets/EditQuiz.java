@@ -161,9 +161,7 @@ public class EditQuiz extends HttpServlet {
             int quizID = parseInt(request.getParameter("QuizID"));
             QuizModel qm = new QuizModel();
             qm.updateQuiz(quizID,title,module,parseBoolean(available));
-            RequestDispatcher rd = request.getRequestDispatcher("/EditQuiz/1");
-            rd.forward(request, response);
-            
+            response.sendRedirect("/Agile/EditQuiz/"+quizID);
         }
         else if(args[2].equals("EditQuestion")){
             String question = request.getParameter("question");
