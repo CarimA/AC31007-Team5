@@ -50,7 +50,8 @@ header {
 }
 
 footer {
-    margin: 1em auto;
+    margin: 1em auto !important;
+    padding: 1em 0 !important;
     border-top: 1px solid #e1e1e1;
 }
 
