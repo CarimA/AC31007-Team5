@@ -27,9 +27,7 @@ public class QuizModel {
         Quiz quiz = null;
         try {
             quiz = Quiz.fetch(Helpers.connect(), id);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         }
             

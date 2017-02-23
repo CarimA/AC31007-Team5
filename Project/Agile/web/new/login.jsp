@@ -21,13 +21,16 @@
                 <h2>Log In</h2>
                 <div class="row">
                     <div class="twelve columns">
-                        <input type="text" class="u-full-width" placeholder="Your User ID" />
+                        <input type="text" class="u-full-width" placeholder="Your User ID or Matriculation Number" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="twelve columns">
                         <input type="text" class="u-full-width" placeholder="Your Password" />
                     </div>
+                </div>
+                <div class="row">
+                    <a href="#" class="button">Submit</a>
                 </div>
             </div>
             
@@ -35,13 +38,37 @@
                 <h2>Register</h2>
                 <div class="row">
                     <div class="twelve columns">
-                        <input type="text" class="u-full-width" placeholder="Your User ID" />
+                        <input type="text" class="u-full-width" placeholder="Your User ID or Matriculation Number" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="twelve columns">
-                        <input type="text" class="u-full-width" placeholder="Your Password" />
+                        <input type="text" class="u-full-width" placeholder="Email Address" />
                     </div>
+                </div>     
+                <div class="row">
+                    <div class="twelve columns">
+                        <input type="text" class="u-full-width" placeholder="Choose Your Password" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="twelve columns">
+                        <input type="text" class="u-full-width" placeholder="Confirm Your Password" />
+                    </div>
+                </div>   
+                <div class="row">
+                    <div class="three columns row-center">
+                        Position
+                    </div>
+                    <div class="nine columns">
+                        <select class="u-full-width">
+                            <option value="student">Student</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                    </div>
+                </div>  
+                <div class="row">
+                    <a href="#" class="button">Submit</a>
                 </div>                
             </div>
         </div>
