@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,7 +89,7 @@ public class Question {
     }
         
     public List<Answer> fetchAnswers(Connection connection, int id) throws SQLException {
-        List<Answer> answerList = null;
+        List<Answer> answerList = new ArrayList();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM answer where QuestionID = ?");
         statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();

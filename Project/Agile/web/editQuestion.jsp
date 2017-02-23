@@ -21,6 +21,7 @@
             //}
             
             Question q = (Question) request.getAttribute("Question");
+            int QuizID = (int) request.getAttribute("QuizID");
             if(q == null){
                 %>
                 <p>No question selected</p>
@@ -56,7 +57,7 @@
             
                 %>
                 <%// change this%>
-                <li><a href="/EditAnswer/<%=a.getId()%>">Edit Question <%=q.getNumber()%></a></li>
+                <li><a href="/EditAnswer/<%=a.getId()%>">Edit Answer <%=q.getNumber()%></a></li>
                        
     <%
             }}

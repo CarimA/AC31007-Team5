@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -126,7 +127,7 @@ public class Quiz {
     
     
         public void fetchQuestions(Connection connection) throws SQLException  {
-        List<Question> questionList = null;
+        List<Question> questionList = new ArrayList();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ?");
         statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();
