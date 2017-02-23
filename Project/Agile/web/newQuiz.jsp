@@ -25,7 +25,7 @@
     <%@include file="header.jsp"%>
     <body>
         <%
-            user = (User) session.getAttribute("person");
+            user = (User) session.getAttribute("user");
             if (user.getPosition().equals("student")) {
                 response.sendRedirect("index.jsp");
         } %>

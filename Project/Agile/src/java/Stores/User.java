@@ -134,7 +134,7 @@ public class User {
             String salt = user.getSalt();
             
             
-            statement = connection.prepareStatement("INSERT INTO Person (pId, DisplayName, Password, Email, Position, Salt) values (?, ?, ?, ?, ?, ?)");
+            statement = connection.prepareStatement("INSERT INTO person (pId, DisplayName, Password, Email, Position, Salt) values (?, ?, ?, ?, ?, ?)");
             statement.setString(1, id);
             statement.setString(2, displayName);
             statement.setString(3, user.getPassword());

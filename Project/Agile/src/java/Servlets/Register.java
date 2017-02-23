@@ -83,7 +83,7 @@ public class Register extends HttpServlet {
         User user = lm.registerUser(userID, pass, displayName, email, position);
         
         if (user != null) {
-            session.setAttribute("person", user);
+            session.setAttribute("user", user);
             if ("Staff".equals(user.getPosition())) {
                 rd = request.getRequestDispatcher("index.jsp");
             } else {
