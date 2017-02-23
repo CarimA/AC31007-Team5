@@ -12,6 +12,7 @@ import Stores.Question;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
 import java.sql.SQLException;
@@ -153,21 +154,25 @@ public class EditQuiz extends HttpServlet {
             throws ServletException, IOException {
         String[] args = request.getRequestURI().split("/");
         
-        if(args[1].equals("/EditQuiz")){
+        if(args[2].equals("EditQuiz")){
             String title = request.getParameter("title");
             String module = request.getParameter("module");
             String available = request.getParameter("available");
             int quizID = parseInt(request.getParameter("QuizID"));
-            // qm.updateQuiz(title,module,available,quizID):
+            QuizModel qm = new QuizModel();
+            qm.updateQuiz(quizID,title,module,parseBoolean(available));
+            RequestDispatcher rd = request.getRequestDispatcher("/EditQuiz/1");
+            rd.forward(request, response);
+            
         }
-        else if(args[1].equals("/EditQuestion")){
+        else if(args[2].equals("EditQuestion")){
             String question = request.getParameter("question");
             String image = request.getParameter("image");
             int points = parseInt(request.getParameter("available"));
             int questionID = parseInt(request.getParameter("QuestionID"));
             // qm.updateQuestion(question,image,points,questionID):
         }
-        else if(args[1].equals("/EditAnswer")){
+        else if(args[2].equals("EditAnswer")){
             String answer = request.getParameter("answer");
             String explanation = request.getParameter("explanation");
             String right = request.getParameter("right");

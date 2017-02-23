@@ -35,6 +35,28 @@ public class QuizModel {
         return quiz;
     }
     
+    public void updateQuiz(int id,String title,String module,boolean available){
+        Connection connection;
+        try {
+            connection = Helpers.connect();
+            
+            
+                PreparedStatement statement;
+                statement = connection.prepareStatement("UPDATE quiz SET Title = ?, Module = ?, Available = ? WHERE qId = ?");
+                statement.setString(1, title);
+                statement.setString(2, module);
+                statement.setBoolean(3, available);
+                statement.setInt(4, id);
+                statement.executeUpdate();
+                statement.close();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public int CreateQuiz(String title, String module){
         int id = 0;
         try {
