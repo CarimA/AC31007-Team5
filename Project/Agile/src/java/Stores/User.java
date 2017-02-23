@@ -8,11 +8,14 @@ package Stores;
 import Exception.PasswordInvalidException;
 import Exception.UsernameInvalidException;
 import Misc.Helpers;
+import Models.LoginModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -84,9 +87,9 @@ public class User {
             if (!rs.next()) {
                 throw new UsernameInvalidException();
             }
-
+            
             String hashedPassword = rs.getString("Password");
-            String displayName = rs.getString("DisplayName");
+            String displayName = rs.getString("DisplayName");            
             String salt = rs.getString("Salt");
             String email = rs.getString("Email");
             String position = rs.getString("Position");

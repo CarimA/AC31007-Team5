@@ -25,7 +25,7 @@
                 <div class="dynamic-column grow">
                     <ul>
                         <%
-                            User user = (User)(request.getSession().getAttribute("person"));
+                            User user = (User)(request.getSession().getAttribute("user"));
                             if (user == null) {
                         %>
                         <li><a href="/Agile/Login">Login</a></li>

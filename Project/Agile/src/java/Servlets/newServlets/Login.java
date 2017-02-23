@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             User user = lm.checkLogin(id, password);
-            session.setAttribute("person", user);
+            session.setAttribute("user", user);
             response.sendRedirect("Home");
         } catch (UsernameInvalidException | PasswordInvalidException ex) {
             request.setAttribute("error", "Username and/or Password incorrect.");
