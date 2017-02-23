@@ -47,6 +47,11 @@ input[type=text] {
     padding: 0.5em;
 }
 
+.row-center {
+    text-align: center;
+    line-height: 2.5em;
+}
+
 /* Larger than mobile */
 @media (min-width: 400px) {}
 

@@ -17,19 +17,19 @@
     </head>
     <body>
         <header class="container">
-            <div class="row">
+            <div class="dynamic-row">
                 <div class="dynamic-column">
                     <h1>Quiz Thing</h1>
                 </div>
                 <div class="dynamic-column grow">
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="Agile/new/Home">Home</a></li>
                         <%
                             User user = (User)(request.getAttribute("person"));
                             if (user == null) {
                         %>
-                        <li><a href="/Agile/Login">Login</a></li>
-                        <li><a href="/Register">Register</a></li>
+                        <li><a href="/Agile/new/Login">Login</a></li>
+                        <li><a href="/Agile/new/Register">Register</a></li>
                         <%
                             }
                             else {

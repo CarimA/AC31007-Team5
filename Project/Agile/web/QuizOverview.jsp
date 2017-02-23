@@ -29,7 +29,7 @@
             <a href = "viewQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> View Quiz </a>
             <%
                 user = (User) session.getAttribute("person");
-                if (user.getPosition().equals("staff")) {
+                if (user.getPosition().equals("Staff")) {
                     //response.sendRedirect("login.jsp");
             %>
                 <a href = "newQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> New Quiz </a>
