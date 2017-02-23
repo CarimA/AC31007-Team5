@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jimiwesterholm
  */
-@WebServlet(name = "Register", urlPatterns = {"/oldRegister"})
+@WebServlet(name = "oldRegister", urlPatterns = {"/oldRegister"})
 public class Register extends HttpServlet {
 
 

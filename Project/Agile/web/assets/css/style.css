@@ -37,6 +37,13 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Pangolin', cursive; }
     margin-left: 0.5em;
 }
 
+.error span {
+    display: block;
+    font-style: italic;
+    font-size: 0.75em;
+    margin-left: 0.5em;
+}
+
 header { 
     margin: 1em auto !important;
     border-bottom: 1px solid #e1e1e1;
@@ -49,6 +56,11 @@ footer {
 
 header h1 {
     font-size: 3em;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: #555;
 }
 
 header ul {

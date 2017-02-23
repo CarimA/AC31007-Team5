@@ -6,6 +6,10 @@
 package Servlets.newServlets;
 
 import Exception.NotImplementedException;
+import Exception.PasswordInvalidException;
+import Exception.UsernameInvalidException;
+import Models.LoginModel;
+import Stores.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,10 +37,21 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try { 
-            throw new NotImplementedException();
-        } catch (NotImplementedException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        LoginModel lm = new LoginModel();
+        
+        String id = request.getParameter("id");
+        String password = request.getParameter("password");
+        
+        HttpSession session = request.getSession();
+        try {
+            User user = lm.checkLogin(id, password);
+            session.setAttribute("person", user);
+            response.sendRedirect("Home");
+        } catch (UsernameInvalidException | PasswordInvalidException ex) {
+            request.setAttribute("error", "Username and/or Password incorrect.");
+            
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
         }
     }
 }

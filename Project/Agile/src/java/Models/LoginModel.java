@@ -25,15 +25,11 @@ public class LoginModel {
         
     }
     
-    public User checkLogin(String username, String password) {
+    public User checkLogin(String username, String password) throws UsernameInvalidException, PasswordInvalidException {
         try {
             return User.login(Helpers.connect(), username, password);
-        } catch (UsernameInvalidException ex) {
-            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (PasswordInvalidException ex) {
-            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+        } catch (UsernameInvalidException | PasswordInvalidException ex) {
+            throw ex;
         } catch (SQLException ex) {
             Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
