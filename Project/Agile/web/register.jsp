@@ -24,6 +24,7 @@
             </ul>
             <input type="submit" value="Register User">
         </form>
+        <p><%request.getAttribute("message");%></p>
     </body>
 </html>
 
