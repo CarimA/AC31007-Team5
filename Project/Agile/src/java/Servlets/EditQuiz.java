@@ -6,6 +6,7 @@
 package Servlets;
 
 import Models.DBConnect;
+import Models.QuizModel;
 import Stores.Answer;
 import Stores.Question;
 import Stores.Quiz;
@@ -86,16 +87,10 @@ public class EditQuiz extends HttpServlet {
         System.out.println(args[3]);
         if(args[2].equals("EditQuiz")){
             Quiz quiz = new Quiz();
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            DBConnect db = new DBConnect();
-            String query = "Select * from quiz where qId = " + args[3];
-            Vector<Quiz> temp = db.getQuizzes(query);
-            System.out.println(temp.size());
-            quiz = temp.elementAt(0);
+            
+            
+            QuizModel qm = new QuizModel();
+            quiz = qm.fetchQuiz(parseInt(args[3]));
             
             RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
             request.setAttribute("Quiz",quiz);
@@ -104,35 +99,48 @@ public class EditQuiz extends HttpServlet {
         }
         else if(args[2].equals("EditQuestion")){
             // get question with id depicted in url
+            QuizModel qm = new QuizModel();
             Question q = new Question();
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
+            Quiz quiz = new Quiz();
+            quiz = qm.fetchQuiz(parseInt(args[3]));
+            for(int i = 0;i<quiz.getQuestions().size();i++){
+                if(quiz.getQuestions().get(i).getId() == parseInt(args[3])){
+                    q = quiz.getQuestions().get(i);
+                    break;
+                }
             }
-            DBConnect db = new DBConnect();
-            
-            q = db.getQuestion(args[3]);
             System.out.println(q.getQuestion());
             System.out.println(q.getNumber());
             System.out.println(q.getPoints());
             RequestDispatcher rd = request.getRequestDispatcher("/editQuestion.jsp");
+            request.setAttribute("QuizID", quiz.getId());
             request.setAttribute("Question", q);
             rd.forward(request, response);
         }
         else if(args[2].equals("EditAnswer")){
-            Answer a = new Answer();
-            // get answer with id depicted in url
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EditQuiz.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            DBConnect db = new DBConnect();
             
-            a = db.getAnswer(args[3]);
+            // get answer with id depicted in url
+            QuizModel qm = new QuizModel();           
+            Quiz quiz = new Quiz();
+            Question q = new Question();
+            Answer a = new Answer();
+            quiz = qm.fetchQuiz(parseInt(args[3]));
+            for(int i = 0;i<quiz.getQuestions().size();i++){
+                if(quiz.getQuestions().get(i).getId() == parseInt(args[3])){
+                    q = quiz.getQuestions().get(i);
+                    break;
+                }
+            }
+            for(int i = 0;i<q.getAnswers().size();i++){
+                if(q.getAnswers().get(i).getId() == parseInt(args[3])){
+                    a = q.getAnswers().get(i);
+                    break;
+                }
+            }
             //Answer a = GetAnswer(args[3]);
             RequestDispatcher rd = request.getRequestDispatcher("/editAnswer.jsp");
+            request.setAttribute("QuizID", quiz.getId());
+            request.setAttribute("QuestionID", q.getId());
             request.setAttribute("Answer", a);
             rd.forward(request, response);
         }
@@ -155,17 +163,17 @@ public class EditQuiz extends HttpServlet {
             throws ServletException, IOException {
         String[] args = request.getRequestURI().split("/");
         
-        if(args[1].equals("/EditQuiz")){
+        if(args[2].equals("EditQuiz")){
             String title = request.getParameter("title");
             String module = request.getParameter("module");
             String available = request.getParameter("available");
         }
-        else if(args[1].equals("/EditQuestion")){
+        else if(args[2].equals("EditQuestion")){
             String question = request.getParameter("question");
             String image = request.getParameter("image");
             int points = parseInt(request.getParameter("available"));
         }
-        else if(args[1].equals("/EditAnswer")){
+        else if(args[2].equals("EditAnswer")){
             String answer = request.getParameter("answer");
             String explanation = request.getParameter("explanation");
             String right = request.getParameter("right");

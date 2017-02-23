@@ -21,6 +21,8 @@
                 //}
             
                 Answer a = (Answer) request.getAttribute("Answer");
+                int QuizID = (int) request.getAttribute("QuizID");
+                int QuestionID = (int) request.getAttribute("QuestionID");
                 if(a == null){
                     %>
                     <p>No answer selected</p>

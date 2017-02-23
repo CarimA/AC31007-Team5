@@ -15,10 +15,10 @@
     </head>
     <body>
         <%
-            User user = (User) session.getAttribute("person");
-            if (user.getPosition().equals("student")) {
-                response.sendRedirect("index.jsp");
-            }
+            //User user = (User) session.getAttribute("person");
+            //if (user.getPosition().equals("student")) {
+            //    response.sendRedirect("index.jsp");
+            //}
             
             // get the quiz
             // change this
@@ -37,19 +37,19 @@
             <p>Edit module</p>
             <input type="text" name="module">
             <h2>Created <%=quiz.getDateCreated()%></h2>
-            <h2>Available <%=quiz.isAvaliable()%></h2>
+            <h2>Available <%=quiz.isAvailable()%></h2>
             <p>Edit Availability</p>
-            <p>Make available?</p> <input type="checkbox" name="avaliable" <%if(quiz.isAvaliable()){%>checked="checked"<%}%>>
+            <p>Make available?</p> <input type="checkbox" name="avaliable" <%if(quiz.isAvailable()){%>checked="checked"<%}%>>
             
             </form>
             <ul> Questions
         <%
             
-            if(quiz.getQuestions().isEmpty()){
+            if(quiz.getQuestions() == null || quiz.getQuestions().isEmpty()){
                 %>
                 <p>This Quiz has no questions</p>
         <%
-            }
+            }else{
             Iterator<Question> iter;
             
             iter = quiz.getQuestions().iterator();
@@ -58,7 +58,7 @@
 
         %>
         <li><a href="/EditQuestion/<%=q.getId()%>">Edit question <%=q.getNumber()%></a></li>
-        <% }}
+        <% }}}
 %>
     </ul>
         
