@@ -34,7 +34,7 @@ public final class Helpers {
         }
     }
     
-    public static Connection connect() throws ClassNotFoundException {
+    public static Connection connect() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
     }
