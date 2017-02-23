@@ -44,6 +44,15 @@
             </div>
         </header>
         <section class="container">
+            <%
+                String error = (String)request.getAttribute("error");
+                if (!(error == null)) {
+            %>
+            <p class="error">${error}</p>
+            <%
+                    request.setAttribute("error", null);
+                }
+            %>
             <jsp:doBody/>    
         </section>
         <footer class="container">

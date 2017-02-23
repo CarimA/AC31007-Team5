@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <a href="#" class="button">Submit</a>
+                    <a href="#" class="button">Log In</a>
                 </div>
             </div>
             
@@ -68,7 +68,7 @@
                     </div>
                 </div>  
                 <div class="row">
-                    <a href="#" class="button">Submit</a>
+                    <a href="#" class="button">Create An Account</a>
                 </div>                
             </div>
         </div>

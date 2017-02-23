@@ -26,6 +26,23 @@ there.
 body { font-family: 'PT Sans', sans-serif !important; }
 h1, h2, h3, h4, h5, h6 { font-family: 'Pangolin', cursive; }
 
+.error {
+    background: #EFA5A5;
+    border: 1px solid #E06767;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+header { 
+    margin: 1em auto !important;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+footer {
+    margin: 1em auto;
+    margin-top: 1px solid #e1e1e1;
+}
+
 header h1 {
     font-size: 3em;
 }
@@ -40,7 +57,21 @@ header ul li {
 }
 
 header ul li a {
-    padding: 1em;
+    padding: 0.45em 0.8em;
+    margin: 0 0.25em;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #555;
+    background: #e1e1e1;
+    letter-spacing: .1rem;
+    text-size: 11px;
+    font-weight: 600;
+}
+
+header ul li a:hover {
+    background: #0FA0CE;
+    color: #fff;
 }
 
 input[type=text] {
