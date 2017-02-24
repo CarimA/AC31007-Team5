@@ -8,6 +8,7 @@ package Servlets.newServlets;
 import Exception.NotImplementedException;
 import Models.LoginModel;
 import Stores.User;
+import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.length;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +39,8 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       LoginModel lm = new LoginModel();
+       RequestDispatcher rd;
        String error = "";
        
        String userID = request.getParameter("userID");
@@ -46,19 +49,39 @@ public class Register extends HttpServlet {
        String email = request.getParameter("email");
        String position = request.getParameter("position");
        
-       if(userID.length() <= 0){
+        if(userID.length() <= 12){
            error += "Matriculation number is invalid!";
+           response.sendRedirect("/Register");
            return;
-           
-       }
+           }
+       
+         if(pass.length() < 7){
+           error += "Password is to short! 7 characters minimum";
+           response.sendRedirect("/Register");
+           return;
+           }
+       
+        HttpSession session = request.getSession();
+        User user = lm.registerUser(userID, pass, displayName, email, position);
         
-        
-
-        try { 
-            throw new NotImplementedException();
-        } catch (NotImplementedException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        if (user != null) {
+            session.setAttribute("user", user);
+            if ("Staff".equals(user.getPosition())) {
+                rd = request.getRequestDispatcher("index.jsp");
+            } else {
+                rd = request.getRequestDispatcher("index.jsp");
+            }
+        } else {
+            rd = request.getRequestDispatcher("register.jsp");
         }
+        rd.forward(request, response);
+    }
+
+//        try { 
+//            throw new NotImplementedException();
+//        } catch (NotImplementedException ex) {
+//            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
     
@@ -66,4 +89,4 @@ public class Register extends HttpServlet {
     
     
     
-}
+
