@@ -154,7 +154,7 @@ public class DBConnect {
                 List<Question> qs = new ArrayList<>();
                 while(sr.next()){
                     Question quest = new Question();
-                    quest.setId(sr.getInt("qId"));
+                    quest.setId(sr.getInt("questionId"));
                     quest.setNumber(sr.getInt("Number"));
                     quest.setQuestion(sr.getString("Question"));
                     quest.setPoints(sr.getInt("points"));
@@ -162,7 +162,7 @@ public class DBConnect {
                     
                     List<Answer> as = new ArrayList<>();
                     PreparedStatement s = connection.prepareStatement("Select * from answer where QuestionID = ?");
-                    s.setString(1,sr.getString("qId"));
+                    s.setString(1,sr.getString("questionId"));
                     ResultSet r = s.executeQuery();
                     while(r.next()){
                         Answer a = new Answer();
