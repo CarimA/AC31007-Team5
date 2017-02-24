@@ -44,16 +44,22 @@ public final class Helpers {
         return DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
     }
     
-    public static void successRedirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, String errorMessage) throws ServletException, IOException {
-        request.setAttribute("success", errorMessage);
-            
-        RequestDispatcher rd = request.getRequestDispatcher(redirectPage);
-        rd.forward(request, response);
+    public static void successRedirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, boolean hardRedirect, String message) throws ServletException, IOException {
+        request.getSession().setAttribute("success", message);
+        redirect(request, response, redirectPage, hardRedirect);
     }
-    public static void errorRedirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, String errorMessage) throws ServletException, IOException {
-        request.setAttribute("error", errorMessage);
-            
-        RequestDispatcher rd = request.getRequestDispatcher(redirectPage);
-        rd.forward(request, response);
+    
+    public static void errorRedirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, boolean hardRedirect, String message) throws ServletException, IOException {
+        request.getSession().setAttribute("error", message);
+        redirect(request, response, redirectPage, hardRedirect);
+    }
+    
+    public static void redirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, boolean hardRedirect) throws ServletException, IOException { 
+        if (hardRedirect) {
+            response.sendRedirect(redirectPage);            
+        } else {
+            RequestDispatcher rd = request.getRequestDispatcher(redirectPage);
+            rd.forward(request, response);
+        } 
     }
 }

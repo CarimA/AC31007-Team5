@@ -32,8 +32,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-        rd.forward(request, response);
+        Helpers.redirect(request, response, "login.jsp", false);
     }
 
     @Override
@@ -53,12 +52,12 @@ public class Register extends HttpServlet {
         
         // TODO: confirm password
         if(userID.length() != 9){
-            Helpers.errorRedirect(request, response, "login.jsp", "User ID or Matriculation ID is invalid!");
+            Helpers.errorRedirect(request, response, "login.jsp", false, "User ID or Matriculation ID is invalid!");
             return;
         }
        
         if(pass.length() < 7){
-            Helpers.errorRedirect(request, response, "login.jsp", "Password is too short! 7 characters minimum!");
+            Helpers.errorRedirect(request, response, "login.jsp", false, "Password is too short! 7 characters minimum!");
             return;
         }
        
@@ -71,10 +70,9 @@ public class Register extends HttpServlet {
         
         if (user != null) {
             session.setAttribute("user", user);
-            response.sendRedirect("Home");
+            Helpers.successRedirect(request, response, "Home", true, "Successfully created an account!");
         } else {
-            Helpers.errorRedirect(request, response, "login.jsp", "Something else happened!");
-            return;
+            Helpers.errorRedirect(request, response, "login.jsp", false, "Something else happened!");
         }
     }
 

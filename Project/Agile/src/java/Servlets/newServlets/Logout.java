@@ -6,6 +6,7 @@ package Servlets.newServlets;
  * and open the template in the editor.
  */
 
+import Misc.Helpers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -39,7 +40,7 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("user", null);
-        response.sendRedirect("Home");
+            Helpers.successRedirect(request, response, "Home", true, "Successfully logged out!");
     }
 
     /**

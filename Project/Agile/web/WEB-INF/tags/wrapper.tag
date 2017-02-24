@@ -46,12 +46,20 @@
         </header>
         <section class="container">
             <%
-                String error = (String)request.getAttribute("error");
+                String success = (String)session.getAttribute("success");
+                if (!(success == null)) {
+            %>
+            <p id="success-message" class="success" onclick="this.parentElement.removeChild(document.getElementById('success-message'));"><i class="fa fa-rocket" aria-hidden="true"></i> ${success}</p>
+            <%
+                    session.setAttribute("success", null);
+                }
+
+                String error = (String)session.getAttribute("error");
                 if (!(error == null)) {
             %>
             <p id="error-message" class="error" onclick="this.parentElement.removeChild(document.getElementById('error-message'));"><i class="fa fa-bug" aria-hidden="true"></i> ${error}<span>(Click anywhere on this error message to close it)</span></p>
             <%
-                    request.setAttribute("error", null);
+                    session.setAttribute("error", null);
                 }
             %>
             <jsp:doBody/>    

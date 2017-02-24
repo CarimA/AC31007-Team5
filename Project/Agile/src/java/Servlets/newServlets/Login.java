@@ -31,8 +31,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-        rd.forward(request, response);
+            Helpers.redirect(request, response, "login.jsp", false);
     }
 
     @Override
@@ -47,9 +46,9 @@ public class Login extends HttpServlet {
         try {
             User user = lm.checkLogin(id, password);
             session.setAttribute("user", user);
-            response.sendRedirect("Home");
+            Helpers.successRedirect(request, response, "Home", true, "Successfully logged in!");
         } catch (UsernameInvalidException | PasswordInvalidException ex) {
-            Helpers.errorRedirect(request, response, "login.jsp", "Username and/or Password incorrect!");
+            Helpers.errorRedirect(request, response, "login.jsp", false, "Username and/or Password incorrect!");
         }
     }
 }

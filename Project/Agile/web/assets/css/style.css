@@ -26,15 +26,23 @@ there.
 body { font-family: 'PT Sans', sans-serif !important; }
 h1, h2, h3, h4, h5, h6 { font-family: 'Pangolin', cursive; }
 
-.error {
-    background: #EFA5A5;
-    border: 1px solid #E06767;
+.success, .error {
     border-radius: 5px;
     padding: 5px;
 }
 
-.error i {
-    margin-left: 0.5em;
+.success i, .error i {
+    margin-left: 0.5em;    
+}
+
+.error {
+    background: #EFA5A5;
+    border: 1px solid #E06767;
+}
+
+.success {
+    background: #A1D490;
+    border: 1px solid #579E65;
 }
 
 .error span {
