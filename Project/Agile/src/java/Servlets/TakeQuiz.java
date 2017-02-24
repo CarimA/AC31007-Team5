@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jimiwesterholm
  */
-@WebServlet(urlPatterns = {"/takeQuiz"})
+@WebServlet(urlPatterns = {"/takeQuiz", "/takeQuiz/*"})
 public class TakeQuiz extends HttpServlet {
 
 
@@ -42,15 +44,15 @@ public class TakeQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
         QuizModel qm = new QuizModel();
         
-        //String[] args = request.getRequestURI().split("/");
-        Quiz quiz = qm.fetchQuiz(/*parseInt(args[1])*/1);
+        String[] args = request.getRequestURI().split("/");
+        int a = Integer.parseInt(args[3]);
+        Quiz quiz = qm.fetchQuiz(a);
         
         
-        request.setAttribute("quiz", quiz);
-        RequestDispatcher rd = request.getRequestDispatcher("takeQuiz.jsp");
+        request.getSession().setAttribute("quiz", quiz);
+        RequestDispatcher rd = request.getRequestDispatcher("/takeQuiz.jsp");
         rd.forward(request, response);
     }
 
@@ -65,8 +67,10 @@ public class TakeQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*NOT FUCTIONAL YET
         RequestDispatcher rd = request.getRequestDispatcher("studentsummary.jsp");
-        Quiz quiz = (Quiz) request.getAttribute("quiz");
+        
+        Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
         List<Question> questions = quiz.getQuestions();
         
         for (int i = 0; i < questions.size(); i++) {
@@ -74,16 +78,14 @@ public class TakeQuiz extends HttpServlet {
             
             //Get answer object
             int q = questions.get(i).getId();
-            String a = request.getParameter(Integer.toString(q));
-            int answerID = Integer.getInteger(a);
+            String qs = String.valueOf(q);
+            String a = request.getParameter(qs);
+            System.out.println(a);
+            int answerID = Integer.parseInt(a);
             
-            int j = 0;
-            while (answers.get(j).getId()!=answerID) j++;
-            
-            request.setAttribute(Integer.toString(questions.get(i).getId()), answers.get(j));
         }
         
-        rd.forward(request, response);
+        rd.forward(request, response);*/
     }
 
     /**

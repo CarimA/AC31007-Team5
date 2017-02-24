@@ -24,7 +24,7 @@
             if (user == null || user.getPosition().equals("staff")) {
                 response.sendRedirect("index.jsp");
             }*/
-            Quiz quiz = (Quiz) request.getAttribute("quiz");
+            Quiz quiz = (Quiz) session.getAttribute("quiz");
             Question q;
             Answer a;
             List<Question> questions = quiz.getQuestions();
