@@ -22,6 +22,7 @@
             
             Question q = (Question) request.getAttribute("Question");
             int QuizID = (int) request.getAttribute("QuizID");
+            int lastNum = 1;
             if(q == null){
                 %>
                 <p>No question selected</p>
@@ -39,7 +40,7 @@
         <input type="number" name="points" min="1" max="100" value="<%=q.getPoints()%>">
         <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
         
-        <input type="submit" value="Submit">
+        <input type="submit" name="submit" value="Submit">
         </form>
         <br/>
         <%// change this%>
@@ -59,9 +60,9 @@
             
                 %>
                 <%// change this%>
-                <li><a href="/Agile/EditAnswer/<%=a.getId()%>">Edit Answer <%=q.getNumber()%></a></li>
+                <li><a href="/Agile/EditAnswer/<%=QuizID%>/<%=q.getId()%>/<%=a.getId()%>">Edit Answer <%=a.getNumber()%></a></li>
                        
-    <%
+    <%          lastNum = q.getNumber() + 1;
             }}
 
 }
@@ -82,7 +83,9 @@
                 <p>Set right answer</p>
                 <input type=checkbox name="right"> 
                 <br/>
-                <input type="submit" value="Submit">
+                <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
+                <input type="hidden" name="number" value="<%=lastNum%>">
+                <input type="submit" name="submit" value="Add">
                 </form>
         <h3>Go back to <a href="/Agile/EditQuiz/<%=QuizID%>">Quiz</a></h3>
            

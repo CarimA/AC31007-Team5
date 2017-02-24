@@ -104,8 +104,8 @@ public class EditQuiz extends HttpServlet {
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
             for(int i=0;i<quiz.getQuestions().size();i++){
-                if(quiz.getQuestions().get(i).getId() == parseInt(args[3])){
-                    q= quiz.getQuestions().get(i);
+                if(quiz.getQuestions().get(i).getId() == parseInt(args[4])){
+                    q = quiz.getQuestions().get(i);
                     break;
                 }
             }
@@ -120,14 +120,17 @@ public class EditQuiz extends HttpServlet {
             Quiz quiz = new Quiz();
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
-            for(int i=0;i<quiz.getQuestions().size();i++){
+            outerloop: for(int i=0;i<quiz.getQuestions().size();i++){
+                
                 q = quiz.getQuestions().get(i);
-                for(int j =0;j<q.getAnswers().size();j++){
-                if(q.getAnswers().get(j).getId() == parseInt(args[3])){
-                    a = q.getAnswers().get(j);
-                    break;
+                if(q.getId() == parseInt(args[4])){
+                    for(int j =0;j<q.getAnswers().size();j++){
+                        if(q.getAnswers().get(j).getId() == parseInt(args[5])){
+                            a = q.getAnswers().get(j);
+                            break outerloop;
+                        }
+                    }
                 }
-            }
             }
             
             //Answer a = GetAnswer(args[3]);
@@ -201,7 +204,31 @@ public class EditQuiz extends HttpServlet {
             int questionID = parseInt(request.getParameter("QuestionID"));
             // qm.updateQuestion(question,image,points,questionID):
             QuizModel qm = new QuizModel();
-            qm.updateQuestion(questionID, question, points);
+            // add answer
+            String submit = request.getParameter("submit");
+            if(submit.equals("Add")){
+                String answer = request.getParameter("answer");
+                //String image = request.getParameter("image");
+                String explanation = request.getParameter("explanation");
+                String right = request.getParameter("right");
+                int number = parseInt(request.getParameter("number"));
+                boolean a;
+                if(right == null){
+                    a = false;
+                }
+                else if(right.equals("on")){
+                    a = true;
+                }
+                else{
+                    a = false;
+                }
+                if(!answer.equals("")){
+                   qm.addAnswer(answer,number,explanation,a,questionID);
+                }
+                }else{
+            //
+                qm.updateQuestion(questionID, question, points);
+                }
             response.sendRedirect("/Agile/EditQuestion/"+questionID);
         }
         else if(args[2].equals("EditAnswer")){

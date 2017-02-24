@@ -48,6 +48,6 @@
                 </form>
                        <%}
                        %>
-                       <h3>Go back to <a href="/Agile/EditQuestion/<%=QuestionID%>">Question</a></h3>
+                       <h3>Go back to <a href="/Agile/EditQuestion/<%=QuizID%>/<%=QuestionID%>">Question</a></h3>
     </body>
 </html>
