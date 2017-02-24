@@ -206,9 +206,8 @@ $(document).ready(function(){
     </head>
     <body>
         <h1>Test X Summary</h1>
-        <h3>Name: .....</h3>
-        <h3>Surname: .....</h3>
-        <h3>Email: ......</h3>
+        <h3>Name: ${user.getDisplayName()}</h3>
+        <h3>Email: ${user.getEmail()}</h3>
         <h3>Grade ......</h3>
         <h3>Date ......</h3>
         <button id="show1">Question 1</button><br>
