@@ -31,7 +31,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("Register.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
          request.setAttribute("error",error);
         rd.forward(request, response);
     }
@@ -41,6 +41,7 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
        LoginModel lm = new LoginModel();
        RequestDispatcher rd;
+        //rd = request.getRequestDispatcher("index.jsp");
        String error = "";
        
        String userID = request.getParameter("userID");
@@ -51,13 +52,13 @@ public class Register extends HttpServlet {
        
         if(userID.length() <= 12){
            error += "Matriculation number is invalid!";
-           response.sendRedirect("/Register");
+           response.sendRedirect("register.jsp");
            return;
            }
        
          if(pass.length() < 7){
            error += "Password is to short! 7 characters minimum";
-           response.sendRedirect("/Register");
+           response.sendRedirect("register.jsp");
            return;
            }
        
