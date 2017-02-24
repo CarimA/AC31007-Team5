@@ -116,7 +116,9 @@ public class StudentSummary extends HttpServlet {
              Logger.getLogger(StudentSummary.class.getName()).log(Level.SEVERE, null, ex);
              }
              **/
-             sendEmail();
+             Stores.User user = (Stores.User)(request.getSession().getAttribute("user"));
+             String email = user.getEmail();
+             sendEmail(email);
        
         
         
@@ -150,7 +152,7 @@ public class StudentSummary extends HttpServlet {
         
     }
     
-    public void sendEmail() //throws SQLException, ClassNotFoundException
+    public void sendEmail(String email) //throws SQLException, ClassNotFoundException
     {
         //Class.forName("com.mysql.jdbc.Driver");
         //connection = DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
@@ -185,7 +187,7 @@ public class StudentSummary extends HttpServlet {
                 message.setFrom(new InternetAddress("agileteam5email@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO,
                         //InternetAddress.parse(email));
-                        InternetAddress.parse("a.tarasov1209@gmail.com"));
+                        InternetAddress.parse(email));
                 message.setSubject("Testing Subject");
                 message.setText("Dear Mail Crawler,"
                         + "\n\n No spam to my email, please!");
