@@ -59,7 +59,7 @@
                 Question q = (Question) iter.next();
 
         %>
-        <li><a href="/Agile/EditQuestion/<%=q.getId()%>">Edit question <%=q.getNumber()%></a></li>
+        <li><a href="/Agile/EditQuestion/<%=quiz.getId()%>/<%=q.getId()%>">Edit question <%=q.getNumber()%></a></li>
         
         <%lastNum = q.getNumber() + 1; }}}
 %>

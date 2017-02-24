@@ -91,7 +91,7 @@ public class Question {
     public List<Answer> fetchAnswers(Connection connection, int id) throws SQLException {
         List<Answer> answerList = new ArrayList();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM answer where QuestionID = ?");
-        statement.setInt(1, id);
+        statement.setInt(1, this.id);
         ResultSet rs = statement.executeQuery();
         
         while (rs.next()) {

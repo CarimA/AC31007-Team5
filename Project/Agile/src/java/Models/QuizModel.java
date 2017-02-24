@@ -6,8 +6,12 @@
 package Models;
 
 import Misc.Helpers;
+import Stores.Answer;
+import Stores.Question;
 import Stores.Quiz;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,6 +37,50 @@ public class QuizModel {
             
         
         return quiz;
+    }
+    
+    public Question fetchQuestion(int id){
+        Connection connection;
+        Question q = new Question();
+        try {
+            connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("Select * from Question where questionId = ?");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next()){
+                q.setId(rs.getInt("questionId"));
+                q.setNumber(rs.getInt("Number"));
+                q.setQuestion(rs.getString("Question"));
+                //q.setImage(rs.getBlob("Image");
+                q.setPoints(rs.getInt("Points"));
+                List<Answer> as = new ArrayList<>();
+                    PreparedStatement s = connection.prepareStatement("Select * from answer where QuestionID = ?");
+                    s.setString(1,rs.getString("questionId"));
+                    ResultSet r = s.executeQuery();
+                    while(r.next()){
+                        Answer a = new Answer();
+                        a.setId(r.getInt("aId"));
+                        a.setAnswer(r.getString("AnswerText"));
+                        a.setNumber(r.getInt("Number"));
+                        a.setExplanation("Explanation");
+                        a.setRight(r.getBoolean("Right"));
+                        as.add(a);
+                    }
+                    r.close();
+                    s.close();
+                    q.setAnswers(as);
+            }
+            rs.close();
+            statement.close();
+            return q;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return q;
     }
     
     public void updateQuiz(int id,String title,String module,boolean available){
@@ -152,6 +200,25 @@ public class QuizModel {
             statement.setString(2, question);
             statement.setInt(3, points);
             statement.setInt(4, quizID);
+            statement.executeUpdate();
+            statement.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addAnswer(String answer,int number,String explanation, boolean right,int questionID){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Answer (Number,AnswerText,Explanation,`Right`,QuestionID) VALUES (?,?,?,?,?)");
+            statement.setInt(1, number);
+            statement.setString(2, answer);
+            statement.setString(3, explanation);
+            statement.setBoolean(4, right);
+            statement.setInt(5, questionID);
             statement.executeUpdate();
             statement.close();
         } catch (ClassNotFoundException ex) {
