@@ -10,6 +10,7 @@ import Models.QuizModel;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,11 +42,12 @@ public class TakeQuiz extends HttpServlet {
         HttpSession session = request.getSession();
         QuizModel qm = new QuizModel();
         
-        Quiz quiz = qm.fetchQuiz((int) request.getAttribute("quiz"));
+        //String[] args = request.getRequestURI().split("/");
+        Quiz quiz = qm.fetchQuiz(/*parseInt(args[1])*/1);
         
         
-        session.setAttribute("quiz", null);
-        RequestDispatcher rd = request.getRequestDispatcher("");
+        request.setAttribute("quiz", quiz);
+        RequestDispatcher rd = request.getRequestDispatcher("takeQuiz.jsp");
         rd.forward(request, response);
     }
 
