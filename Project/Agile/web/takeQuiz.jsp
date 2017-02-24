@@ -30,27 +30,30 @@
             List<Question> questions = quiz.getQuestions();
         %>
         <h1><%=quiz.getTitle()%></h1>
-        <%
+        
+        <form method="POST" action="takeQuiz">
+            <%
             for (int i = 0; i < questions.size(); i++) {
                 q = questions.get(i);
                 %>
-                <ul>
-                    <li><%=q.getQuestion()%> Worth <%=q.getPoints()%> points.<br>
-                    <%
-                    List<Answer> answers = q.getAnswers();
-                    for (int j = 0; j < answers.size(); j++) {
-                        a = answers.get(j);
-                        int value = 0;
-                        if (a.isRight()) value = q.getPoints();
-                        %>
-                        <input type="radio" name=<%=q.getId()%> value=<%=value%>><%=a.getAnswer()%><br>
+                    <ul>
+                        <li><%=q.getQuestion()%> Worth <%=q.getPoints()%> points.<br>
                         <%
-                    }
-                    %>
-                    </li>
-                </ul>
-        <%
+                        List<Answer> answers = q.getAnswers();
+                        for (int j = 0; j < answers.size(); j++) {
+                            a = answers.get(j);
+                            %>
+                            <input type="radio" name=<%=q.getId()%> value=<%=a.getId()%>><%=a.getAnswer()%><br>
+                            <%
+                        }
+                        %>
+                        </li>
+                    </ul>
+                    
+            <%
             }
-        %>
+            %>
+        <input type="submit" value="Submit">
+        </form>
     </body>
 </html>

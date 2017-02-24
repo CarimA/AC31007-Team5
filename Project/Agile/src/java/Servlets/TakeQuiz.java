@@ -7,10 +7,13 @@ package Servlets;
  */
 
 import Models.QuizModel;
+import Stores.Answer;
+import Stores.Question;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +65,25 @@ public class TakeQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("studentsummary.jsp");
+        Quiz quiz = (Quiz) request.getAttribute("quiz");
+        List<Question> questions = quiz.getQuestions();
         
+        for (int i = 0; i < questions.size(); i++) {
+            List<Answer> answers = questions.get(i).getAnswers();
+            
+            //Get answer object
+            int q = questions.get(i).getId();
+            String a = request.getParameter(Integer.toString(q));
+            int answerID = Integer.getInteger(a);
+            
+            int j = 0;
+            while (answers.get(j).getId()!=answerID) j++;
+            
+            request.setAttribute(Integer.toString(questions.get(i).getId()), answers.get(j));
+        }
+        
+        rd.forward(request, response);
     }
 
     /**
