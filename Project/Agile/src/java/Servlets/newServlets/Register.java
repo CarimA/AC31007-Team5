@@ -42,7 +42,7 @@ public class Register extends HttpServlet {
        LoginModel lm = new LoginModel();
        RequestDispatcher rd;
         //rd = request.getRequestDispatcher("index.jsp");
-       String error = "";
+       String error = " ";
        
        String userID = request.getParameter("userID");
        String pass = request.getParameter("pass");
@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
        String email = request.getParameter("email");
        String position = request.getParameter("position");
        
-        if(userID.length() <= 12){
+        if(userID.length() != 9){
            error += "Matriculation number is invalid!";
            response.sendRedirect("register.jsp");
            return;
