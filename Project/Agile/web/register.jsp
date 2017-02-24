@@ -10,24 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register page</title>
-        <script>
-         function validateFormLess() {
-        var x = document.forms["registerForm"]["userID"].value;
-        if (x.length < 7) {
-        alert("Matriculation number is invalid! Must be 8 characters");
-        return false;
-    }
-    
-        function validateFormMore() {
-        var x = document.forms["registerForm"]["userID"].value;
-        if (x.length 8) {
-        alert("Matriculation number is invalid! Must be 8 characters");
-        return false;
-    }
-}
-            
-            
-        </script>
     </head>
     <body>
         <h1>Register</h1>
@@ -42,7 +24,6 @@
             </ul>
             <input type="submit" value="Register User">
         </form>
-        <p><%=request.getAttribute("error")%></p>
     </body>
 </html>
 

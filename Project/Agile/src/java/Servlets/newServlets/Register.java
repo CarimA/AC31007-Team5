@@ -31,7 +31,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
          request.setAttribute("error",error);
         rd.forward(request, response);
     }
@@ -39,42 +39,41 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       LoginModel lm = new LoginModel();
-       RequestDispatcher rd;
-        //rd = request.getRequestDispatcher("index.jsp");
-       String error = " ";
-       
-       String userID = request.getParameter("userID");
-       String pass = request.getParameter("pass");
-       String displayName = request.getParameter("name");
-       String email = request.getParameter("email");
-       String position = request.getParameter("position");
-       
+        LoginModel lm = new LoginModel();
+        RequestDispatcher rd;
+         //rd = request.getRequestDispatcher("index.jsp");
+        String error = " ";
+
+        String userID = request.getParameter("userid");
+        String pass = request.getParameter("password");
+        String passConfirm = request.getParameter("passwordConfirm");
+        String displayName = request.getParameter("displayName");
+        String email = request.getParameter("email");
+        String position = request.getParameter("position");
+        
+        // TODO: confirm password
         if(userID.length() != 9){
-           error += "Matriculation number is invalid!";
-           response.sendRedirect("register.jsp");
-           return;
-           }
+            error += "Matriculation number is invalid!";
+            response.sendRedirect("login.jsp");
+            return;
+        }
        
-         if(pass.length() < 7){
-           error += "Password is to short! 7 characters minimum";
-           response.sendRedirect("register.jsp");
-           return;
-           }
+        if(pass.length() < 7){
+            error += "Password is to short! 7 characters minimum";
+            response.sendRedirect("login.jsp");
+            return;
+        }
        
         HttpSession session = request.getSession();
         User user = lm.registerUser(userID, pass, displayName, email, position);
         
         if (user != null) {
             session.setAttribute("user", user);
-            if ("Staff".equals(user.getPosition())) {
-                rd = request.getRequestDispatcher("index.jsp");
-            } else {
-                rd = request.getRequestDispatcher("index.jsp");
-            }
+            rd = request.getRequestDispatcher("index.jsp");
         } else {
-            rd = request.getRequestDispatcher("register.jsp");
+            rd = request.getRequestDispatcher("login.jsp");
         }
+        
         rd.forward(request, response);
     }
 

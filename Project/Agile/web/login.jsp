@@ -37,41 +37,48 @@
             </div>
             
             <div class="six columns">
-                <h2>Register</h2>
-                <div class="row">
-                    <div class="twelve columns">
-                        <input type="text" class="u-full-width" placeholder="Your User ID or Matriculation Number" />
+                <form method="POST" action="Register">
+                    <h2>Register</h2>
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="userid" type="text" class="u-full-width" placeholder="Your User ID or Matriculation Number" />
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="displayName" type="text" class="u-full-width" placeholder="Display Name" />
+                        </div>
+                    </div>    
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="email" type="text" class="u-full-width" placeholder="Email Address" />
+                        </div>
+                    </div>     
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="password" type="password" class="u-full-width" placeholder="Choose Your Password" />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="twelve columns">
-                        <input type="text" class="u-full-width" placeholder="Email Address" />
-                    </div>
-                </div>     
-                <div class="row">
-                    <div class="twelve columns">
-                        <input type="password" class="u-full-width" placeholder="Choose Your Password" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="twelve columns">
-                        <input type="password" class="u-full-width" placeholder="Confirm Your Password" />
-                    </div>
-                </div>   
-                <div class="row">
-                    <div class="three columns row-center">
-                        Position
-                    </div>
-                    <div class="nine columns">
-                        <select class="u-full-width">
-                            <option value="student">Student</option>
-                            <option value="staff">Staff</option>
-                        </select>
-                    </div>
-                </div>  
-                <div class="row">
-                    <a href="#" class="button">Create An Account</a>
-                </div>                
+                    <div class="row">
+                        <div class="twelve columns">
+                            <input name="passwordConfirm" type="password" class="u-full-width" placeholder="Confirm Your Password" />
+                        </div>
+                    </div>   
+                    <div class="row">
+                        <div class="three columns row-center">
+                            Position
+                        </div>
+                        <div class="nine columns">
+                            <select name="position" class="u-full-width">
+                                <option value="student">Student</option>
+                                <option value="staff">Staff</option>
+                            </select>
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <input class="button" type="submit" value="Create An Account">
+                    </div>    
+                </form>
             </div>
         </div>
         
