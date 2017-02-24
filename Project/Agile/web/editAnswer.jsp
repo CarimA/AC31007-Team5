@@ -30,7 +30,7 @@
                 }else{
                 %>
                 
-                <form method="POST" action="edit">
+                <form method="POST" action="EditQuiz">
                 <li><%=a.getAnswer()%></li>
                 <p>Change Answer</p>
                 <input type="text" name="answer">
