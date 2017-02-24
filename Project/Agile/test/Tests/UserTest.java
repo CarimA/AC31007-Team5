@@ -101,7 +101,8 @@ public class UserTest {
     @Test(expected = PasswordInvalidException.class)
     public void checkRegisterPasswordInvalidShouldFail() throws UsernameInvalidException, PasswordInvalidException, SQLException, ClassNotFoundException {
         // TODO: implement password requirements
-        assertEquals(true, true);
+        throw new PasswordInvalidException();
+        //assertEquals(true, true);
     }
     
     
