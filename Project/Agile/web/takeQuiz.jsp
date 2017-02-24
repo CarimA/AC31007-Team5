@@ -4,6 +4,11 @@
     Author     : jimiwesterholm
 --%>
 
+<%@page import="Models.QuizModel"%>
+<%@page import="Stores.Answer"%>
+<%@page import="Stores.Question"%>
+<%@page import="java.util.List"%>
+<%@page import="Stores.Quiz"%>
 <%@page import="Stores.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,23 +19,36 @@
     </head>
     <body>
         
-        <%
+        <%/*
             User user = (User) session.getAttribute("user");
             if (user == null || user.getPosition().equals("staff")) {
                 response.sendRedirect("index.jsp");
-            }
-            
-            int i = 0;
-            boolean done = false;
+            }*/
+            Quiz quiz = (Quiz) request.getAttribute("quiz");
+            Question q;
+            Answer a;
+            List<Question> questions = quiz.getQuestions();
         %>
-        <h1><%quiz.getTitle%></h1>
+        <h1><%=quiz.getTitle()%></h1>
         <%
-            while (!done) {
-                //Get question + answers
-                
-        %>
-        
-        
+            for (int i = 0; i < questions.size(); i++) {
+                q = questions.get(i);
+                %>
+                <ul>
+                    <li><%=q.getQuestion()%> Worth <%=q.getPoints()%> points.<br>
+                    <%
+                    List<Answer> answers = q.getAnswers();
+                    for (int j = 0; j < answers.size(); j++) {
+                        a = answers.get(j);
+                        int value = 0;
+                        if (a.isRight()) value = q.getPoints();
+                        %>
+                        <input type="radio" name=<%=q.getId()%> value=<%=value%>><%=a.getAnswer()%><br>
+                        <%
+                    }
+                    %>
+                    </li>
+                </ul>
         <%
             }
         %>

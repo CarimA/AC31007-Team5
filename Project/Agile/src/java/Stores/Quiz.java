@@ -87,6 +87,27 @@ public class Quiz {
         this.questions = questions;
     }
     
+    public void fetchQuestions(Connection connection) throws SQLException  {
+        List<Question> questionList = new ArrayList();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ?");
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next()) {
+            Question temp = new Question();
+            temp.setId(rs.getInt("questionId"));
+            temp.setNumber(rs.getInt("Number"));
+            temp.setQuestion(rs.getString("Question"));
+            temp.setPoints(rs.getInt("Points"));
+            temp.setAnswers(temp.fetchAnswers(connection, id));
+            
+            //Get image as well?
+            
+            questionList.add(temp);
+        }
+        
+        setQuestions(questionList);
+    }
     
     public static Quiz fetch(Connection connection, int id) throws SQLException {
         Quiz q = new Quiz();
@@ -125,26 +146,4 @@ public class Quiz {
         return q;
     }
     
-    
-        public void fetchQuestions(Connection connection) throws SQLException  {
-        List<Question> questionList = new ArrayList();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ?");
-        statement.setInt(1, id);
-        ResultSet rs = statement.executeQuery();
-        
-        while (rs.next()) {
-            Question temp = new Question();
-            temp.setId(rs.getInt("questionId"));
-            temp.setNumber(rs.getInt("Number"));
-            temp.setQuestion(rs.getString("Question"));
-            temp.setPoints(rs.getInt("Points"));
-            temp.setAnswers(temp.fetchAnswers(connection, id));
-            
-            //Get image as well?
-            
-            questionList.add(temp);
-        }
-        
-        setQuestions(questionList);
-    }
 }
