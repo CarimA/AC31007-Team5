@@ -44,7 +44,7 @@
                 
             %>
             <a href = "newQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> New Quiz </a>
-            <a href = "editQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> Edit Quiz </a>
+            
                         <ul>
             <%
                 for(Quiz q : quizzes)

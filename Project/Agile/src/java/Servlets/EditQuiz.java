@@ -160,6 +160,7 @@ public class EditQuiz extends HttpServlet {
             String title = request.getParameter("title");
             String module = request.getParameter("module");
             String available = request.getParameter("available");
+            int quizID = parseInt(request.getParameter("QuizID"));
             System.out.println(available);
             boolean a;
             if(available == null){
@@ -171,11 +172,26 @@ public class EditQuiz extends HttpServlet {
             else{
                 a = false;
             }
+            
             System.out.println(a);
-            int quizID = parseInt(request.getParameter("QuizID"));
             QuizModel qm = new QuizModel();
+            // Adding question
+            String submit = request.getParameter("submit");
+            if(submit.equals("Add")){
+                String question = request.getParameter("question");
+                //String image = request.getParameter("image");
+                int points = parseInt(request.getParameter("points"));
+                int number = parseInt(request.getParameter("number"));
+                if(!question.equals("")){
+                   qm.addQuestion(question,number,points,quizID);
+                }
+            }else{
+            //
+            
+            
             qm.updateQuiz(quizID,title,module,a);
             System.out.println(available);
+            }
             response.sendRedirect("/Agile/EditQuiz/"+quizID);
         }
         else if(args[2].equals("EditQuestion")){

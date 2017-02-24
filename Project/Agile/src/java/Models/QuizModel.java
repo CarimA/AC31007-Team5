@@ -143,6 +143,24 @@ public class QuizModel {
         
     }
     
+    public void addQuestion(String question,int number,int points,int quizID){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Question (Number,Question,Points,QuizID) VALUES (?,?,?,?)");
+            statement.setInt(1, number);
+            statement.setString(2, question);
+            statement.setInt(3, points);
+            statement.setInt(4, quizID);
+            statement.executeUpdate();
+            statement.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public int CreateQuiz(String title, String module){
         int id = 0;
         try {

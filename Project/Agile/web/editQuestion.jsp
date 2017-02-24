@@ -68,7 +68,22 @@
             
         %>
             </ul>
-            
+            <p>Add an answer</p>
+            <form method="POST" action="EditQuiz">
+                
+                <p>Answer</p>
+                <input type="text" name="answer">
+                <br/>
+                
+                <p>Explanation</p>
+                <input type="text" name="explanation">
+                <br/>
+                
+                <p>Set right answer</p>
+                <input type=checkbox name="right"> 
+                <br/>
+                <input type="submit" value="Submit">
+                </form>
         <h3>Go back to <a href="/Agile/EditQuiz/<%=QuizID%>">Quiz</a></h3>
            
     </body>
