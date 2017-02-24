@@ -52,7 +52,7 @@ public class createQuestion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 RequestDispatcher rd;
-        String id = request.getParameter("qId");
+        String id = request.getParameter("questionId");
         String question = request.getParameter("Question");
         String image = request.getParameter("image");
         String points =  request.getParameter("points");

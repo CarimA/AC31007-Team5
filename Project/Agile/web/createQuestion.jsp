@@ -27,7 +27,7 @@
             <h3>Add an question to a quiz</h3>
             <form method="POST"  action="Register">
                 <ul>
-                    <li>Quiz ID <input type="text" name="qId"></li>
+                    <li>Quiz ID <input type="text" name="questionId"></li>
                     <li>Question <input type="text" name="Question"></li>
                     <li>Image <input type="file" name="image"></li>
                     <li>Points <input type="text" name="points"></li>
