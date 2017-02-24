@@ -1,4 +1,4 @@
-package Servlets;
+package Servlets.newServlets;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
