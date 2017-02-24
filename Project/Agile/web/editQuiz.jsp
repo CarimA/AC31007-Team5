@@ -15,10 +15,10 @@
     </head>
     <body>
         <%
-            //User user = (User) session.getAttribute("person");
-            //if (user.getPosition().equals("student")) {
-            //    response.sendRedirect("index.jsp");
-            //}
+            User user = (User) session.getAttribute("user");
+            if (user.getPosition().equals("student")) {
+                response.sendRedirect("index.jsp");
+            }
             
             // get the quiz
             // change this
