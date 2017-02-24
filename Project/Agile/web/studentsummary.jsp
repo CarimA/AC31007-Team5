@@ -6,16 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
-<t:wrapper>
-    <jsp:attribute name="header">
-        
-    </jsp:attribute>
-    <jsp:attribute name="footer">
-        
-    </jsp:attribute>
-     <jsp:body>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,7 +31,7 @@ window.onload = function(){
 }
 
 $(document).ready(function(){
-    $("#show1").click(function){
+    $("#show1").click(function(){
         $("#question1").show();
         $("#question2").hide();
         $("#question3").hide();
@@ -62,8 +52,26 @@ $(document).ready(function(){
         <h3>Surname: .....</h3>
         <h3>Email: ......</h3>
         <h3>Score: ......</h3>
-        <h3>Question 1</h3>
-        <h3>Question 2</h3>
+        <button id="show1">Question 1</button><br>
+        <form id="question1">
+            <label>hdfksdfdkfj</label>
+            <input type="text" name="productid"><br>
+        </form> 
+        <button id="show2">Question 2</button><br>
+        <form id="question2">
+            <label>hdfksdfdkfj</label>
+            <input type="text" name="productid"><br>
+        </form> 
+        <button id="show3">Question 3</button><br>
+        <button id="show4">Question 4</button><br>
+        <button id="show5">Question 5</button><br>
+        <button id="show6">Question 6</button><br>
+        <button id="showw7">Question 7</button><br>
+        <button id="showe8">Question 8</button><br>
+        <button id="show9">Question 9</button><br>
+        <button id="show10">Question 10</button><br>
+        
+        
         
         
         <button onclick="myFunction()">Print Summary</button>
@@ -73,5 +81,3 @@ $(document).ready(function(){
         </form>
     </body>
 </html>
-     </jsp:body>
-</t:wrapper>
