@@ -23,7 +23,7 @@ public class QuestionModel {
         try {
             Connection connection = Helpers.connect();
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO `Question` (`qId`, `Question`, `image`,`points`) VALUES\n" +
+            statement = connection.prepareStatement("INSERT INTO `Question` (`questionId`, `Question`, `image`,`points`) VALUES\n" +
 "(?, ?, ?, ?);");
             statement.setString(1, id);
             statement.setString(2, question);
