@@ -58,7 +58,7 @@ public class createQuestion extends HttpServlet {
         String points =  request.getParameter("points");
         QuestionModel qm = new QuestionModel();
         qm.CreateQuestion(id, question, image, points);
-        rd = request.getRequestDispatcher("EditQuiz"); //redirect to edit quiz, to add more questions/view questions?
+        rd = request.getRequestDispatcher("EditQuiz/"); //redirect to edit quiz, to add more questions/view questions?
     }
 
     /**

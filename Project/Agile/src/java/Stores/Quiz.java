@@ -134,7 +134,7 @@ public class Quiz {
         
         while (rs.next()) {
             Question temp = new Question();
-            temp.setId(rs.getInt("qId"));
+            temp.setId(rs.getInt("questionId"));
             temp.setNumber(rs.getInt("Number"));
             temp.setQuestion(rs.getString("Question"));
             temp.setPoints(rs.getInt("Points"));

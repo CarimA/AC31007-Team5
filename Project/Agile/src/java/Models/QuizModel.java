@@ -82,7 +82,7 @@ public class QuizModel {
             
             if(!question.equals("")){
                 PreparedStatement statement;
-                statement = connection.prepareStatement("UPDATE question SET Question = ? WHERE qId = ?");
+                statement = connection.prepareStatement("UPDATE question SET Question = ? WHERE questionId = ?");
                 statement.setString(1, question);
                 statement.setInt(2, id);
                 statement.executeUpdate();
@@ -91,7 +91,7 @@ public class QuizModel {
             }
             if(points != 0){
                 PreparedStatement statement;
-                statement = connection.prepareStatement("UPDATE question SET Points = ? WHERE qId = ?"); 
+                statement = connection.prepareStatement("UPDATE question SET Points = ? WHERE questionId = ?"); 
                 statement.setInt(1, points);
                 statement.setInt(2, id);
                 statement.executeUpdate();

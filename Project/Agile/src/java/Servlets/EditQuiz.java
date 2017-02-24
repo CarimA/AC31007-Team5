@@ -88,8 +88,10 @@ public class EditQuiz extends HttpServlet {
         System.out.println(args[3]);
         if(args[2].equals("EditQuiz")){
             Quiz quiz = new Quiz();
+            System.out.println(quiz);
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
+            System.out.println(quiz);
             RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
             request.setAttribute("Quiz",quiz);
             
