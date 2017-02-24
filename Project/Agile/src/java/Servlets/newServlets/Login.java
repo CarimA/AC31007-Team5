@@ -8,6 +8,7 @@ package Servlets.newServlets;
 import Exception.NotImplementedException;
 import Exception.PasswordInvalidException;
 import Exception.UsernameInvalidException;
+import Misc.Helpers;
 import Models.LoginModel;
 import Stores.User;
 import java.io.IOException;
@@ -48,10 +49,7 @@ public class Login extends HttpServlet {
             session.setAttribute("user", user);
             response.sendRedirect("Home");
         } catch (UsernameInvalidException | PasswordInvalidException ex) {
-            request.setAttribute("error", "Username and/or Password incorrect.");
-            
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
+            Helpers.errorRedirect(request, response, "login.jsp", "Username and/or Password incorrect!");
         }
     }
 }

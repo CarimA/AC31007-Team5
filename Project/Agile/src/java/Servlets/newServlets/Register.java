@@ -6,6 +6,7 @@
 package Servlets.newServlets;
 
 import Exception.NotImplementedException;
+import Misc.Helpers;
 import Models.LoginModel;
 import Stores.User;
 import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.length;
@@ -32,7 +33,6 @@ public class Register extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-         request.setAttribute("error",error);
         rd.forward(request, response);
     }
 
@@ -53,28 +53,29 @@ public class Register extends HttpServlet {
         
         // TODO: confirm password
         if(userID.length() != 9){
-            error += "Matriculation number is invalid!";
-            response.sendRedirect("login.jsp");
+            Helpers.errorRedirect(request, response, "login.jsp", "User ID or Matriculation ID is invalid!");
             return;
         }
        
         if(pass.length() < 7){
-            error += "Password is to short! 7 characters minimum";
-            response.sendRedirect("login.jsp");
+            Helpers.errorRedirect(request, response, "login.jsp", "Password is too short! 7 characters minimum!");
             return;
         }
        
+        // TODO: ??? ??? 
+        // move above logic to LoginModel within registerUser and throw PasswordInvalidException/UsernameInvalidException
+        // implement try/catch here to handle accordingly
+        
         HttpSession session = request.getSession();
         User user = lm.registerUser(userID, pass, displayName, email, position);
         
         if (user != null) {
             session.setAttribute("user", user);
-            rd = request.getRequestDispatcher("index.jsp");
+            response.sendRedirect("Home");
         } else {
-            rd = request.getRequestDispatcher("login.jsp");
+            Helpers.errorRedirect(request, response, "login.jsp", "Something else happened!");
+            return;
         }
-        
-        rd.forward(request, response);
     }
 
 //        try { 

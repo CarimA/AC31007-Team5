@@ -1,9 +1,14 @@
 package Misc;
 
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.sql.DriverManager;
 import java.sql.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,5 +42,18 @@ public final class Helpers {
     public static Connection connect() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+    }
+    
+    public static void successRedirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, String errorMessage) throws ServletException, IOException {
+        request.setAttribute("success", errorMessage);
+            
+        RequestDispatcher rd = request.getRequestDispatcher(redirectPage);
+        rd.forward(request, response);
+    }
+    public static void errorRedirect(HttpServletRequest request, HttpServletResponse response, String redirectPage, String errorMessage) throws ServletException, IOException {
+        request.setAttribute("error", errorMessage);
+            
+        RequestDispatcher rd = request.getRequestDispatcher(redirectPage);
+        rd.forward(request, response);
     }
 }
