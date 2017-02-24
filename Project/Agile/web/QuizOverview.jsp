@@ -4,6 +4,7 @@
     Author     : danielward
 --%>
 
+<%@page import="Stores.Quiz"%>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -31,15 +32,16 @@
                 for(Quiz q : quizzes)
                 {
             %>
-            <li><a href="ViewQuiz/<%q.getId()%>">View Quiz: <%q.getTitle()%></a>></li>
+            <li><a href="ViewQuiz/<%=q.getId()%>">View Quiz: <%=q.getTitle()%></a>></li>
             <%
                 }
             %>
             </ul>
             <%
-                user = (User) session.getAttribute("user");
+                //user = (User) session.getAttribute("user");
                 if (user.getPosition().equals("Staff")) {
                     //response.sendRedirect("login.jsp");
+                
             %>
             <a href = "newQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> New Quiz </a>
             <a href = "editQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> Edit Quiz </a>
@@ -48,7 +50,7 @@
                 for(Quiz q : quizzes)
                 {
             %>
-            <li><a href="EditQuiz/<%q.getId()%>">Edit Quiz: <%q.getTitle()%></a>></li>
+            <li><a href="EditQuiz/<%=q.getId()%>">Edit Quiz: <%=q.getTitle()%></a>></li>
             <%
                 }
             %>
@@ -56,5 +58,5 @@
             <% } %>
         </div>
     </body>
-    <%@include file="footer.jsp"%>
+    
 </html>

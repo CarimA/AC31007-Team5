@@ -37,8 +37,12 @@ public class QuizOverview extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //System.out.println(1);
         DBConnect d = new DBConnect();
+        
         Vector<Quiz> quizzes = d.getQuizzes("Select * from Quiz");
+        
+        System.out.println(quizzes);
         RequestDispatcher rd = request.getRequestDispatcher("/QuizOverview.jsp");
         request.setAttribute("quizzes", quizzes);
         rd.forward(request,response);
