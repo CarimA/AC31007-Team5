@@ -6,6 +6,7 @@
 package Servlets.newServlets;
 
 import Exception.NotImplementedException;
+import Misc.Helpers;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,8 +26,11 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
+        if (request.getSession().getAttribute("user") == null) {
+            Helpers.redirect(request, response, "Login", true);
+        } else {
+            Helpers.redirect(request, response, "index.jsp", false);
+        }
     }
 
     @Override
