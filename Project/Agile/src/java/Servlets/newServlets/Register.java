@@ -9,7 +9,6 @@ import Exception.NotImplementedException;
 import Misc.Helpers;
 import Models.LoginModel;
 import Stores.User;
-import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.length;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
