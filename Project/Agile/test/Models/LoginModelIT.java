@@ -45,7 +45,7 @@ public class LoginModelIT {
      * Test of checkLogin method, of class LoginModel.
      * @throws java.lang.Exception
      */
-     @Test //(expected = UsernameInvalidException.class)
+     @Test (expected = UsernameInvalidException.class)
     public void testCheckLogin() throws Exception {
         System.out.println("checkLogin");
         String username = "13";
