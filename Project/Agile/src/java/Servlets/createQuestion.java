@@ -52,13 +52,31 @@ public class createQuestion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 RequestDispatcher rd;
-        String id = request.getParameter("questionId");
-        String question = request.getParameter("Question");
-        String image = request.getParameter("image");
-        String points =  request.getParameter("points");
-        QuestionModel qm = new QuestionModel();
-        qm.CreateQuestion(id, question, image, points);
-        rd = request.getRequestDispatcher("EditQuiz/"); //redirect to edit quiz, to add more questions/view questions?
+        int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
+        QuizModel qm = new QuizModel();
+        int qID = qm.createQuiz((String)request.getAttribute("title"), (String)request.getAttribute("module"));
+        for(int i = 0; i < numberOfQuestions; i++)
+        {
+            String questionString = "question" + Integer.toString(i);
+            String q = (String) request.getAttribute(questionString);
+            String numberString = "number" + Integer.toString(i);
+            int number = (int) request.getAttribute(numberString);
+            String pointsString = "points" + Integer.toString(i);
+            int points = (int) request.getAttribute(pointsString);
+            int questionID = qm.addQuestionGetID(q, number, points, qID);
+            for(int x = 0; x < 4; x++)
+            {
+                String aString = "answer" + Integer.toString(x);
+                String answer = (String) request.getAttribute(aString);
+                String nString = "number" + Integer.toString(x);
+                int aNumber = (int) request.getAttribute(nString);
+                String eString = "explanation" + Integer.toString(x);
+                String explanation = (String) request.getAttribute(eString);
+                String rString = "right" + Integer.toString(x);
+                boolean right = (boolean) request.getAttribute(rString);
+                qm.addAnswer(answer,aNumber,explanation,right,questionID);
+            }
+        }
     }
 
     /**
