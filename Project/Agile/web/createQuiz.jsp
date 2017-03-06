@@ -25,13 +25,12 @@
         <h1>Quiz thing</h1>
         <div>
             <h3>Create a Quiz</h3>
-            <form method="POST"  action="Register">
+            <form method="POST"  action="createQuiz">
                 <ul>
-                    <li>Title <input type="text" name="title"></li>
-                    <li>Module <input type="text" name="module"></li>
+                    <li>How many questions do you want to start with? <input type="text" name="questions"></li>
                 </ul>
                 <br/>
-                <input type="submit" value="createAQuiz"> 
+                <input type="submit" value="Create Quiz"> 
             </form>
         </div>
     </body>
