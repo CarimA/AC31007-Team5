@@ -58,6 +58,7 @@ public class LoginModelIT {
     }
 
     /**
+     * pass
      * Test of registerUser method, of class LoginModel.
      */
     @Test

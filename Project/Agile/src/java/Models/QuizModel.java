@@ -62,6 +62,7 @@ public class QuizModel {
                     while(r.next()){
                         Answer a = new Answer();
                         a.setId(r.getInt("aId"));
+                        //maybe there is well
                         a.setAnswer(r.getString("AnswerText"));
                         a.setNumber(r.getInt("Number"));
                         a.setExplanation("Explanation");

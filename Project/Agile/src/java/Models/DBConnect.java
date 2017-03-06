@@ -109,7 +109,7 @@ public class DBConnect {
             PreparedStatement statement = connection.prepareStatement("Select * from answer where aId = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
-            
+            // maybe need comment this later
             while(rs.next()){
                 a.setAnswer(rs.getString("AnswerText"));
                 a.setNumber(rs.getInt("Number"));
