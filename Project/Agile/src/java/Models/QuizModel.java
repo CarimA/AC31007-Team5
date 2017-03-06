@@ -210,6 +210,41 @@ public class QuizModel {
         }
     }
     
+    public int addQuestionGetID(String question,int number,int points,int quizID){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Question (Number,Question,Points,QuizID) VALUES (?,?,?,?)");
+            statement.setInt(1, number);
+            statement.setString(2, question);
+            statement.setInt(3, points);
+            statement.setInt(4, quizID);
+            statement.executeUpdate();
+            
+            statement = connection.prepareStatement("SELECT 'qId' FROM Question WHERE (Number,Question,Points,QuizID) VALUES (?,?,?,?)");
+            statement.setInt(1, number);
+            statement.setString(2, question);
+            statement.setInt(3, points);
+            statement.setInt(4, quizID);
+            statement.executeUpdate();
+            
+            int questionID = 0;
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                questionID = rs.getInt("qId");
+            }
+            statement.close();
+            return questionID;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
     public void addAnswer(String answer,int number,String explanation, boolean right,int questionID){
         try {
             Connection connection = Helpers.connect();
@@ -229,7 +264,7 @@ public class QuizModel {
         }
     }
     
-    public int CreateQuiz(String title, String module){
+    public int createQuiz(String title, String module){
         int id = 0;
         try {
             Connection connection = Helpers.connect();
@@ -258,7 +293,7 @@ public class QuizModel {
         }
         catch(SQLException e)
         {
-           return 0; 
+            return 0; 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
