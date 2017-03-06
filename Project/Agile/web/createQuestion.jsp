@@ -18,24 +18,46 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Create Answer</title>
+        <title>Create Questions</title>
     </head>
     <%@include file="header.jsp"%>
     <body>
         <h1>Quiz thing</h1>
         <div>
             <h3>Add an question to a quiz</h3>
-            <form method="POST"  action="Register">
+            <%int q = (int) request.getAttribute("number");%>
+            <form method="POST"  action="createQuestion">
                 <ul>
-                    <li>Quiz ID <input type="text" name="questionId"></li>
-                    <li>Question <input type="text" name="Question"></li>
-                    <li>Image <input type="file" name="image"></li>
-                    <li>Points <input type="text" name="points"></li>
+                    <li>Title <input type="text" name="title"></li>
+                    <li>Module <input type="text" name="module"></li>
+                    <li><input type="hidden" name="questions"><%=q%></li>
                 </ul>
+                <%
+                for(int i = 0; i < q; i++)
+                {
+                %>
+                <ul>
+                    <li>Question: <%=q%><input type="text" name="question<%=q%>"></li>
+                    <li>Number <input type="number" name="number<%=q%>"></li>
+                    <li>Points <input type="text" name="points<%=q%>"></li>
+                </ul>
+                <%
+                    for(int x = 0; x < 4; x++)
+                    {
+                        %>
+                        <ul>
+                            <li>Answer <input type="text" name="answer<%=q%>"></li>
+                            <li>Number <input type="text" name="number<%=q%>"></li>
+                            <li>Explanation <input type="text" name="explanation<%=q%>"></li>
+                            <li>Right <input type="checkbox" name="right<%=q%>"></li>
+                        </ul>
+                <%
+                    }
+                }
+                %>
                 <br/>
-                <input type="submit" value="createAnswer"> 
+                <input type="submit" value="Create Quiz"> 
             </form>
         </div>
     </body>
-    <%@include file="footer.jsp"%>
 </html>
