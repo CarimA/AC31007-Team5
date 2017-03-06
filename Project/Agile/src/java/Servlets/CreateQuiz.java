@@ -33,12 +33,15 @@ public class CreateQuiz extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd;
-        String title = request.getParameter("title");
-        String module = request.getParameter("module");
-        QuizModel qm = new QuizModel();
-        int QuizID = qm.CreateQuiz(title, module);
+        int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
+        request.setAttribute("number",numberOfQuestions);
+        rd = request.getRequestDispatcher("createQuestions");
+        //String title = request.getParameter("title");
+        //String module = request.getParameter("module");
+        //QuizModel qm = new QuizModel();
+        //int QuizID = qm.CreateQuiz(title, module);
         //todo: link the id to the create question page with rd;
-        rd = request.getRequestDispatcher("createQuestion/" + QuizID); //Is this right for a get?
+        //rd = request.getRequestDispatcher("createQuestion/" + QuizID); //Is this right for a get?
         //Do i even want a get? just pass along a quiz object?
     }
 
