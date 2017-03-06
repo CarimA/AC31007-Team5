@@ -138,6 +138,7 @@ public class Quiz {
         q.setDateCreated(dc);
         q.setModule(module);
         q.setTitle(title);
+        //there is well need to check
         q.fetchQuestions(connection);
         
         
