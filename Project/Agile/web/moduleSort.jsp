@@ -23,7 +23,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <t:sorting_tag>
+       <t:sorting_tag>
             
         </t:sorting_tag>
     </jsp:body>
