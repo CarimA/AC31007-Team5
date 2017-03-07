@@ -29,8 +29,8 @@ public class Home extends HttpServlet {
         if (request.getSession().getAttribute("user") == null) {
             Helpers.redirect(request, response, "Login", true);
         } else {
-            // request.setAttribute("userID", request.getSession().getAttribute("userIDKey"));
-            //request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.setAttribute("userID", request.getSession().getAttribute("userIDKey"));
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
             Helpers.redirect(request, response, "index.jsp", false);
         }
     }

@@ -40,7 +40,7 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.setAttribute("user", null);
-        //session.setAttribute("userIDKey", null);
+        session.setAttribute("userIDKey", null);
             Helpers.successRedirect(request, response, "Home", true, "Successfully logged out!");
     }
 
