@@ -37,8 +37,28 @@
             String module = request.getParameter("Module");
             String PersonID = session.getAttribute("userIDKey").toString();
             Connection connection = Helpers.connect();
-        
-
+            /**
+             * Checking whether the student has already done the quiz
+             */
+            String query = "SELECT * FROM results WHERE PersonID = ? and QuizID = ? ";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, PersonID);
+            statement.setInt(2, id);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {//if the student has not taken the quiz 
+                Helpers.errorRedirect(request, response, "Home", true, "You have already done this quiz");
+            }else{
+                
+            Quiz quiz = new Quiz();
+            Question q;
+            Answer a;  
+           
+            
+                
+                
+                
+            }
         %>
     </body>    
 </html>
