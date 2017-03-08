@@ -21,7 +21,7 @@ public class Answer {
     
     public Answer() {
     }
-
+    // in answer maybe need to remove boolean right after I'll check after, remove boolean there and add setRight in question.java
     public Answer(int id, int number, String answer, String explanation, boolean right) {
         this.id = id;
         this.number = number;

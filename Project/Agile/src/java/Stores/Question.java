@@ -99,13 +99,19 @@ public class Question {
             a.setId(rs.getInt("aId"));
             a.setNumber(rs.getInt("Number"));
             a.setExplanation(rs.getString("Explanation"));
-            a.setAnswer(rs.getString("AnswerText"));
-            a.setRight(rs.getBoolean("Right"));
-            answerList.add(a);
-        }
-        
-        return answerList;
-        
-    }
-    
-}
+            a.setAnswer(rs.getString("AnswerText"));         // a.setAnswer(rs.getInt("right"));
+            a.setRight(rs.getBoolean("Right"));              // if (rs.getInt("right") == 1) {
+            answerList.add(a);                               // a.setRight(true);
+        }                                                   //  }else{
+                                                            //  a.setRight(false);
+        return answerList;                                  //  }
+                                                            //  answerList.add(a);
+                                                            //  }  
+    }                                                       //  return answerList;
+                                                            //  }
+}                                                           //}
+/*
+This is snother version that I need to try change for a check
+
+
+*/
