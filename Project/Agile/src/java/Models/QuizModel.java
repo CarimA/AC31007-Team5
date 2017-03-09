@@ -192,6 +192,81 @@ public class QuizModel {
         
     }
     
+    public void deleteQuiz(int id){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            List<Integer> as = new ArrayList<>();
+            
+            statement = connection.prepareStatement("Select * From question Where QuizID=?");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                
+                as.add(rs.getInt("questionId"));
+            }
+            statement.close();
+            rs.close();
+            for(int i=0;i<as.size();i++){
+                deleteQuestion(as.get(i));
+            }
+            PreparedStatement state;
+            state = connection.prepareStatement("DELETE FROM quiz WHERE qId=?");
+            state.setInt(1, id);
+            state.executeUpdate();
+            state.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteQuestion(int id){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            List<Integer> as = new ArrayList<>();
+            
+            statement = connection.prepareStatement("Select * From answer Where QuestionID=?");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                
+                as.add(rs.getInt("aId"));
+            }
+            statement.close();
+            rs.close();
+            for(int i=0;i<as.size();i++){
+                deleteAnswer(as.get(i));
+            }
+            PreparedStatement state;
+            state = connection.prepareStatement("DELETE FROM question WHERE questionId=?");
+            state.setInt(1, id);
+            state.executeUpdate();
+            state.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteAnswer(int id){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("DELETE FROM answer WHERE aId=?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void addQuestion(String question,int number,int points,int quizID){
         try {
             Connection connection = Helpers.connect();

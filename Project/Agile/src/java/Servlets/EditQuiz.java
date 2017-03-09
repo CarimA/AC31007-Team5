@@ -37,7 +37,10 @@ import sun.security.ssl.Debug;
     "/EditAnswer",
     "/EditQuiz/*",
     "/EditQuestion/*",
-    "/EditAnswer/*"
+    "/EditAnswer/*",
+    "/DeleteQuiz/*",
+    "/DeleteQuestion/*",
+    "/DeleteAnswer/*"
         
 })
 public class EditQuiz extends HttpServlet {
@@ -80,7 +83,7 @@ public class EditQuiz extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("We got to here");
+        //System.out.println("We got to here");
         String[] args = request.getRequestURI().split("/");
         //System.out.println(args[0]);
         System.out.println(args[1]);
@@ -92,6 +95,10 @@ public class EditQuiz extends HttpServlet {
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
             System.out.println(quiz);
+            if(quiz == null){
+                error(request,response);
+                return;
+            }
             RequestDispatcher rd = request.getRequestDispatcher("/editQuiz.jsp");
             request.setAttribute("Quiz",quiz);
             
@@ -103,11 +110,19 @@ public class EditQuiz extends HttpServlet {
             Quiz quiz = new Quiz();
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
+            if(quiz == null){
+                error(request,response);
+                return;
+            }
             for(int i=0;i<quiz.getQuestions().size();i++){
                 if(quiz.getQuestions().get(i).getId() == parseInt(args[4])){
                     q = quiz.getQuestions().get(i);
                     break;
                 }
+            }
+            if(q == null){
+                error(request,response);
+                return;
             }
             RequestDispatcher rd = request.getRequestDispatcher("/editQuestion.jsp");
             request.setAttribute("QuizID",quiz.getId());
@@ -120,13 +135,25 @@ public class EditQuiz extends HttpServlet {
             Quiz quiz = new Quiz();
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
+            if(quiz == null){
+                error(request,response);
+                return;
+            }
             outerloop: for(int i=0;i<quiz.getQuestions().size();i++){
                 
                 q = quiz.getQuestions().get(i);
+                if(q == null){
+                    error(request,response);
+                    return;
+                }
                 if(q.getId() == parseInt(args[4])){
                     for(int j =0;j<q.getAnswers().size();j++){
                         if(q.getAnswers().get(j).getId() == parseInt(args[5])){
                             a = q.getAnswers().get(j);
+                            if(a == null){
+                                error(request,response);
+                                return;
+                            }
                             break outerloop;
                         }
                     }
@@ -140,7 +167,24 @@ public class EditQuiz extends HttpServlet {
             request.setAttribute("Answer", a);
             rd.forward(request, response);
         }
-        
+        else if(args[2].equals("DeleteQuiz")){
+            QuizModel qm = new QuizModel();
+            qm.deleteQuiz(parseInt(args[3]));
+            response.sendRedirect("/Agile/index.jsp");
+        }
+        else if(args[2].equals("DeleteQuestion")){
+            QuizModel qm = new QuizModel();
+            qm.deleteQuestion(parseInt(args[4]));
+            response.sendRedirect("/Agile/EditQuiz/"+args[3]);
+        }
+        else if(args[2].equals("DeleteAnswer")){
+            QuizModel qm = new QuizModel();
+            qm.deleteAnswer(parseInt(args[5]));
+            response.sendRedirect("/Agile/EditQuiz/"+args[3]+ "/" + args[4]);
+        }
+        else{
+            error(request,response);
+        }
         //processRequest(request, response);
     }
     
@@ -255,6 +299,12 @@ public class EditQuiz extends HttpServlet {
         }
     }
 
+    
+    public void error(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        
+        response.sendRedirect("/Agile/index.jsp");
+        //rd.forward(request, response);
+    }
     /**
      * Returns a short description of the servlet.
      *

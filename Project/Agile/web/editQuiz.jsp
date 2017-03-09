@@ -77,6 +77,6 @@
         <input type="submit" name="submit" value="Add">
     </form>
         
-            
+        <a href="/Agile/DeleteQuiz/<%=quiz.getId()%>">Delete this quiz (Do not click by accident)</a>        
     </body>
 </html>

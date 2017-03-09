@@ -48,6 +48,7 @@
                 </form>
                        <%}
                        %>
+                       <a href="/Agile/DeleteAnswer/<%=QuizID%>/<%=QuestionID%>/<%=a.getId()%>">Delete this answer (Do not click this by mistake)</a>
                        <h3>Go back to <a href="/Agile/EditQuestion/<%=QuizID%>/<%=QuestionID%>">Question</a></h3>
     </body>
 </html>

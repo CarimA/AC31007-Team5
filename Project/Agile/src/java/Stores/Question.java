@@ -25,6 +25,7 @@ public class Question {
     String question;
     //Blob image;
     int points;
+    
     List<Answer> answers;
 
     public Question() {
@@ -88,6 +89,8 @@ public class Question {
         this.answers = answers;
     }
         
+    
+    
     public List<Answer> fetchAnswers(Connection connection, int id) throws SQLException {
         List<Answer> answerList = new ArrayList();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM answer where QuestionID = ?");
