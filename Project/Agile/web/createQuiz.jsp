@@ -27,7 +27,7 @@
             <h3>Create a Quiz</h3>
             <form method="POST"  action="createQuiz">
                 <ul>
-                    <li>How many questions do you want to start with? <input type="text" name="questions"></li>
+                    <li>How many questions do you want to start with? <input type="number" name="questions"></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Create Quiz"> 
