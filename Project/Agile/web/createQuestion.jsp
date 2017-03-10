@@ -24,32 +24,33 @@
     <body>
         <h1>Quiz thing</h1>
         <div>
-            <h3>Add an question to a quiz</h3>
+            <h3>Add a question to a quiz</h3>
             <%int q = (int) request.getAttribute("number");%>
             <form method="POST"  action="createQuestion">
                 <ul>
                     <li>Title <input type="text" name="title"></li>
                     <li>Module <input type="text" name="module"></li>
-                    <li><input type="hidden" name="questions"><%=q%></li>
+                    <li><input type="hidden" name="questions" value="<%=q%>"><%=q%></li>
                 </ul>
                 <%
-                for(int i = 0; i < q; i++)
+                for(int i = 1; i <= q;  i++)
                 {
                 %>
                 <ul>
-                    <li>Question: <%=q%><input type="text" name="question<%=q%>"></li>
-                    <li>Number <input type="number" name="number<%=q%>"></li>
-                    <li>Points <input type="text" name="points<%=q%>"></li>
+                    <li>Question: <%=i%><input type="text" name="question<%=i%>"></li>
+                    <li>Number <input type="number" name="number<%=i%>"></li>
+                    <li>Points <input type="number" name="points<%=i%>"></li>
+                    </br>
                 </ul>
                 <%
                     for(int x = 0; x < 4; x++)
                     {
                         %>
                         <ul>
-                            <li>Answer <input type="text" name="answer<%=q%>"></li>
-                            <li>Number <input type="text" name="number<%=q%>"></li>
-                            <li>Explanation <input type="text" name="explanation<%=q%>"></li>
-                            <li>Right <input type="checkbox" name="right<%=q%>"></li>
+                            <li>Answer <input type="text" name="answer<%=i%><%=x%>"></li>
+                            <li>Number <input type="text" name="number<%=i%><%=x%>"></li>
+                            <li>Explanation <input type="text" name="explanation<%=i%><%=x%>"></li>
+                            <li>Right <input type="checkbox" value="true" name="right<%=i%><%=x%>"></li>
                         </ul>
                 <%
                     }
