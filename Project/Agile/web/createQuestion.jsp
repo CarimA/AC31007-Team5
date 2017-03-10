@@ -30,7 +30,7 @@
                 <ul>
                     <li>Title <input type="text" name="title"></li>
                     <li>Module <input type="text" name="module"></li>
-                    <li><input type="hidden" name="questions"><%=q%></li>
+                    <li><input type="hidden" name="questions" value="<%=q%>"><%=q%></li>
                 </ul>
                 <%
                 for(int i = 1; i <= q;  i++)
@@ -50,7 +50,7 @@
                             <li>Answer <input type="text" name="answer<%=i%><%=x%>"></li>
                             <li>Number <input type="text" name="number<%=i%><%=x%>"></li>
                             <li>Explanation <input type="text" name="explanation<%=i%><%=x%>"></li>
-                            <li>Right <input type="checkbox" name="right<%=i%><%=x%>"></li>
+                            <li>Right <input type="checkbox" value="true" name="right<%=i%><%=x%>"></li>
                         </ul>
                 <%
                     }

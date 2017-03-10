@@ -9,6 +9,8 @@ import Models.QuestionModel;
 import Models.QuizModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.Integer.parseInt;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,31 +56,31 @@ public class createQuestion extends HttpServlet {
                 RequestDispatcher rd;
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
         QuizModel qm = new QuizModel();
-        int qID = qm.createQuiz((String)request.getAttribute("title"), (String)request.getAttribute("module"));
+        int qID = qm.createQuiz((String)request.getParameter("title"), (String)request.getParameter("module"));
         for(int i = 1; i <= numberOfQuestions; i++)
         {
             String questionString = "question" + Integer.toString(i);
-            String q = (String) request.getAttribute(questionString);
+            String q = (String) request.getParameter(questionString);
             String numberString = "number" + Integer.toString(i);
-            int number = (int) request.getAttribute(numberString);
+            int number =  parseInt(request.getParameter(numberString));
             String pointsString = "points" + Integer.toString(i);
-            int points = (int) request.getAttribute(pointsString);
+            int points =  parseInt(request.getParameter(pointsString));
             int questionID = qm.addQuestionGetID(q, number, points, qID);
             qm.addQuestion(q,number,points,questionID);
             for(int x = 0; x < 4; x++)
             {
                 String aString = "answer" + Integer.toString(i);
                 aString += Integer.toString(x);
-                String answer = (String) request.getAttribute(aString);
+                String answer = (String) request.getParameter(aString);
                 String nString = "number" + Integer.toString(i);
                 nString += Integer.toString(x);
-                int aNumber = (int) request.getAttribute(nString);
+                int aNumber =  parseInt(request.getParameter(nString));
                 String eString = "explanation" + Integer.toString(i);
                 eString += Integer.toString(x);
-                String explanation = (String) request.getAttribute(eString);
+                String explanation =  (String) request.getParameter(eString);
                 String rString = "right" + Integer.toString(i);
                 rString += Integer.toString(x);
-                boolean right = (boolean) request.getAttribute(rString);
+                boolean right =  parseBoolean(request.getParameter(rString));
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
             }
         }
