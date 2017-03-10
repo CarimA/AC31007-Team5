@@ -37,13 +37,6 @@ public class CreateQuiz extends HttpServlet {
         request.setAttribute("number",numberOfQuestions);
         rd = request.getRequestDispatcher("createQuestion.jsp");
         rd.forward(request,response);
-        //String title = request.getParameter("title");
-        //String module = request.getParameter("module");
-        //QuizModel qm = new QuizModel();
-        //int QuizID = qm.CreateQuiz(title, module);
-        //todo: link the id to the create question page with rd;
-        //rd = request.getRequestDispatcher("createQuestion/" + QuizID); //Is this right for a get?
-        //Do i even want a get? just pass along a quiz object?
     }
 
 }
