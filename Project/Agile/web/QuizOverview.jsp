@@ -39,11 +39,11 @@
             </ul>
             <%
                 //user = (User) session.getAttribute("user");
-                if (user.getPosition().equals("Staff")) {
+                //if (user.getPosition().equals("Staff")) {
                     //response.sendRedirect("login.jsp");
                 
             %>
-            <a href = "newQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> New Quiz </a>
+            <a href = "createQuiz.jsp" class = "btn btn-primary btn-lg" role = "button"> New Quiz </a>
             
                         <ul>
             <%
@@ -55,7 +55,7 @@
                 }
             %>
             </ul>
-            <% } %>
+            <% //} %>
         </div>
     </body>
     
