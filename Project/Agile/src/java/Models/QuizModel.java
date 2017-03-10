@@ -308,6 +308,7 @@ public class QuizModel {
             while (rs.next())
             {
                 questionID = rs.getInt("qId");
+                System.out.println(questionID);
             }
             statement.close();
             return questionID;
