@@ -38,9 +38,7 @@ import sun.security.ssl.Debug;
     "/EditQuiz/*",
     "/EditQuestion/*",
     "/EditAnswer/*",
-    "/DeleteQuiz/*",
-    "/DeleteQuestion/*",
-    "/DeleteAnswer/*"
+    
         
 })
 public class EditQuiz extends HttpServlet {
@@ -167,21 +165,6 @@ public class EditQuiz extends HttpServlet {
             request.setAttribute("Answer", a);
             rd.forward(request, response);
         }
-        else if(args[2].equals("DeleteQuiz")){
-            QuizModel qm = new QuizModel();
-            qm.deleteQuiz(parseInt(args[3]));
-            response.sendRedirect("/Agile/index.jsp");
-        }
-        else if(args[2].equals("DeleteQuestion")){
-            QuizModel qm = new QuizModel();
-            qm.deleteQuestion(parseInt(args[4]));
-            response.sendRedirect("/Agile/EditQuiz/"+args[3]);
-        }
-        else if(args[2].equals("DeleteAnswer")){
-            QuizModel qm = new QuizModel();
-            qm.deleteAnswer(parseInt(args[5]));
-            response.sendRedirect("/Agile/EditQuiz/"+args[3]+ "/" + args[4]);
-        }
         else{
             error(request,response);
         }
@@ -220,7 +203,7 @@ public class EditQuiz extends HttpServlet {
                 a = false;
             }
             
-            System.out.println(a);
+            //System.out.println(a);
             QuizModel qm = new QuizModel();
             // Adding question
             String submit = request.getParameter("submit");
@@ -232,12 +215,16 @@ public class EditQuiz extends HttpServlet {
                 if(!question.equals("")){
                    qm.addQuestion(question,number,points,quizID);
                 }
-            }else{
-            //
-            
-            
-            qm.updateQuiz(quizID,title,module,a);
-            System.out.println(available);
+                
+            }else if(submit.equals("Delete")){
+                int QuizID = parseInt(request.getParameter("QuizID"));
+                qm.deleteQuiz(QuizID);
+                response.sendRedirect("/Agile/index.jsp");
+                return;
+            }
+            else{
+                qm.updateQuiz(quizID,title,module,a);
+                //System.out.println(available);
             }
             response.sendRedirect("/Agile/EditQuiz/"+quizID);
         }
@@ -269,7 +256,12 @@ public class EditQuiz extends HttpServlet {
                 if(!answer.equals("")){
                    qm.addAnswer(answer,number,explanation,a,questionID);
                 }
-                }else{
+                }
+            else if(submit.equals("Delete")){
+                qm.deleteQuestion(parseInt(args[4]));
+                response.sendRedirect("/Agile/EditQuiz/"+args[3]);
+            }
+            else{
             //
                 qm.updateQuestion(questionID, question, points);
                 }
@@ -292,10 +284,19 @@ public class EditQuiz extends HttpServlet {
             else{
                 a = false;
             }
+            String submit = request.getParameter("submit");
+        
+        if(submit.equals("Delete")){
+            QuizModel qm = new QuizModel();
+            qm.deleteAnswer(parseInt(args[5]));
+            response.sendRedirect("/Agile/EditQuiz/"+args[3]+ "/" + args[4]);
+        }
+        else{
             System.out.println(a);
             QuizModel qm = new QuizModel();
             qm.updateAnswer(answerID, answer, explanation, a);
             response.sendRedirect("/Agile/EditAnswer/" +answerID);
+        }
         }
     }
 

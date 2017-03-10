@@ -48,7 +48,12 @@
                 </form>
                        <%}
                        %>
-                       <a href="/Agile/DeleteAnswer/<%=QuizID%>/<%=QuestionID%>/<%=a.getId()%>">Delete this answer (Do not click this by mistake)</a>
+                       
+                       
+                <form method="POST" action="EditQuiz">
+                    <input type="hidden" name="AnswerID" value="<%=a.getId()%>">
+                Delete Answer (Do not click by accident) <input type="submit" name="submit" value="Delete">
+                </form>
                        <h3>Go back to <a href="/Agile/EditQuestion/<%=QuizID%>/<%=QuestionID%>">Question</a></h3>
     </body>
 </html>
