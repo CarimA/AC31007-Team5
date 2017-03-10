@@ -67,6 +67,10 @@ public class createQuestion extends HttpServlet {
             int points =  parseInt(request.getParameter(pointsString));
             int questionID = qm.addQuestionGetID(q, number, points, qID);
             qm.addQuestion(q,number,points,questionID);
+            System.out.println(q);
+            System.out.println(number);
+            System.out.println(points);
+            System.out.println(questionID);
             for(int x = 0; x < 4; x++)
             {
                 String aString = "answer" + Integer.toString(i);
@@ -82,8 +86,14 @@ public class createQuestion extends HttpServlet {
                 rString += Integer.toString(x);
                 boolean right =  parseBoolean(request.getParameter(rString));
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
+                System.out.println(answer);
+                System.out.println(aNumber);
+                System.out.println(explanation);
+                System.out.println(right);
             }
         }
+        rd = request.getRequestDispatcher("quizCreated.jsp");
+        rd.forward(request,response);
     }
 
     /**
