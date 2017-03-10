@@ -35,7 +35,8 @@ public class CreateQuiz extends HttpServlet {
         RequestDispatcher rd;
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
         request.setAttribute("number",numberOfQuestions);
-        rd = request.getRequestDispatcher("createQuestions");
+        rd = request.getRequestDispatcher("createQuestion.jsp");
+        rd.forward(request,response);
         //String title = request.getParameter("title");
         //String module = request.getParameter("module");
         //QuizModel qm = new QuizModel();
