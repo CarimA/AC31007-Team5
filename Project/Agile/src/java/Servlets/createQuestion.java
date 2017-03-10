@@ -55,7 +55,7 @@ public class createQuestion extends HttpServlet {
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
         QuizModel qm = new QuizModel();
         int qID = qm.createQuiz((String)request.getAttribute("title"), (String)request.getAttribute("module"));
-        for(int i = 0; i < numberOfQuestions; i++)
+        for(int i = 1; i <= numberOfQuestions; i++)
         {
             String questionString = "question" + Integer.toString(i);
             String q = (String) request.getAttribute(questionString);
@@ -64,15 +64,20 @@ public class createQuestion extends HttpServlet {
             String pointsString = "points" + Integer.toString(i);
             int points = (int) request.getAttribute(pointsString);
             int questionID = qm.addQuestionGetID(q, number, points, qID);
+            qm.addQuestion(q,number,points,questionID);
             for(int x = 0; x < 4; x++)
             {
-                String aString = "answer" + Integer.toString(x);
+                String aString = "answer" + Integer.toString(i);
+                aString += Integer.toString(x);
                 String answer = (String) request.getAttribute(aString);
-                String nString = "number" + Integer.toString(x);
+                String nString = "number" + Integer.toString(i);
+                nString += Integer.toString(x);
                 int aNumber = (int) request.getAttribute(nString);
-                String eString = "explanation" + Integer.toString(x);
+                String eString = "explanation" + Integer.toString(i);
+                eString += Integer.toString(x);
                 String explanation = (String) request.getAttribute(eString);
-                String rString = "right" + Integer.toString(x);
+                String rString = "right" + Integer.toString(i);
+                rString += Integer.toString(x);
                 boolean right = (boolean) request.getAttribute(rString);
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
             }
