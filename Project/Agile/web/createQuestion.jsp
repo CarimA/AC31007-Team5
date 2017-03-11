@@ -40,7 +40,7 @@
                     <li>Question: <%=i%><input type="text" name="question<%=i%>"></li>
                     <li>Number <input type="number" name="number<%=i%>"></li>
                     <li>Points <input type="number" name="points<%=i%>"></li>
-                    </br>
+                    <li>Image <input type="file" name="file<%=i%>"></li>
                 </ul>
                 <%
                     for(int x = 0; x < 4; x++)
