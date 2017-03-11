@@ -345,18 +345,14 @@ public class QuizModel {
         try {
             Connection connection = Helpers.connect();
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module, DateCreated) values (?, ?, ?)");
+            statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module, DateCreated) values (?, ?)");
             statement.setString(1, title);
             statement.setString(2, module);
-            //Date date = new Date(); SHould work?
-            //statement.setString(3, date);
             statement.execute();
             
-            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Title, Module, DateCreated) values (?, ?, ?)");
+            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Title, Module, DateCreated) values (?, ?)");
             statement.setString(1, title);
             statement.setString(2, module);
-            //Date date = new Date(); SHould work?
-            //statement.setString(3, date);
             
             ResultSet rs = statement.executeQuery();
             while (rs.next())
