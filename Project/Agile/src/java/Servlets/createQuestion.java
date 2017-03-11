@@ -68,10 +68,9 @@ public class createQuestion extends HttpServlet {
             int number =  parseInt(request.getParameter(numberString));
             String pointsString = "points" + Integer.toString(i);
             int points =  parseInt(request.getParameter(pointsString));
-            int questionID = qm.addQuestionGetID(q, number, points, qID);
-            //Image get part
-            InputStream inputStream = null;
             
+            
+            InputStream inputStream = null;
             String imageString = "image" + Integer.toString(i);
             Part fp = request.getPart(imageString);
             if(fp != null)
@@ -79,9 +78,16 @@ public class createQuestion extends HttpServlet {
                 inputStream = fp.getInputStream();
             }
             
+            if(inputStream == null)
+            {
+                qm.addQuestion(q,number,points,qID);
+            }
+            else
+            {
+                qm.addQuestionWithImage(q,number,points,qID,inputStream);
+            }
             
-            qm.addQuestion(q,number,points,questionID);
-            
+            int questionID = qm.getIdFromQ(q, number, points, qID);
             for(int x = 0; x < 4; x++)
             {
                 String aString = "answer" + Integer.toString(i);
