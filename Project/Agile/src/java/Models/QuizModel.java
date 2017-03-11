@@ -9,6 +9,7 @@ import Misc.Helpers;
 import Stores.Answer;
 import Stores.Question;
 import Stores.Quiz;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -356,6 +357,54 @@ public class QuizModel {
             statement.setString(2, module);
             //Date date = new Date(); SHould work?
             //statement.setString(3, date);
+            
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                id = rs.getInt("qId");
+            }
+            statement.close();
+            connection.close();
+            return id;
+        }
+        catch(SQLException e)
+        {
+            return 0; 
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+
+    public void addQuestionWithImage(String question, int number, int points, int quizID, InputStream i) {
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Question (Number,Question,Points,QuizID,Image) VALUES (?,?,?,?,?)");
+            statement.setInt(1, number);
+            statement.setString(2, question);
+            statement.setInt(3, points);
+            statement.setInt(4, quizID);
+            statement.setBlob(5,i);
+            statement.executeUpdate();
+            statement.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getIdFromQ(String question,int number,int points,int quizID) {
+                int id = 0;
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Question, Number, Points, QuizID) values (?, ?, ?, ?)");
+            statement.setString(1, question);
+            statement.setInt(2, number);
+            statement.setInt(3, points);
+            statement.setInt(4, quizID);
             
             ResultSet rs = statement.executeQuery();
             while (rs.next())
