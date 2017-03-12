@@ -23,6 +23,7 @@
     </jsp:attribute>
 
     <jsp:body>
+        
         <t:quiz_results_tag>
             
         </t:quiz_results_tag>
