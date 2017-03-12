@@ -3,7 +3,11 @@
     Created on : 08-Mar-2017, 10:06:52
     Author     : Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
 --%>
-
+<%--
+this page fetches and displays the questions of the quiz selected which their respective answers.
+The answers are displayed using field-sets of radio buttons which separates the answers of each question. 
+The radio button groups are identified using a unique name generated depending on the id of the questions.
+--%>
 <%@tag import="Stores.ResultModel"%>
 <%@tag import="Misc.Helpers"%>
 <%@tag import="java.util.ArrayList"%>

@@ -3,7 +3,11 @@
     Created on : 12-Mar-2017, 12:38:20
     Author     : Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
 --%>
-
+<%--
+quizzes are fetched and displayed to the user.
+Each quiz is displayed depending on whether is available and complete. 
+All the quizzes which are not available have the ‘Take Quiz’ button disabled. 
+--%>
 
 <%@tag import="Stores.ResultModel"%>
 <%@tag import="java.util.ArrayList"%>
@@ -57,8 +61,8 @@
             QuizModel quizModel;
             int theme = 0;
             while (resultSet.next()) {//fetching the quizzes
-                quizModel = new QuizModel(resultSet.getInt("qId"), resultSet.getString("Title"), resultSet.getString("Module"), resultSet.getDate("DateCreated"), resultSet.getInt("Available"),false,0);
-
+                quizModel = new QuizModel(resultSet.getInt("quizId"), resultSet.getString("Title"), resultSet.getString("Module"), resultSet.getDate("DateCreated"), resultSet.getInt("Available"),false,0);
+                    // can't remeber now correct primaty id name, no vpn
                 if (!resquizes.isEmpty()) {//determining the completed quizzes
                     for (ResultModel resultModel : resquizes) {
                         if ((resultModel.getQuizId() == quizModel.getQuizId()) && (resultModel.getPersonId().equals(PersonID))) {

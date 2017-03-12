@@ -3,7 +3,10 @@
     Created on : 07-Mar-2017, 10:28:34
     Author     : Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
 --%>
+<%--
+in this page the quizzes are sorted by modules and displayed using the rules of availability and completion.
 
+--%>
 <%@tag import="Stores.ResultModel"%>
 <%@tag import="java.util.ArrayList"%>
 <%@tag import="java.util.List"%>

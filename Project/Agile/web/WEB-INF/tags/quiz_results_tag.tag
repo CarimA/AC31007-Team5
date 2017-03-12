@@ -3,7 +3,14 @@
     Created on : 12-Mar-2017, 11:35:06
     Author     : Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
 --%>
-
+<%--
+In this page the parameters from the form are extracted to process the results of the student. 
+A question is correctly answered if user selected answer matches the correct answer
+Each question is displayed alongside with user answer and the correct answer. If the user got it correct, a tick is indicated. 
+If he got it wrong a cross is indicated.
+To compute the total score, the points of correct answers are summed.
+The score is later recorded in the results to indicate that the user has already completed the quiz
+--%>
 <%@tag import="Stores.Question"%>
 <%@tag import="java.util.List"%>
 <%@tag import="java.util.Calendar"%>
