@@ -84,7 +84,7 @@
 <%
     }
     //Recording results to the database
-    String insertQuery = "INSERT INTO `results`(`Score`, `Date`, `PersonID`, `Quiz_id`) VALUES (?,?,?,?)";
+    String insertQuery = "INSERT INTO `results`(`Score`, `Date`, `PersonID`, `QuizID`) VALUES (?,?,?,?)";
     PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
     insertStatement.setInt(1, correctAnswers);
     java.sql.Date d = new java.sql.Date(Calendar.getInstance().getTime().getTime());

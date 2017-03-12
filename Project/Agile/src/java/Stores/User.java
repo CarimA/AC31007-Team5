@@ -89,6 +89,7 @@ public class User {
             }
             
             String hashedPassword = rs.getString("Password");
+            String idInDB = rs.getString("pId");
             String displayName = rs.getString("DisplayName");            
             String salt = rs.getString("Salt");
             String email = rs.getString("Email");

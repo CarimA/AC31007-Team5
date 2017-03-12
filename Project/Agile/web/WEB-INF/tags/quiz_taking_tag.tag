@@ -30,7 +30,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-          <%
+        <%
             int id = Integer.valueOf(request.getParameter("qId"));//getting the quiz id
             session.setAttribute("selectedQuizId", id);
             String title = request.getParameter("Title");
@@ -45,20 +45,76 @@
             statement.setString(1, PersonID);
             statement.setInt(2, id);
             ResultSet resultSet = statement.executeQuery();
-            
             if (resultSet.next()) {//if the student has not taken the quiz 
                 Helpers.errorRedirect(request, response, "Home", true, "You have already done this quiz");
             }else{
-                
+            
             Quiz quiz = new Quiz();
             Question q;
-            Answer a;  
-         
-            
-                
-                
-                
+            Answer a;
+            List<Question> questions = quiz.fetchQuestions(connection, id);//fetching all the questions
+            int possibleResults = 0;
+            session.setAttribute("quizQuestions", questions);
+            int arraySize = questions.size();
+            if (!questions.isEmpty()) {//qustions array is not empty
+        %>
+        <h4><%=title%></h4>
+        <h5>Answer All The Questions</h5>
+        <div class="dynamic-row" hidden="true">  
+<!--            displaying questions along side with choices-->
+            <form method="POST" action="processResults.jsp">
+                <input type="hidden" name="arraySize" value=<%=arraySize%>><br>                
+                <%
+                    //looping through the questions
+                    for (int i = 0; i < questions.size(); i++) {
+                        String ans = "ans";
+                        q = questions.get(i);
+                %>
+                <ul style="list-style: none;">
+                    <li><label><%=q.getQuestion()%> Worth <%=q.getPoints()%> points.</label><br>
+                        <input type="hidden" name="quiz_id" value=<%=id%>>
+                        <input type="hidden" name="question_id" value=<%=q.getId()%>>  
+                        <input type="hidden" name="points" value="<%=q.getPoints()%>">
+                        <%
+                            List<Answer> answers = q.getAnswers();
+                            //points of the questions
+                            possibleResults = possibleResults = q.getPoints();
+                            request.setAttribute("possibleResults", possibleResults);
+                        %>
+                        <fieldset id="<%= q.getId()%>">
+
+                            <%
+                                for (int j = 0; j < answers.size(); j++) {//looping through the answers
+                                    a = answers.get(j);
+                            %>
+                            
+                            <input type="radio" name="<%= ans + i%>" value="<%=a.getExplanation()%>"><%=a.getExplanation()%><br>
+                            <%
+                                if (a.getRight()) {//getting the correct answer for the question
+
+                            %>
+                            <input type="hidden" name="answer" value="<%=a.getExplanation()%>">
+                            <%
+                                    }
+                                }
+                            %>
+                        </fieldset>
+                    </li>
+                </ul>
+
+                <%}
+                    } else {//if no questions in the quiz
+                        Helpers.errorRedirect(request, response, "Home", true, "There are no questions in the quiz");
+                    }
+                %>
+                <div class="dynamic-column">
+                    <input type="submit" value="Submit Quiz">
+                </div>
+            </form>
+                <%
             }
         %>
-    </body>    
+        
+        </div>
+    </body>
 </html>
