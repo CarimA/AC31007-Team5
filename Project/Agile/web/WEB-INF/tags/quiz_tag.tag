@@ -124,7 +124,7 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
             </div>
             <div class="dynamic-column">
                 <br><br>
-                <form name="frm" method="post" action="takeQuiz.jsp">
+                <form name="frm" method="post" action="takeQuizStudent.jsp">
                     <input type="hidden" name="id" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
                     <input type="hidden" name="module" value="<%= quizObj.getModule()%>" />
@@ -174,7 +174,7 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
             </div>
             <div class="dynamic-column">
                 <br><br>
-                <form name="frm" method="post" action="takeQuiz.jsp">
+                <form name="frm" method="post" action="takeQuizStudent.jsp">
                     <input type="hidden" name="id" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
                     <input type="hidden" name="module" value="<%= quizObj.getModule()%>" />
