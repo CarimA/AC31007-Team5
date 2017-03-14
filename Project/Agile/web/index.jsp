@@ -25,11 +25,13 @@
     </jsp:attribute>
     <jsp:body>
         
-          
+                  <t:quiz_tag>
+            
+        </t:quiz_tag>
             
       
         
-        <div class="dynamic-row quiz-row">
+<!--        <div class="dynamic-row quiz-row">
             <div class="dynamic-column">
                 AC31007
             </div>
@@ -365,7 +367,7 @@
                 <i class="fa fa-lock" aria-hidden="true"></i>
                 <i class="fa fa-cog" aria-hidden="true"></i>
             </div>
-        </div>
+        </div>-->
               
              
     </jsp:body>

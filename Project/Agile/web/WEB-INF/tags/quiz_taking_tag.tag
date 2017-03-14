@@ -56,7 +56,8 @@ The radio button groups are identified using a unique name generated depending o
             Quiz quiz = new Quiz();
             Question q;
             Answer a;
-            List<Question> questions = quiz.fetchQuestions(connection, id);//fetching all the questions
+            //an error here
+            List<Question> questions = quiz.fetchQuestions(connection, id);
             int possibleResults = 0;
             session.setAttribute("quizQuestions", questions);
             int arraySize = questions.size();
@@ -95,7 +96,7 @@ The radio button groups are identified using a unique name generated depending o
                             
                             <input type="radio" name="<%= ans + i%>" value="<%=a.getExplanation()%>"><%=a.getExplanation()%><br>
                             <%
-                                if (a.getRight()) {//getting the correct answer for the question
+                                if (a.isRight()) {//getting the correct answer for the question
 
                             %>
                             <input type="hidden" name="answer" value="<%=a.getExplanation()%>">

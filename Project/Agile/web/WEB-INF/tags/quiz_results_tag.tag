@@ -55,10 +55,10 @@ The score is later recorded in the results to indicate that the user has already
 
                 int correctAnswers = 0;
                 int arraySize = Integer.valueOf(request.getParameter("arraySize"));// size of the questions array from quiz_tzking_tag
-                String rightAnswers[] = request.getParameterValues("Answer");//right answers from quiz_tzking_tag
+                String rightAnswers[] = request.getParameterValues("answer");//right answers from quiz_tzking_tag
                 
-                String points[] = request.getParameterValues("Points");//answer points from quiz_tzking_tag
-                int quiz_id = Integer.valueOf(request.getParameter("QuizID"));
+                String points[] = request.getParameterValues("points");//answer points from quiz_tzking_tag
+                int quiz_id = Integer.valueOf(request.getParameter("quiz_id"));
                 List<Question> quizQuestions = (List<Question>) session.getAttribute("quizQuestions");
                 for (int i = 0; i < arraySize; i++) {//looping through all the answers
                     String studentAnswer = request.getParameter(String.valueOf("ans" + i));
@@ -86,7 +86,9 @@ The score is later recorded in the results to indicate that the user has already
 <label>Correct Answer:   </label><p style="display: inline;">  <%=correctAnswer%><i class="fa fa-check" aria-hidden="true" style="color: green;"></i></p>
     <%
         }
+            
     %>
+<button>send to print</button>
 
 <%
     }

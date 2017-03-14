@@ -47,7 +47,7 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
             ResultModel resModel;
 
             while (resresultSet.next()) {//fetching the quiz results
-                resModel = new ResultModel(resresultSet.getInt("rId"), resresultSet.getInt("Quiz_ID"), resresultSet.getDate("Date"), resresultSet.getString("PersonID"), resresultSet.getInt("Score"));
+                resModel = new ResultModel(resresultSet.getInt("rId"), resresultSet.getInt("QuizID"), resresultSet.getDate("Date"), resresultSet.getString("PersonID"), resresultSet.getInt("Score"));
                 resquizes.add(resModel);
             }
 
@@ -122,8 +122,8 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
             </div>
             <div class="dynamic-column">
                 <br><br>
-                <form name="frm" method="post" action="takeQuiz.jsp">
-                    <input type="hidden" name="id" value="<%= quizObj.getQuizId()%>" />
+                <form name="frm" method="post" action="takeQuizStudent.jsp">
+                    <input type="hidden" name="qId" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
                     <input type="hidden" name="module" value="<%= quizObj.getModule()%>" />
                     <input type="submit" name="button" value="Take quiz"/>
@@ -172,8 +172,8 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
             </div>
             <div class="dynamic-column">
                 <br><br>
-                <form name="frm" method="post" action="takeQuiz.jsp">
-                    <input type="hidden" name="id" value="<%= quizObj.getQuizId()%>" />
+                <form name="frm" method="post" action="takeQuizStudent.jsp">
+                    <input type="hidden" name="qId" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
                     <input type="hidden" name="module" value="<%= quizObj.getModule()%>" />
                     <input type="submit" name="button" value="Take quiz"/>

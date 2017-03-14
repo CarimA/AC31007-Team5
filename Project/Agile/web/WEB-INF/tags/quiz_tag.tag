@@ -61,8 +61,9 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
             QuizModel quizModel;
             int theme = 0;
             while (resultSet.next()) {//fetching the quizzes
-                quizModel = new QuizModel(resultSet.getInt("quizId"), resultSet.getString("Title"), resultSet.getString("Module"), resultSet.getDate("DateCreated"), resultSet.getInt("Available"),false,0);
-                    // can't remeber now correct primaty id name, no vpn
+                quizModel = new QuizModel(resultSet.getInt("qId"), resultSet.getString("Title"), resultSet.getString("Module"), resultSet.getDate("DateCreated"), resultSet.getInt("Available"),false,0);
+                 
+                           
                 if (!resquizes.isEmpty()) {//determining the completed quizzes
                     for (ResultModel resultModel : resquizes) {
                         if ((resultModel.getQuizId() == quizModel.getQuizId()) && (resultModel.getPersonId().equals(PersonID))) {
@@ -125,7 +126,7 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
             <div class="dynamic-column">
                 <br><br>
                 <form name="frm" method="post" action="takeQuizStudent.jsp">
-                    <input type="hidden" name="id" value="<%= quizObj.getQuizId()%>" />
+                    <input type="hidden" name="qId" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
                     <input type="hidden" name="module" value="<%= quizObj.getModule()%>" />
                     <input type="submit" name="button" value="Take quiz"/>
@@ -175,7 +176,7 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
             <div class="dynamic-column">
                 <br><br>
                 <form name="frm" method="post" action="takeQuizStudent.jsp">
-                    <input type="hidden" name="id" value="<%= quizObj.getQuizId()%>" />
+                    <input type="hidden" name="qId" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
                     <input type="hidden" name="module" value="<%= quizObj.getModule()%>" />
                     <input type="submit" name="button" value="Take quiz"/>
