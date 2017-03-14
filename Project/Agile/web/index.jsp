@@ -25,7 +25,7 @@
     </jsp:attribute>
     <jsp:body>
         
-          <t:quiz_tag>
+          
             
       
         
@@ -367,6 +367,6 @@
             </div>
         </div>
               
-                </t:quiz_tag>
+             
     </jsp:body>
 </t:wrapper>
