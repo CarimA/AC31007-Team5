@@ -5,6 +5,7 @@
  */
 package Misc;
 
+import Stores.Answer;
 import Stores.ResultModel;
 import java.util.List;
 import org.junit.After;
@@ -19,20 +20,14 @@ import static org.junit.Assert.*;
  * @author jimiwesterholm
  */
 public class ResultControllerTest {
+    ResultController rc;
     
     public ResultControllerTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
+        rc = new ResultController();
     }
     
     @After
@@ -42,9 +37,17 @@ public class ResultControllerTest {
     @Test
     public void testFetchResultsOverview() {
         int expectedResult = 12;
-        ResultController rc = new ResultController();
+        
         List<ResultModel> results = rc.fetchResultOverview();
         assertEquals(expectedResult, results.get(0).getId());
+    }
+    
+    @Test
+    public void testFetchResultsIndividual() {
+        String expectedResult = "fine";
+        int id = 14;
+        List<Answer> answers = rc.fetchResultsIndividual(id);
+        assertEquals(expectedResult, answers.get(0).getExplanation());
     }
     
 }
