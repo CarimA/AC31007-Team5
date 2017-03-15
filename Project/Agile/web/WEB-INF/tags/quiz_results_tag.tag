@@ -26,6 +26,11 @@ The score is later recorded in the results to indicate that the user has already
 
 <%-- any content can be specified here e.g.: --%>
 
+<script>
+    function myFunction() {
+        window.print();
+    }
+</script>
 
 <!DOCTYPE html>
 <html>
@@ -105,8 +110,10 @@ The score is later recorded in the results to indicate that the user has already
 %>
 <br><br><p><%="Your Score is:  " + correctAnswers%></p>
 
-<!--Place next page for a printing results there -->
-<button>send to print</button> 
+        <button onclick="myFunction()">Print</button> 
+        <form id="submit" method="POST" action="StudentSummary">
+            <input type="submit" value="Submit">
+        </form>
 <%
     }
 %>       
