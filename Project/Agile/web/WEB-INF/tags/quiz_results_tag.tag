@@ -88,7 +88,7 @@ The score is later recorded in the results to indicate that the user has already
         }
             
     %>
-<button>send to print</button>
+
 
 <%
     }
@@ -104,6 +104,9 @@ The score is later recorded in the results to indicate that the user has already
     connection.close();
 %>
 <br><br><p><%="Your Score is:  " + correctAnswers%></p>
+
+<!--Place next page for a printing results there -->
+<button>send to print</button> 
 <%
     }
 %>       
