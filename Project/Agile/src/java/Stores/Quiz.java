@@ -89,7 +89,7 @@ public class Quiz {
     
     public List<Question> fetchQuestions(Connection connection, int id) throws SQLException  {
         List<Question> questionList = new ArrayList();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ? Order by Number Asc");
         statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();
         
@@ -108,6 +108,28 @@ public class Quiz {
         
         setQuestions(questionList);
         return questionList;
+    }
+    
+    public void fetchQuestions(Connection connection) throws SQLException  {
+        List<Question> questionList = new ArrayList();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ? Order by Number Asc");
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next()) {
+            Question temp = new Question();
+            temp.setId(rs.getInt("questionId"));
+            temp.setNumber(rs.getInt("Number"));
+            temp.setQuestion(rs.getString("Question"));
+            temp.setPoints(rs.getInt("Points"));
+            temp.setAnswers(temp.fetchAnswers(connection, id));
+            
+            //Get image as well?
+            
+            questionList.add(temp);
+        }
+        
+        setQuestions(questionList);
     }
     
     public static Quiz fetch(Connection connection, int id) throws SQLException {
@@ -140,7 +162,7 @@ public class Quiz {
         q.setModule(module);
         q.setTitle(title);
         //there is well need to check
-        //q.fetchQuestions(connection);
+        q.fetchQuestions(connection);
         
         
         connection.close();
