@@ -25,10 +25,14 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage; 
 import Stores.Question;
 import Misc.Helpers;
 import Stores.User;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.StringWriter;
 
 
 
@@ -72,22 +76,56 @@ public class StudentSummary extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd;
+        
         Stores.User user = (Stores.User)(request.getSession().getAttribute("user"));
         String email = user.getEmail();
         String displayname = user.getDisplayName();
         String id = user.getId();
-        //Stores.ResultModel resultmodel = (Stores.ResultModel)(request.getSession().getAttribute("selectedQuizId"));
         int quizid = Integer.parseInt(request.getSession().getAttribute("selectedQuizId").toString());
-        //int score = Integer.parseInt(request.getSession().getAttribute("score").toString());
         int score = Integer.parseInt(request.getParameter("score").toString());
-        //int score = Integer.valueOf(request.getParameter("quiz_id"));
+        String[] questions = request.getParameterValues("questions");
+        String[] studentAnswers = request.getParameterValues("studentanswers");
+        String[] correctAnswers = request.getParameterValues("correctanswers");
+        String questionss = "";
+        //String studentAnswerss = "";
+        String check = "";
+        int count = 1;
         
-        sendEmail(email, displayname, id, quizid, score);
+        for (int i=0; i<questions.length; i++)
+        {
+            if(correctAnswers[i].equals(studentAnswers[i]))
+            {
+                check = "right";
+            }
+            else
+            {
+                check = "false";
+            }
+                questionss += ("Your answer for the Question " + count + " is " + check 
+                        + "\n\n" + "Question " + count + ": " + questions[i] + "\n" + "Your answer: " + studentAnswers[i]
+                         + "\n" + "Correct answer: " + correctAnswers[i]+ "\n\n");
+                count+=1;
+
+
+  
+ 
+
+        }
+        
+        String plaintext = ("Hello " + displayname + ", \n\n"
+                + "Your overall score for the Quiz " + quizid + " is " + score + " points. \n"
+                + "\n\nDescription \n***********************************************************************\n"
+                + questionss + "***********************************************************************\n\n"
+                + "Thank you for participation! \n\nRegards, \nYour Agile Team 5");
+        
+        sendEmail(email, plaintext, quizid);
+        
+        
         rd = request.getRequestDispatcher("summarysent.jsp");
         rd.forward(request, response);
     }
     
-    public void sendEmail(String email, String displayname, String id, int quizid, int score)
+    public void sendEmail(String email, String plaintext, int quizid) throws FileNotFoundException
     { 
         final String username = "agileteam5email@gmail.com";
         final String password = "Qwerty12345";
@@ -109,15 +147,21 @@ public class StudentSummary extends HttpServlet {
                 message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(email));
                 message.setSubject("Quiz summary for quiz " + quizid);
-                message.setText("Dear " + displayname + " (Mariculation Number: " + id + "),"
-                            + "\n\n Overeall score is " + score + " points."
-                            + "");
+               // StringWriter writer = new StringWriter();
+                //IOUtils.copy(new FileInputStream(new File("processResults.jsp")), writer);
+                //message.setContent(writer.toString(), "text/html");
+                message.setText(plaintext);
+//                message.setText("Dear " + displayname + " (Mariculation Number: " + id + "),"
+//                            + "\n\n Overeall score is " + score + " points."
+//                            + "");
+//                message.setText("Dear ");
                 Transport.send(message);
                 System.out.println("Done");
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
         }
     }
+    
     
     /**
      * Returns a short description of the servlet.

@@ -94,7 +94,11 @@ The score is later recorded in the results to indicate that the user has already
             
     %>
 
-
+    <form id="submit" method="POST" action="StudentSummary">
+    <input type="hidden" name="score" value="<%=correctAnswers%>">
+    <input type="hidden" name="studentanswers" value="<%=studentAnswer%>">
+    <input type="hidden" name="correctanswers" value="<%=correctAnswer%>">
+    <input type="hidden" name="questions" value="<%=quizQuestions.get(i).getQuestion()%>">
 <%
     }
     //Recording results to the database
@@ -110,11 +114,9 @@ The score is later recorded in the results to indicate that the user has already
 %>
 <br><br><p><%="Your Score is:  " + correctAnswers%></p>
 
-        <button onclick="myFunction()">Print</button> 
-        <form id="submit" method="POST" action="StudentSummary">
-            <input type="hidden" name="score" value="<%=correctAnswers%>">
             <input type="submit" value="Submit">
         </form>
+<button onclick="myFunction()">Print</button> 
 <%
     }
 %>       
