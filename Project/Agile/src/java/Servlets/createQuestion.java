@@ -60,9 +60,6 @@ public class createQuestion extends HttpServlet {
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
         QuizModel qm = new QuizModel();
         int qID = qm.createQuiz((String)request.getParameter("title"), (String)request.getParameter("module"));
-        System.out.println(numberOfQuestions);
-        System.out.println((String)request.getParameter("title"));
-        System.out.println((String)request.getParameter("module"));
         for(int i = 1; i <= numberOfQuestions; i++)
         {
             String questionString = "question" + Integer.toString(i);
@@ -106,10 +103,6 @@ public class createQuestion extends HttpServlet {
                 rString += Integer.toString(x);
                 boolean right =  parseBoolean(request.getParameter(rString));
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
-                System.out.println(answer);
-                System.out.println(aNumber);
-                System.out.println(explanation);
-                System.out.println(right);
             }
         }
         rd = request.getRequestDispatcher("quizCreated.jsp");
