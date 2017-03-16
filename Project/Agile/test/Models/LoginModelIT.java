@@ -6,8 +6,10 @@
 package Models;
 
 
+import Exception.PasswordInvalidException;
 import Exception.UsernameInvalidException;
 import Stores.User;
+import org.bouncycastle.openssl.PasswordException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -45,8 +47,21 @@ public class LoginModelIT {
      * Test of checkLogin method, of class LoginModel.
      * @throws java.lang.Exception
      */
-     @Test (expected = UsernameInvalidException.class)
+     @Test (expected = PasswordInvalidException.class)
+     
     public void testCheckLogin() throws Exception {
+        System.out.println("checkLogin");
+        String username = "13";
+        String password = "password";
+        LoginModel instance = new LoginModel();
+        User expResult = new User();
+        User result = instance.checkLogin(username, password);
+        assertEquals(expResult, result);
+        
+    } 
+    @Test (expected = UsernameInvalidException.class)
+     
+    public void testCheckLogin2() throws Exception {
         System.out.println("checkLogin");
         String username = "13";
         String password = "password";

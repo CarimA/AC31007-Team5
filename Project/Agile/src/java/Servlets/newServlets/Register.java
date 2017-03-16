@@ -69,6 +69,7 @@ public class Register extends HttpServlet {
         
         if (user != null) {
             session.setAttribute("user", user);
+            session.setAttribute("userIDKey", userID);
             Helpers.successRedirect(request, response, "Home", true, "Successfully created an account!");
         } else {
             Helpers.errorRedirect(request, response, "login.jsp", false, "Something else happened!");

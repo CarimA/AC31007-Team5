@@ -12,7 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+//import static org.mockito.Mockito.mock;
+
 
 /**
  * the same, this data worked on my db , need to add later to this database
@@ -61,7 +62,9 @@ public class ResultModelIT {
     public void testSetId() {
         System.out.println("setId");
         int id = 0;
-        ResultModel instance = mock(ResultModel.class);
+        String strDate = "2017-03-02";  
+        Date date=Date.valueOf(strDate);
+        ResultModel instance = new ResultModel(1, 10, date, "001", 20);
         instance.setId(id);
        
     }
@@ -88,7 +91,9 @@ public class ResultModelIT {
     public void testSetQuizId() {
         System.out.println("setQuizId");
         int quizId = 0;
-        ResultModel instance = mock(ResultModel.class);
+        String strDate = "2017-03-02";  
+        Date date=Date.valueOf(strDate);
+        ResultModel instance = new ResultModel(1, 10, date, "001", 20);
         instance.setQuizId(quizId);
         
     }
@@ -114,8 +119,9 @@ public class ResultModelIT {
     @Test
     public void testSetDate() {
         System.out.println("setDate");
-        Date date = null;
-        ResultModel instance = mock(ResultModel.class);
+        String strDate = "2017-03-02";  
+        Date date=Date.valueOf(strDate);
+        ResultModel instance = new ResultModel(1, 10, date, "001", 20);
         instance.setDate(date);
       
     }
@@ -142,7 +148,9 @@ public class ResultModelIT {
     public void testSetPersonId() {
         System.out.println("setPersonId");
         String personId = "";
-        ResultModel instance = mock(ResultModel.class);
+        String strDate = "2017-03-02";  
+        Date date=Date.valueOf(strDate);
+        ResultModel instance = new ResultModel(1, 10, date, "001", 20);
         instance.setPersonId(personId);
         
     }
@@ -168,7 +176,9 @@ public class ResultModelIT {
     public void testSetScore() {
         System.out.println("setScore");
         int score = 0;
-        ResultModel instance = mock(ResultModel.class);
+        String strDate = "2017-03-02";  
+        Date date=Date.valueOf(strDate);
+        ResultModel instance = new ResultModel(1, 10, date, "001", 20);
         instance.setScore(score);
         
     }

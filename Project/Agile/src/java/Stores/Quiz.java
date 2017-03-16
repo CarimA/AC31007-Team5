@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 
 /**
  *
@@ -87,7 +87,7 @@ public class Quiz {
         this.questions = questions;
     }
     
-    public void fetchQuestions(Connection connection) throws SQLException  {
+    public List<Question> fetchQuestions(Connection connection, int id) throws SQLException  {
         List<Question> questionList = new ArrayList();
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM question where QuizID = ?");
         statement.setInt(1, id);
@@ -107,6 +107,7 @@ public class Quiz {
         }
         
         setQuestions(questionList);
+        return questionList;
     }
     
     public static Quiz fetch(Connection connection, int id) throws SQLException {
@@ -139,7 +140,7 @@ public class Quiz {
         q.setModule(module);
         q.setTitle(title);
         //there is well need to check
-        q.fetchQuestions(connection);
+        //q.fetchQuestions(connection);
         
         
         connection.close();

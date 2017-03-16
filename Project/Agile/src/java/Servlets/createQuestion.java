@@ -8,9 +8,12 @@ package Servlets;
 import Models.QuestionModel;
 import Models.QuizModel;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
+import java.sql.Blob;
+import javax.servlet.http.Part;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,12 +71,26 @@ public class createQuestion extends HttpServlet {
             int number =  parseInt(request.getParameter(numberString));
             String pointsString = "points" + Integer.toString(i);
             int points =  parseInt(request.getParameter(pointsString));
-            int questionID = qm.addQuestionGetID(q, number, points, qID);
-            qm.addQuestion(q,number,points,questionID);
-            System.out.println(q);
-            System.out.println(number);
-            System.out.println(points);
-            System.out.println(questionID);
+            
+            
+            InputStream inputStream = null;
+            String imageString = "image" + Integer.toString(i);
+            Part fp = request.getPart(imageString);
+            if(fp != null)
+            {
+                inputStream = fp.getInputStream();
+            }
+            
+            if(inputStream == null)
+            {
+                qm.addQuestion(q,number,points,qID);
+            }
+            else
+            {
+                qm.addQuestionWithImage(q,number,points,qID,inputStream);
+            }
+            
+            int questionID = qm.getIdFromQ(q, number, points, qID);
             for(int x = 0; x < 4; x++)
             {
                 String aString = "answer" + Integer.toString(i);

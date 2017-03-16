@@ -5,7 +5,13 @@
  */
 package Stores;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -68,6 +74,26 @@ public class ResultModel {
 
     public void setScore(int score) {
         this.score = score;
+    }
+    
+    public static List<ResultModel> fetch(Connection connection) throws SQLException {
+        List<ResultModel> results = new ArrayList();
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM results");
+        ResultSet rs = statement.executeQuery();
+        
+        
+        
+        while (rs.next()) {
+            ResultModel rm = new ResultModel(rs.getInt("rId"), rs.getInt("QuizID"), rs.getDate("Date"), rs.getString("PersonID"), rs.getInt("Score"));
+            results.add(rm);
+        }
+        
+        
+        rs.close();
+        statement.close();
+        connection.close();
+        
+        return results;
     }
 
 }

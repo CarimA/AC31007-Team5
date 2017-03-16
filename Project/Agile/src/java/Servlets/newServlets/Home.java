@@ -7,6 +7,7 @@ package Servlets.newServlets;
 
 import Exception.NotImplementedException;
 import Misc.Helpers;
+import Stores.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,8 +30,12 @@ public class Home extends HttpServlet {
         if (request.getSession().getAttribute("user") == null) {
             Helpers.redirect(request, response, "Login", true);
         } else {
+            User user = (User) request.getSession().getAttribute("user");
             request.setAttribute("userID", request.getSession().getAttribute("userIDKey"));
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            if (user.getPosition().equalsIgnoreCase("student")){
+                request.getRequestDispatcher("/student.jsp").forward(request, response);
+            }
+            //redirecting to admin page
             Helpers.redirect(request, response, "index.jsp", false);
         }
     }

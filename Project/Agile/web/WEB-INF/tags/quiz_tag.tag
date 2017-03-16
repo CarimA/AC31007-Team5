@@ -1,12 +1,14 @@
 <%-- 
-    Document   : sorting_tag
-    Created on : 07-Mar-2017, 10:28:34
+    Document   : quiz_tag
+    Created on : 12-Mar-2017, 12:38:20
     Author     : Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
 --%>
 <%--
-in this page the quizzes are sorted by modules and displayed using the rules of availability and completion.
-
+quizzes are fetched and displayed to the user.
+Each quiz is displayed depending on whether is available and complete. 
+All the quizzes which are not available have the ‘Take Quiz’ button disabled. 
 --%>
+
 <%@tag import="Stores.ResultModel"%>
 <%@tag import="java.util.ArrayList"%>
 <%@tag import="java.util.List"%>
@@ -51,7 +53,7 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
                 resquizes.add(resModel);
             }
 
-            String query = "SELECT * FROM quiz order by Module";//to order the quizzes by module
+            String query = "SELECT * FROM quiz";//to order the quizzes by module
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
@@ -60,7 +62,8 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
             int theme = 0;
             while (resultSet.next()) {//fetching the quizzes
                 quizModel = new QuizModel(resultSet.getInt("qId"), resultSet.getString("Title"), resultSet.getString("Module"), resultSet.getDate("DateCreated"), resultSet.getInt("Available"),false,0);
-
+                 
+                           
                 if (!resquizes.isEmpty()) {//determining the completed quizzes
                     for (ResultModel resultModel : resquizes) {
                         if ((resultModel.getQuizId() == quizModel.getQuizId()) && (resultModel.getPersonId().equals(PersonID))) {

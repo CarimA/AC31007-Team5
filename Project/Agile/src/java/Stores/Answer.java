@@ -5,6 +5,12 @@
  */
 package Stores;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -69,5 +75,47 @@ public class Answer {
     public void setRight(boolean right) {
         this.right = right;
     }
+    
+    public static List<Answer> getStudentAnswers(Connection connection, int rId) throws SQLException {
+        List<Answer> answers = new ArrayList();
+        List<Integer> answerIDs = new ArrayList();
+        
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM result_answer where ResultID = ?");
+        statement.setInt(1, rId);
+        ResultSet rs = statement.executeQuery();
+        
+        while (rs.next()) {
+            int aId = rs.getInt("AnswerID");
+            answerIDs.add(aId);
+        }
+        
+        //rs.close();
+        //statement.close();
+        
+        for (int i = 0; i < answerIDs.size(); i++) {
+            statement = connection.prepareStatement("SELECT * FROM answer where aId = ?");
+            statement.setInt(1, answerIDs.get(i));
+            rs = statement.executeQuery();
+            
+            while (rs.next()) {
+                Answer a = new Answer(answerIDs.get(i), rs.getInt("Number"), rs.getString("AnswerText"), rs.getString("Explanation"), rs.getBoolean("Right"));
+                answers.add(a);
+            }
+        }
+        
+        rs.close();
+        statement.close();
+        connection.close();
+        
+        return answers;
+    }
+
+          
+        
+        
+        
+        
+        
+    
     
 }

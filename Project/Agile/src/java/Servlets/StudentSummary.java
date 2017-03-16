@@ -6,6 +6,7 @@
 package Servlets;
 
 import java.sql.*;
+import java.util.*;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +26,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import Stores.Question;
+import Misc.Helpers;
+import Stores.User;
+
+
+
 
 
 /**
@@ -74,6 +81,9 @@ public class StudentSummary extends HttpServlet {
     
     public void sendEmail(String email)
     {
+        User user = new User();
+        String intf = user.getDisplayName();
+        
         final String username = "agileteam5email@gmail.com";
         final String password = "Qwerty12345";
         Properties props = new Properties();
@@ -95,7 +105,8 @@ public class StudentSummary extends HttpServlet {
                 InternetAddress.parse(email));
                 message.setSubject("Testing Subject");
                 message.setText("Dear Mail Crawler,"
-                            + "\n\n No spam to my email, please!");
+                            + "\n\n No spam to my email, please!"
+                            + intf);
                 Transport.send(message);
                 System.out.println("Done");
             } catch (MessagingException e) {
