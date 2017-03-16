@@ -74,16 +74,20 @@ public class StudentSummary extends HttpServlet {
         RequestDispatcher rd;
         Stores.User user = (Stores.User)(request.getSession().getAttribute("user"));
         String email = user.getEmail();
-        sendEmail(email);
+        String displayname = user.getDisplayName();
+        String id = user.getId();
+        //Stores.ResultModel resultmodel = (Stores.ResultModel)(request.getSession().getAttribute("selectedQuizId"));
+        int quizid = Integer.parseInt(request.getSession().getAttribute("selectedQuizId").toString());
+        
+        //int score = Integer.valueOf(request.getParameter("quiz_id"));
+        
+        sendEmail(email, displayname, id, quizid);
         rd = request.getRequestDispatcher("summarysent.jsp");
         rd.forward(request, response);
     }
     
-    public void sendEmail(String email)
-    {
-        User user = new User();
-        String intf = user.getDisplayName();
-        
+    public void sendEmail(String email, String displayname, String id, int quizid)
+    { 
         final String username = "agileteam5email@gmail.com";
         final String password = "Qwerty12345";
         Properties props = new Properties();
@@ -103,10 +107,10 @@ public class StudentSummary extends HttpServlet {
                 message.setFrom(new InternetAddress("agileteam5email@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(email));
-                message.setSubject("Testing Subject");
-                message.setText("Dear Mail Crawler,"
-                            + "\n\n No spam to my email, please!"
-                            + intf);
+                message.setSubject("Quiz summary for quiz" + quizid);
+                message.setText("Dear " + displayname + " (Mariculation Number: " + id + "),"
+                            + "\n\n Overeall score is " + quizid + "points"
+                            + "");
                 Transport.send(message);
                 System.out.println("Done");
             } catch (MessagingException e) {
