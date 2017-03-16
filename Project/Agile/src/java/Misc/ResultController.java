@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class ResultController {
     
-    public List<ResultModel> fetchResultOverview() {
+    public List<ResultModel> fetchResultOverview(int id) {
         List<ResultModel> results = null;
         try {
-            results = ResultModel.fetch(Helpers.connect());
+            results = ResultModel.fetch(Helpers.connect(), id);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ResultModel.class.getName()).log(Level.SEVERE, null, ex);
         }

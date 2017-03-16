@@ -157,5 +157,23 @@ public class User {
     public boolean checkPassword(String password) {
         String hashedPassword = Helpers.sha256(password + getSalt());
         return (getPassword().equals(hashedPassword));
-    }    
+    }
+    
+    public static String getNameFromID(String id) {
+        PreparedStatement statement;
+        String name = null;
+        try {
+            statement = Helpers.connect().prepareStatement("SELECT DisplayName FROM person where pId = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("DisplayName");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
 }

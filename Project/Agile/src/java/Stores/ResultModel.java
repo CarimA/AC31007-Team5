@@ -32,6 +32,9 @@ public class ResultModel {
         this.personId = personId;
         this.score = score;
     }
+    
+    public ResultModel() {
+    }
 
     
 
@@ -76,9 +79,10 @@ public class ResultModel {
         this.score = score;
     }
     
-    public static List<ResultModel> fetch(Connection connection) throws SQLException {
+    public static List<ResultModel> fetch(Connection connection, int id) throws SQLException {
         List<ResultModel> results = new ArrayList();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM results");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM results WHERE QuizID = ?");
+        statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();
         
         

@@ -128,4 +128,10 @@ public class UserTest {
         connection.close();
     }
     
+    @Test
+    public void getNameFromIDTest() {
+        String id = "22";
+        assertEquals("22", User.getNameFromID(id));
+    }
+    
 }

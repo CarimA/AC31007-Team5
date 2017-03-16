@@ -37,8 +37,8 @@ public class ResultControllerTest {
     @Test
     public void testFetchResultsOverview() {
         int expectedResult = 12;
-        
-        List<ResultModel> results = rc.fetchResultOverview();
+        int id = 1;
+        List<ResultModel> results = rc.fetchResultOverview(1);
         assertEquals(expectedResult, results.get(0).getId());
     }
     

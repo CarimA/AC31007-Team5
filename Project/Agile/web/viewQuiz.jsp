@@ -4,6 +4,10 @@
     Author     : danielward
 --%>
 
+<%@page import="Stores.ResultModel"%>
+<%@page import="java.util.List"%>
+<%@page import="Misc.ResultController"%>
+<%@page import="Stores.Quiz"%>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -24,11 +28,28 @@
     </head>
         <%@include file="header.jsp"%>
     <body>
-        <h1>view quiz, needs doing</h1>
-        <div>
-            <a href = "index.jsp" class = "btn btn-primary btn-lg" role = "button"> Home </a>
-
-        </div>
+        <%/*
+            User user = (User) session.getAttribute("user");
+            if (user == null || user.getPosition().equals("staff")) {
+                response.sendRedirect("index.jsp");
+            }*/
+            Quiz quiz = (Quiz) session.getAttribute("quiz");
+            ResultController rc = new ResultController();
+            ResultModel result = new ResultModel();
+            List<ResultModel> results = rc.fetchResultOverview(quiz.getId());
+        %>
+        <h1><%=quiz.getTitle()%></h1>
+        
+        
+        <%
+        for (int i = 0; i < results.size(); i++) {
+            result = results.get(i);
+            %>
+                <ul>
+                    <li><%=results.size()%><%=User.getNameFromID(result.getPersonId())%> got <%=result.getScore()%> points on <%=result.getDate()%>.<br>
+                    </li>
+                </ul>
+        <% } %>
     </body>
     <%@include file="footer.jsp"%>
 </html>
