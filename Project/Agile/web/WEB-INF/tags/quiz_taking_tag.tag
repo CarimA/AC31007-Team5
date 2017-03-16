@@ -44,14 +44,14 @@ The radio button groups are identified using a unique name generated depending o
             /**
              * Checking whether the student has already done the quiz
              */
-            String query = "SELECT * FROM results WHERE PersonID = ? and QuizID = ? ";
+            /*String query = "SELECT * FROM results WHERE PersonID = ? and QuizID = ? ";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, PersonID);
             statement.setInt(2, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {//if the student has not taken the quiz 
                 Helpers.errorRedirect(request, response, "Home", true, "You have already done this quiz");
-            }else{
+            }else{*/
             
             Quiz quiz = new Quiz();
             Question q;
@@ -118,7 +118,7 @@ The radio button groups are identified using a unique name generated depending o
                 </div>
             </form>
                 <%
-            }
+            //}
         %>
         
         </div>

@@ -46,7 +46,7 @@
             result = results.get(i);
             %>
                 <ul>
-                    <li><%=results.size()%><%=User.getNameFromID(result.getPersonId())%> got <%=result.getScore()%> points on <%=result.getDate()%>.<br>
+                    <li><%=result.getPersonId()%><%=User.getNameFromID(result.getPersonId())%> got <%=result.getScore()%> points on <%=result.getDate()%>.<br>
                     </li>
                 </ul>
         <% } %>
