@@ -78,15 +78,16 @@ public class StudentSummary extends HttpServlet {
         String id = user.getId();
         //Stores.ResultModel resultmodel = (Stores.ResultModel)(request.getSession().getAttribute("selectedQuizId"));
         int quizid = Integer.parseInt(request.getSession().getAttribute("selectedQuizId").toString());
-        
+        //int score = Integer.parseInt(request.getSession().getAttribute("score").toString());
+        int score = Integer.parseInt(request.getParameter("score").toString());
         //int score = Integer.valueOf(request.getParameter("quiz_id"));
         
-        sendEmail(email, displayname, id, quizid);
+        sendEmail(email, displayname, id, quizid, score);
         rd = request.getRequestDispatcher("summarysent.jsp");
         rd.forward(request, response);
     }
     
-    public void sendEmail(String email, String displayname, String id, int quizid)
+    public void sendEmail(String email, String displayname, String id, int quizid, int score)
     { 
         final String username = "agileteam5email@gmail.com";
         final String password = "Qwerty12345";
@@ -107,9 +108,9 @@ public class StudentSummary extends HttpServlet {
                 message.setFrom(new InternetAddress("agileteam5email@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(email));
-                message.setSubject("Quiz summary for quiz" + quizid);
+                message.setSubject("Quiz summary for quiz " + quizid);
                 message.setText("Dear " + displayname + " (Mariculation Number: " + id + "),"
-                            + "\n\n Overeall score is " + quizid + "points"
+                            + "\n\n Overeall score is " + score + " points."
                             + "");
                 Transport.send(message);
                 System.out.println("Done");
