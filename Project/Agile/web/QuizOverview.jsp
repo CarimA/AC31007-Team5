@@ -6,7 +6,7 @@
 
 <%@page import="Stores.Quiz"%>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/style.css">
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
