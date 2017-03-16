@@ -13,7 +13,7 @@
         <title>Create Questions</title>
     </head>
     <%@include file="header.jsp"%>
-    <body>
+    <body> 
         <h1>Create a Quiz!</h1>
         <div>
             <h3>Add a question to a quiz</h3>
