@@ -4,16 +4,8 @@
     Author     : Danstev
 --%>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="assets/css/style.css">
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,16 +13,17 @@
         <title>Create Questions</title>
     </head>
     <%@include file="header.jsp"%>
-    <body>
-        <h1>Quiz thing</h1>
+    <body> 
+        <h1>Create a Quiz!</h1>
         <div>
             <h3>Add a question to a quiz</h3>
             <%int q = (int) request.getAttribute("number");%>
+            <div class="dynamic-row">  
             <form method="POST"  action="createQuestion">
                 <ul>
                     <li>Title <input type="text" name="title"></li>
                     <li>Module <input type="text" name="module"></li>
-                    <li><input type="hidden" name="questions" value="<%=q%>"><%=q%></li>
+                    <li><input type="hidden" hidden="true" name="questions" value="<%=q%>"><%=q%></li>
                 </ul>
                 <%
                 for(int i = 1; i <= q;  i++)

@@ -103,10 +103,6 @@ public class createQuestion extends HttpServlet {
                 rString += Integer.toString(x);
                 boolean right =  parseBoolean(request.getParameter(rString));
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
-                System.out.println(answer);
-                System.out.println(aNumber);
-                System.out.println(explanation);
-                System.out.println(right);
             }
         }
         rd = request.getRequestDispatcher("quizCreated.jsp");
