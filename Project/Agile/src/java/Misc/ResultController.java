@@ -2,7 +2,11 @@ package Misc;
 
 import Stores.Answer;
 import Stores.ResultModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,5 +43,30 @@ public class ResultController {
         }
         
         return answers;
+    }
+    
+    public int getQuizId(int rId) {
+        int qId = -1;
+        
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement = connection.prepareStatement("SELECT QuizID FROM results WHERE rId = ?");
+            statement.setInt(1, rId);
+            ResultSet rs = statement.executeQuery();
+            
+            if (rs.next()) {
+                qId = rs.getInt("QuizID");
+            }
+            
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return qId;
     }
 }

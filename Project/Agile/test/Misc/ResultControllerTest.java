@@ -36,7 +36,7 @@ public class ResultControllerTest {
 
     @Test
     public void testFetchResultsOverview() {
-        int expectedResult = 12;
+        int expectedResult = 84;
         int id = 1;
         List<ResultModel> results = rc.fetchResultOverview(1);
         assertEquals(expectedResult, results.get(0).getId());
@@ -50,4 +50,11 @@ public class ResultControllerTest {
         assertEquals(expectedResult, answers.get(0).getExplanation());
     }
     
+    @Test
+    public void testGetQuizId() {
+        int expectedResult = 1;
+        int id = 84;
+        int qId = rc.getQuizId(id);
+        assertEquals(expectedResult, qId);
+    }
 }

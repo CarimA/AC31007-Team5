@@ -6,10 +6,13 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import Misc.ResultController;
 import Models.QuizModel;
+import Stores.Answer;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,9 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jimiwesterholm
  */
-@WebServlet(urlPatterns = {"/viewQuiz", "/viewQuiz/*"})
-public class ViewQuiz extends HttpServlet {
-
+@WebServlet(urlPatterns = {"/StudentResults", "/StudentResults/*"})
+public class StudentResults extends HttpServlet {
 
     
 
@@ -36,20 +38,23 @@ public class ViewQuiz extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         QuizModel qm = new QuizModel();
+        ResultController rc = new ResultController();
         
         String[] args = request.getRequestURI().split("/");
         int a = Integer.parseInt(args[3]);
-        Quiz quiz = qm.fetchQuiz(a);
         
+        Quiz quiz = qm.fetchQuiz(rc.getQuizId(a));
+        List<Answer> studentAns = rc.fetchResultsIndividual(a);
         
         request.getSession().setAttribute("quiz", quiz);
-        RequestDispatcher rd = request.getRequestDispatcher("/viewQuiz.jsp");
+        request.getSession().setAttribute("studentAns", studentAns);
+        RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp");
         rd.forward(request, response);
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.
