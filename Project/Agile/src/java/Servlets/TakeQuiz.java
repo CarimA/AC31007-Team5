@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author jimiwesterholm
  */
-@WebServlet(urlPatterns = {"/takeQuiz", "/takeQuiz/*"})
+@WebServlet(urlPatterns = {"/TakeQuiz", "/TakeQuiz/*"})
 public class TakeQuiz extends HttpServlet {
 
 

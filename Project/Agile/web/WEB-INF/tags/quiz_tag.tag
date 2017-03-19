@@ -76,7 +76,7 @@ All the quizzes which are not available have the ?Take Quiz? button disabled.
 %>
 
 		<div class="dynamic-column">
-			<a href="/Agile/Quiz/<%= quiz.getId() %>">Take Quiz</a>
+			<a href="/Agile/TakeQuiz/<%= quiz.getId() %>">Take Quiz</a>
 		</div>
             </div>
 <%
