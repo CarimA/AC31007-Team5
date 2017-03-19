@@ -4,6 +4,7 @@
     Author     : danielward
 --%>
 
+<%@page import="Stores.User"%>
 <%@page import="Stores.ResultModel"%>
 <%@page import="java.util.List"%>
 <%@page import="Misc.ResultController"%>
@@ -21,18 +22,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Quiz</title>
     </head>
-        <%@include file="header.jsp"%>
     <body>
-        <%/*
+        <%
             User user = (User) session.getAttribute("user");
             if (user == null || user.getPosition().equals("staff")) {
                 response.sendRedirect("index.jsp");
-            }*/
+            }
             Quiz quiz = (Quiz) session.getAttribute("quiz");
             ResultController rc = new ResultController();
             ResultModel result = new ResultModel();
@@ -51,5 +49,4 @@
                 </ul>
         <% } %>
     </body>
-    <%@include file="footer.jsp"%>
 </html>
