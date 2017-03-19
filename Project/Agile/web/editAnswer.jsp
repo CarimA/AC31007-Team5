@@ -12,6 +12,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Answer</title>
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/skeleton.min.css" />
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
+        <jsp:include page="header.jsp"></jsp:include>
     </head>
     <body>
         <%
@@ -31,11 +35,11 @@
                 %>
                 
                 <form method="POST" action="EditQuiz">
-                <li><%=a.getAnswer()%></li>
+                <h1><%=a.getAnswer()%></h1>
                 <p>Change Answer</p>
                 <input type="text" name="answer">
                 <br/>
-                <li><%=a.getExplanation()%></li>
+                <h1><%=a.getExplanation()%></h1>
                 <p>Change Explanation</p>
                 <input type="text" name="explanation">
                 <br/>
