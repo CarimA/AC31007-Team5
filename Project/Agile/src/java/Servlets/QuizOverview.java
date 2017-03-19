@@ -6,6 +6,7 @@
 package Servlets;
 
 import Models.DBConnect;
+import Models.QuizModel;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,10 +39,8 @@ public class QuizOverview extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //System.out.println(1);
-        DBConnect d = new DBConnect();
-        
-        Vector<Quiz> quizzes = d.getQuizzes("Select * from Quiz");
-        
+        QuizModel Qm = new QuizModel();
+        Vector<Quiz> quizzes = Qm.getAllQuizzes();
         System.out.println(quizzes);
         RequestDispatcher rd = request.getRequestDispatcher("/QuizOverview.jsp");
         request.setAttribute("quizzes", quizzes);
