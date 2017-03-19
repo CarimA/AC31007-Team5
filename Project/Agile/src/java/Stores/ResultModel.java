@@ -103,24 +103,30 @@ public class ResultModel {
     
     public static int upload(int score, Date date, String pId, int qId, List<Integer> answerIDs) throws SQLException, ClassNotFoundException {
         Connection connection = Helpers.connect();
-        int rId;
+        int rId = -1;
         PreparedStatement statement = connection.prepareStatement("INSERT INTO results (Score, Date, PersonID, QuizID) values (?, ?, ?, ?)");
         statement.setInt(1, score);
         statement.setDate(2, date);
         statement.setString(3, pId);
         statement.setInt(4, qId);
         statement.execute();
-            
-        statement.close();
         
         statement = connection.prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
         ResultSet rs = statement.executeQuery();
         if (rs.next()) {
             rId = rs.getInt("rId");
         } else {
-            rId = -1;
+            return rId;
         }
         
+        for (int i = 0; i < answerIDs.size(); i++) {
+            statement = connection.prepareStatement("INSERT INTO result_answer (ResultID, AnswerID) values (?, ?)");
+            statement.setInt(1, rId);
+            statement.setInt(2, answerIDs.get(i));
+            statement.execute();
+        }
+        
+        statement.close();
         connection.close();
         return rId;
     }

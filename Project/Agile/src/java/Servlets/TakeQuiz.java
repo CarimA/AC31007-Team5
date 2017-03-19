@@ -6,13 +6,16 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import Misc.ResultController;
 import Models.QuizModel;
 import Stores.Answer;
 import Stores.Question;
 import Stores.Quiz;
+import Stores.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -68,9 +71,16 @@ public class TakeQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
+        
+        int score = 0;
+        Date date = new Date(System.currentTimeMillis());
+        String pId = user.getId();
+        int qId = quiz.getId();
+        
         RequestDispatcher rd = request.getRequestDispatcher("studentsummary.jsp");
         
-        Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
         List<Question> questions = quiz.getQuestions();
         List<Integer> answerIDs = new ArrayList();
         
@@ -83,9 +93,15 @@ public class TakeQuiz extends HttpServlet {
             System.out.println(a);
             int answerID = Integer.parseInt(a);
             
+            //Check if correct
+            for (int j = 0; j < answers.size(); j++) {
+                if (answers.get(j).isRight() && answerID == answers.get(j).getId()) score += questions.get(i).getPoints();
+            }
             answerIDs.add(answerID);
         }
         
+        ResultController rc = new ResultController();
+        rc.sendResults(score, date, pId, qId, answerIDs);
         //rd.forward(request, response);
     }
 

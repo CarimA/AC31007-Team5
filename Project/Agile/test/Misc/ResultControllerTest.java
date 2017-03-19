@@ -71,29 +71,34 @@ public class ResultControllerTest {
     public void testSendResults() {
         //Get values to be stored + expected result
         int expResult = -1;
-//        try {
-//            Connection connection = Helpers.connect();
-//            PreparedStatement statement = connection.prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
-//            ResultSet rs = statement.executeQuery();
-//            connection.close();
-//            if (rs.next()) {
-//                expResult = rs.getInt("rId") + 1;
-//                System.out.print(expResult);
-//            } else {
-//                fail("SQL fail");
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(ResultControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ResultControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement = connection.prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                expResult = rs.getInt("rId") + 1;
+                System.out.print(expResult);
+                statement.close();
+                connection.close();
+            } else {
+                statement.close();
+                connection.close();
+                fail("SQL fail");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
         int score = 12;
         Date date = new Date(System.currentTimeMillis());
         String pId = "666666666";
         int qId = 1;
         List<Integer> answerIDs = new ArrayList();
-        for (int i = 0; i < 4; i++) answerIDs.add(i);
+        answerIDs.add(1);
+        answerIDs.add(6);
+        answerIDs.add(10);
         
         int rId = rc.sendResults(score, date, pId, qId, answerIDs);
         assertEquals(expResult, rId);
