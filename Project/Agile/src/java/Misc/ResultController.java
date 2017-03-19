@@ -26,6 +26,7 @@ public class ResultController {
     
     public List<ResultModel> fetchResultOverview(int id) {
         List<ResultModel> results = null;
+        
         try {
             results = ResultModel.fetch(Helpers.connect(), id);
         } catch (ClassNotFoundException | SQLException ex) {

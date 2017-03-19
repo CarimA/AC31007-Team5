@@ -100,6 +100,9 @@ public class HandleUserAnswer extends HttpServlet {
                 PreparedStatement statement = connection.prepareStatement(query);
                 statement.setInt(1, 0);
                 statement.executeUpdate();
+                
+                connection.close();
+                
                 request.setAttribute("module", module);
                 request.setAttribute("id", 0);
                 request.getRequestDispatcher("/takeQuiz.jsp").forward(request, response);

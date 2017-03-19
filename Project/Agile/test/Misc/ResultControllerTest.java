@@ -7,6 +7,7 @@ package Misc;
 
 import Stores.Answer;
 import Stores.ResultModel;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,38 +42,40 @@ public class ResultControllerTest {
     public void tearDown() {
     }
 
-//    @Test
-//    public void testFetchResultsOverview() {
-//        int expectedResult = 88;
-//        int id = 1;
-//        List<ResultModel> results = rc.fetchResultOverview(1);
-//        assertEquals(expectedResult, results.get(0).getId());
-//    }
-//    
-//    @Test
-//    public void testFetchResultsIndividual() {
-//        String expectedResult = "fine";
-//        int id = 14;
-//        List<Answer> answers = rc.fetchResultsIndividual(id);
-//        assertEquals(expectedResult, answers.get(0).getExplanation());
-//    }
-//    
-//    @Test
-//    public void testGetQuizId() {
-//        int expectedResult = 1;
-//        int id = 88;
-//        int qId = rc.getQuizId(id);
-//        if (qId == -1) fail ("SQL not doing something right");
-//        assertEquals(expectedResult, qId);
-//    }
-//    
+    @Test
+    public void testFetchResultsOverview() {
+        int expectedResult = 88;
+        int id = 1;
+        List<ResultModel> results = rc.fetchResultOverview(1);
+        assertEquals(expectedResult, results.get(0).getId());
+    }
+    
+    @Test
+    public void testFetchResultsIndividual() {
+        String expectedResult = "fine";
+        int id = 14;
+        List<Answer> answers = rc.fetchResultsIndividual(id);
+        assertEquals(expectedResult, answers.get(0).getExplanation());
+    }
+    
+    @Test
+    public void testGetQuizId() {
+        int expectedResult = 1;
+        int id = 88;
+        int qId = rc.getQuizId(id);
+        if (qId == -1) fail ("SQL not doing something right");
+        assertEquals(expectedResult, qId);
+    }
+    
     @Test
     public void testSendResults() {
         //Get values to be stored + expected result
-        int expResult = 100;
+        int expResult = -1;
 //        try {
-//            PreparedStatement statement = Helpers.connect().prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
+//            Connection connection = Helpers.connect();
+//            PreparedStatement statement = connection.prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
 //            ResultSet rs = statement.executeQuery();
+//            connection.close();
 //            if (rs.next()) {
 //                expResult = rs.getInt("rId") + 1;
 //                System.out.print(expResult);

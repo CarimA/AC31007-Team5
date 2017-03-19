@@ -77,6 +77,7 @@ public class QuizModel {
             }
             rs.close();
             statement.close();
+            connection.close();
             return q;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -217,6 +218,7 @@ public class QuizModel {
             state.setInt(1, id);
             state.executeUpdate();
             state.close();
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -247,6 +249,7 @@ public class QuizModel {
             state.setInt(1, id);
             state.executeUpdate();
             state.close();
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -262,6 +265,7 @@ public class QuizModel {
             statement.setInt(1, id);
             statement.executeUpdate();
             statement.close();
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -280,6 +284,7 @@ public class QuizModel {
             statement.setInt(4, quizID);
             statement.executeUpdate();
             statement.close();
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -313,6 +318,7 @@ public class QuizModel {
                 System.out.println(questionID);
             }
             statement.close();
+            connection.close();
             return questionID;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -335,6 +341,7 @@ public class QuizModel {
             statement.setInt(5, questionID);
             statement.executeUpdate();
             statement.close();
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -386,6 +393,7 @@ public class QuizModel {
             statement.setBlob(5,i);
             statement.executeUpdate();
             statement.close();
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

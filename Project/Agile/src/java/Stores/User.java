@@ -161,14 +161,17 @@ public class User {
     
     public static String getNameFromID(String id) {
         PreparedStatement statement;
+        Connection connection;
         String name = null;
         try {
-            statement = Helpers.connect().prepareStatement("SELECT DisplayName FROM person where pId = ?");
+            connection = Helpers.connect();
+            statement = connection.prepareStatement("SELECT DisplayName FROM person where pId = ?");
             statement.setString(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 name = rs.getString("DisplayName");
             }
+            connection.close();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
