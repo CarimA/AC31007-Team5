@@ -31,12 +31,12 @@ public class Home extends HttpServlet {
             Helpers.redirect(request, response, "Login", true);
         } else {
             User user = (User) request.getSession().getAttribute("user");
-            request.setAttribute("userID", request.getSession().getAttribute("userIDKey"));
             if (user.getPosition().equalsIgnoreCase("student")){
                 request.getRequestDispatcher("/student.jsp").forward(request, response);
+            } else {
+                //redirecting to admin page
+                Helpers.redirect(request, response, "index.jsp", false);
             }
-            //redirecting to admin page
-            Helpers.redirect(request, response, "index.jsp", false);
         }
     }
 

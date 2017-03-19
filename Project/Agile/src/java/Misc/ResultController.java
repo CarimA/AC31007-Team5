@@ -3,6 +3,7 @@ package Misc;
 import Stores.Answer;
 import Stores.ResultModel;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,5 +69,17 @@ public class ResultController {
         }
         
         return qId;
+    }
+    
+    public int sendResults(int score, Date date, String pId, int qId, List<Integer> answerIDs) {
+        try {
+            return ResultModel.upload(score, date, pId, qId, answerIDs);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
     }
 }

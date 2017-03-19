@@ -44,7 +44,7 @@
                         for (int j = 0; j < answers.size(); j++) {
                             a = answers.get(j);
                             %>
-                            <input type="radio" name=<%=q.getId()%> value=<%=a.getId()%>><%=a.getAnswer()%><br>
+                            <input type="radio" name=<%=i%> value=<%=a.getId()%>><%=a.getAnswer()%><br>
                             <%
                         }
                         %>

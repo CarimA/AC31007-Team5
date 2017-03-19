@@ -13,6 +13,7 @@ import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,25 +68,25 @@ public class TakeQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*NOT FUCTIONAL YET
         RequestDispatcher rd = request.getRequestDispatcher("studentsummary.jsp");
         
         Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
         List<Question> questions = quiz.getQuestions();
+        List<Integer> answerIDs = new ArrayList();
         
         for (int i = 0; i < questions.size(); i++) {
             List<Answer> answers = questions.get(i).getAnswers();
             
-            //Get answer object
-            int q = questions.get(i).getId();
-            String qs = String.valueOf(q);
+            //Get answer id
+            String qs = String.valueOf(i);
             String a = request.getParameter(qs);
             System.out.println(a);
             int answerID = Integer.parseInt(a);
             
+            answerIDs.add(answerID);
         }
         
-        rd.forward(request, response);*/
+        //rd.forward(request, response);
     }
 
     /**

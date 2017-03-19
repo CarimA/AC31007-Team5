@@ -49,6 +49,8 @@ public class Login extends HttpServlet {
             Helpers.successRedirect(request, response, "Home", true, "Successfully logged in!");
         } catch (UsernameInvalidException | PasswordInvalidException ex) {
             Helpers.errorRedirect(request, response, "login.jsp", false, "Username and/or Password incorrect!");
+        } catch (Exception e) {
+            Helpers.errorRedirect(request, response, "login.jsp", false, "Something else happened");
         }
     }
 }

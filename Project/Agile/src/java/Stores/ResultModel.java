@@ -5,6 +5,7 @@
  */
 package Stores;
 
+import Misc.Helpers;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -98,6 +99,30 @@ public class ResultModel {
         connection.close();
         
         return results;
+    }
+    
+    public static int upload(int score, Date date, String pId, int qId, List<Integer> answerIDs) throws SQLException, ClassNotFoundException {
+        Connection connection = Helpers.connect();
+        int rId;
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO result (Score, Date, PersonID, QuizID) values (?, ?, ?, ?)");
+        statement.setInt(1, score);
+        statement.setDate(2, date);
+        statement.setString(3, pId);
+        statement.setInt(4, qId);
+        statement.execute();
+            
+        statement.close();
+        
+        statement = connection.prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
+        ResultSet rs = statement.executeQuery();
+        if (rs.next()) {
+            rId = rs.getInt("rId");
+        } else {
+            rId = -1;
+        }
+        
+        connection.close();
+        return rId;
     }
 
 }

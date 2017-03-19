@@ -7,7 +7,14 @@ package Misc;
 
 import Stores.Answer;
 import Stores.ResultModel;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,27 +41,58 @@ public class ResultControllerTest {
     public void tearDown() {
     }
 
+//    @Test
+//    public void testFetchResultsOverview() {
+//        int expectedResult = 88;
+//        int id = 1;
+//        List<ResultModel> results = rc.fetchResultOverview(1);
+//        assertEquals(expectedResult, results.get(0).getId());
+//    }
+//    
+//    @Test
+//    public void testFetchResultsIndividual() {
+//        String expectedResult = "fine";
+//        int id = 14;
+//        List<Answer> answers = rc.fetchResultsIndividual(id);
+//        assertEquals(expectedResult, answers.get(0).getExplanation());
+//    }
+//    
+//    @Test
+//    public void testGetQuizId() {
+//        int expectedResult = 1;
+//        int id = 88;
+//        int qId = rc.getQuizId(id);
+//        if (qId == -1) fail ("SQL not doing something right");
+//        assertEquals(expectedResult, qId);
+//    }
+//    
     @Test
-    public void testFetchResultsOverview() {
-        int expectedResult = 84;
-        int id = 1;
-        List<ResultModel> results = rc.fetchResultOverview(1);
-        assertEquals(expectedResult, results.get(0).getId());
-    }
-    
-    @Test
-    public void testFetchResultsIndividual() {
-        String expectedResult = "fine";
-        int id = 14;
-        List<Answer> answers = rc.fetchResultsIndividual(id);
-        assertEquals(expectedResult, answers.get(0).getExplanation());
-    }
-    
-    @Test
-    public void testGetQuizId() {
-        int expectedResult = 1;
-        int id = 84;
-        int qId = rc.getQuizId(id);
-        assertEquals(expectedResult, qId);
+    public void testSendResults() {
+        //Get values to be stored + expected result
+        int expResult = 100;
+//        try {
+//            PreparedStatement statement = Helpers.connect().prepareStatement("SELECT rId FROM results ORDER BY rId Desc");
+//            ResultSet rs = statement.executeQuery();
+//            if (rs.next()) {
+//                expResult = rs.getInt("rId") + 1;
+//                System.out.print(expResult);
+//            } else {
+//                fail("SQL fail");
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(ResultControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ResultControllerTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+            
+        int score = 12;
+        Date date = new Date(System.currentTimeMillis());
+        String pId = "666666666";
+        int qId = 1;
+        List<Integer> answerIDs = new ArrayList();
+        for (int i = 0; i < 4; i++) answerIDs.add(i);
+        
+        int rId = rc.sendResults(score, date, pId, qId, answerIDs);
+        assertEquals(expResult, rId);
     }
 }
