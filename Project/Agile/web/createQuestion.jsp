@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="Stores.User"%>
 <link rel="stylesheet" href="assets/css/style.css">
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,18 +13,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Questions</title>
     </head>
-    <%@include file="header.jsp"%>
     <body> 
         <h1>Create a Quiz!</h1>
         <div>
             <h3>Add a question to a quiz</h3>
-            <%int q = (int) request.getAttribute("number");%>
+            <%
+            int q = (int) request.getAttribute("number");
+            User user = (User) session.getAttribute("user");
+            if (user == null || user.getPosition().equals("student")) {
+                response.sendRedirect("index.jsp");
+            }
+            %>
             <div class="dynamic-row">  
             <form method="POST"  action="createQuestion">
                 <ul>
                     <li>Title <input type="text" name="title"></li>
                     <li>Module <input type="text" name="module"></li>
-                    <li><input type="hidden" hidden="true" name="questions" value="<%=q%>"><%=q%></li>
+                    <li><input type="hidden" name="questions" value="<%=q%>"><%=q%></li>
                 </ul>
                 <%
                 for(int i = 1; i <= q;  i++)
@@ -49,7 +55,6 @@
                     }
                 }
                 %>
-                <br/>
                 <input type="submit" value="Create Quiz"> 
             </form>
         </div>
