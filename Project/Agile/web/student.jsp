@@ -24,13 +24,8 @@
     <jsp:attribute name="footer">
         
     </jsp:attribute>
-    <jsp:body>
-        
-        <t:quiz_tag>
-            
-        </t:quiz_tag>
-        
-        
-        
+    <jsp:body>        
+        <t:quiz_tag>            
+        </t:quiz_tag>   
     </jsp:body>
 </t:wrapper>

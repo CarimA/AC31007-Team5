@@ -27,13 +27,6 @@ The radio button groups are identified using a unique name generated depending o
 <%-- any content can be specified here e.g.: --%>
 <h2>${message}</h2>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
         <%
             int id = Integer.valueOf(request.getParameter("qId"));//getting the quiz id
             session.setAttribute("selectedQuizId", id);
@@ -122,5 +115,3 @@ The radio button groups are identified using a unique name generated depending o
         %>
         
         </div>
-    </body>
-</html>

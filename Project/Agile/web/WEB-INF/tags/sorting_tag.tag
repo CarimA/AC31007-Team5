@@ -121,7 +121,6 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
                 <%= quizObj.getModule()%>
             </div>
             <div class="dynamic-column">
-                <br><br>
                 <form name="frm" method="post" action="takeQuizStudent.jsp">
                     <input type="hidden" name="qId" value="<%= quizObj.getQuizId()%>" />
                     <input type="hidden" name="title" value="<%= quizObj.getTitle()%>" />
