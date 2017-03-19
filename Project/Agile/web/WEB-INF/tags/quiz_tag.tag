@@ -24,10 +24,9 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
 
 <%-- any content can be specified here e.g.: --%>
 <h2>${message}</h2>
-<<<<<<< HEAD
 <div class="row">
     <a href="moduleSort.jsp"><button>Filter by Module</button></a>&nbsp;&nbsp;
-    &nbsp;&nbsp;<a href="moduleSort.jsp"><input type="checkbox" name="filter"> </a> Filter by Completion           
+    <a href="completionSort.jsp"><button>Filter by Completion</button></a>&nbsp;&nbsp;  
 </div>
 <%
     String PersonID = session.getAttribute("userIDKey").toString();
@@ -43,36 +42,6 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
         resModel = new ResultModel(resresultSet.getInt("rId"), resresultSet.getInt("QuizID"), resresultSet.getDate("Date"), resresultSet.getString("PersonID"), resresultSet.getInt("Score"));
         resquizes.add(resModel);
     }
-=======
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="assets/css/skeleton.min.css" />
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <link rel="stylesheet" href="assets/css/style" />
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    </head>
-    <body>
-        <div class="row">
-            <a href="moduleSort.jsp"><button>Filter by Module</button></a>&nbsp;&nbsp;
-            <a href="completionSort.jsp"><button>Filter by Completion</button></a>&nbsp;&nbsp;        
-        </div>
-        <%
-            String PersonID = session.getAttribute("userIDKey").toString();
-            
-            Connection connection = Helpers.connect();
-            String resQuery = "SELECT * FROM results where PersonID=" + PersonID;
-            PreparedStatement resstatement = connection.prepareStatement(resQuery);
-            ResultSet resresultSet = resstatement.executeQuery();
-            List<ResultModel> resquizes = new ArrayList<ResultModel>();
-            ResultModel resModel;
-
-            while (resresultSet.next()) {//fetching the quiz results
-                resModel = new ResultModel(resresultSet.getInt("rId"), resresultSet.getInt("QuizID"), resresultSet.getDate("Date"), resresultSet.getString("PersonID"), resresultSet.getInt("Score"));
-                resquizes.add(resModel);
-            }
->>>>>>> origin/master
 
     String query = "SELECT * FROM quiz";//to order the quizzes by module
     PreparedStatement statement = connection.prepareStatement(query);

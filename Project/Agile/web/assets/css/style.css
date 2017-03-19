@@ -112,10 +112,6 @@ form {
     margin: 0;
 }
 
-form *:last-child {
-    margin-bottom: 0;
-}
-
 /* Larger than mobile */
 @media (min-width: 400px) {}
 
