@@ -20,7 +20,7 @@
         <header class="container">
             <div class="dynamic-row">
                 <div class="dynamic-column">
-                    <h1><a href="Home">Quiz Thing</a></h1>
+                    <h1><a href="/Agile/Home">Quiz Thing</a></h1>
                 </div>
                 <div class="dynamic-column grow">
                     <ul>
@@ -28,14 +28,14 @@
                             User user = (User)(request.getSession().getAttribute("user"));
                             if (user == null) {
                         %>
-                        <li><a href="Login">Login</a></li>
-                        <li><a href="Register">Register</a></li>
+                        <li><a href="/Agile/Login">Login</a></li>
+                        <li><a href="/Agile/Register">Register</a></li>
                         <%
                             }
                             else {
                         %>
                         <li>Hello, ${user.getDisplayName()}</li>
-                        <li><a href="Logout">Log Out</a></li>
+                        <li><a href="/Agile/Logout">Log Out</a></li>
                         <%
                             }
                         %>

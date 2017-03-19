@@ -7,12 +7,16 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="Stores.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Quiz</title>
-        
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/skeleton.min.css" />
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
+        <jsp:include page="header.jsp"></jsp:include>
     </head>
     <body>
         <%
@@ -32,14 +36,14 @@
             }else{
             %>
             <form method="POST" action="EditQuiz">
-            <h1>Quiz <%=quiz.getTitle()%></h1>
+            <h1>Quiz: <%=quiz.getTitle()%></h1>
             <p>Edit title</p>
             <input type="text" name="title">
-            <h2>Module <%=quiz.getModule()%></h2>
+            <h2>Module: <%=quiz.getModule()%></h2>
             <p>Edit module</p>
             <input type="text" name="module">
-            <h2>Created <%=quiz.getDateCreated()%></h2>
-            <h2>Available <%=quiz.isAvailable()%></h2>
+            <h2>Created: <%=quiz.getDateCreated()%></h2>
+            <h2>Available: <%=quiz.isAvailable()%></h2>
             <p>Edit Availability</p>
             <p>Make available?</p> <input type="checkbox" name="available" <%if(quiz.isAvailable()){%>checked="checked"<%}%>>
             <input type="hidden" name="QuizID" value="<%=quiz.getId()%>">

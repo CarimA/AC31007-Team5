@@ -6,13 +6,13 @@
 
 <%@page import="Stores.User"%>
 <div class="header">
-    <a href = "index.jsp" class = "btn btn-primary btn-lg" role = "button"> Home </a>
-    <a href = "QuizOverview.jsp" class = "btn btn-primary btn-lg" role = "button"> Quiz Overview </a>
+    <a href = "/Agile/index.jsp" class = "btn btn-primary btn-lg" role = "button"> Home </a>
+    <a href = "/Agile/QuizOverview.jsp" class = "btn btn-primary btn-lg" role = "button"> Quiz Overview </a>
     <%
         User user = (User) session.getAttribute("user");
         if (user != null) { %>
-        <a href = "Logout" class = "btn btn-primary btn-lg" role = "button"> Log out </a>
+        <a href = "/Agile/Logout" class = "btn btn-primary btn-lg" role = "button"> Log out </a>
     <% } else { %>
-        <a href = "login.jsp" class = "btn btn-primary btn-lg" role = "button"> Login </a>
+        <a href = "/Agile/login.jsp" class = "btn btn-primary btn-lg" role = "button"> Login </a>
     <% } %>
 </div>
