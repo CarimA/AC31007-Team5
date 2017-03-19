@@ -112,7 +112,7 @@ public class StudentSummary extends HttpServlet {
 
         }
         
-        String plaintext = ("Hello " + displayname + ", \n\n"
+        String plaintext = ("Hello " + displayname + " (Matric No: " + id + "), \n\n"
                 + "Your overall score for the Quiz " + quizid + " is " + score + " points. \n"
                 + "\n\nDescription \n***********************************************************************\n"
                 + questionss + "***********************************************************************\n\n"
