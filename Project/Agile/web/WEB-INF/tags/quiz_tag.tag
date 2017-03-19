@@ -36,7 +36,7 @@ All the quizzes which are not available have the ‘Take Quiz’ button disabled
     <body>
         <div class="row">
             <a href="moduleSort.jsp"><button>Filter by Module</button></a>&nbsp;&nbsp;
-            &nbsp;&nbsp;<a href="moduleSort.jsp"><input type="checkbox" name="filter"> </a> Filter by Completion           
+            <a href="completionSort.jsp"><button>Filter by Completion</button></a>&nbsp;&nbsp;        
         </div>
         <%
             String PersonID = session.getAttribute("userIDKey").toString();

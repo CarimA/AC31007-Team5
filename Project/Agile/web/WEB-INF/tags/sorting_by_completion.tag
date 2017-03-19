@@ -1,7 +1,7 @@
 <%-- 
-    Document   : sorting_tag
+    Document   : sorting_by_completion
     Created on : 07-Mar-2017, 10:28:34
-    Author     : Igors Bogdanovs <i.bogdanovs@dundee.ac.uk>
+    Author     : aleksandrstarasovs
 --%>
 <%--
 in this page the quizzes are sorted by modules and displayed using the rules of availability and completion.
@@ -51,7 +51,7 @@ in this page the quizzes are sorted by modules and displayed using the rules of 
                 resquizes.add(resModel);
             }
 
-            String query = "SELECT * FROM quiz order by Module";//to order the quizzes by module
+            String query = "SELECT * FROM quiz order by Available";//to order the quizzes by module
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
