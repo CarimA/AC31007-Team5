@@ -69,7 +69,6 @@ public class createQuestion extends HttpServlet {
             String pointsString = "points" + Integer.toString(i);
             int points =  parseInt(request.getParameter(pointsString));
             
-            
             InputStream inputStream = null;
             String imageString = "image" + Integer.toString(i);
             Part fp = request.getPart(imageString);
@@ -78,7 +77,7 @@ public class createQuestion extends HttpServlet {
                 inputStream = fp.getInputStream();
             }
             
-            if(inputStream == null)
+            if( inputStream.available() == 0)
             {
                 qm.addQuestion(q,number,points,qID);
             }
@@ -90,17 +89,13 @@ public class createQuestion extends HttpServlet {
             int questionID = qm.getIdFromQ(q, number, points, qID);
             for(int x = 0; x < 4; x++)
             {
-                String aString = "answer" + Integer.toString(i);
-                aString += Integer.toString(x);
+                String aString = "answer" + Integer.toString(i) + Integer.toString(x);
                 String answer = (String) request.getParameter(aString);
-                String nString = "number" + Integer.toString(i);
-                nString += Integer.toString(x);
+                String nString = "number" + Integer.toString(i) + Integer.toString(x);
                 int aNumber =  parseInt(request.getParameter(nString));
-                String eString = "explanation" + Integer.toString(i);
-                eString += Integer.toString(x);
+                String eString = "explanation" + Integer.toString(i) + Integer.toString(x);
                 String explanation =  (String) request.getParameter(eString);
-                String rString = "right" + Integer.toString(i);
-                rString += Integer.toString(x);
+                String rString = "right" + Integer.toString(i) + Integer.toString(x);
                 boolean right =  parseBoolean(request.getParameter(rString));
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
             }
