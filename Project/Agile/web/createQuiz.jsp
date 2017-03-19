@@ -4,6 +4,7 @@
     Author     : Danstev
 --%>
 
+<%@page import="Stores.User"%>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -17,14 +18,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Quiz</title>
     </head>
-    <%@include file="header.jsp"%>
     <body>
-        <h1>Quiz thing</h1>
+        <h1>Quiz Creation</h1>
         <div>
             <h3>Create a Quiz</h3>
+            <%
+                User user = (User) session.getAttribute("user");
+            if (user == null || user.getPosition().equals("student")) {
+                response.sendRedirect("QuizOverview");
+            }
+            
+                %>
             <form method="POST"  action="createQuiz">
                 <ul>
                     <li>How many questions do you want to start with? <input type="number" name="questions"></li>
