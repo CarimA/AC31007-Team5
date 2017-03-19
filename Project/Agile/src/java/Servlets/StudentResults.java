@@ -52,6 +52,8 @@ public class StudentResults extends HttpServlet {
         
         request.getSession().setAttribute("quiz", quiz);
         request.getSession().setAttribute("studentAns", studentAns);
+        
+        
         RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp");
         rd.forward(request, response);
     }

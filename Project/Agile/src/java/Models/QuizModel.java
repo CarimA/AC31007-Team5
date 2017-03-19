@@ -452,5 +452,17 @@ public class QuizModel {
         }
     }
     
+    //Not used
+    public static List<Answer> getCorrectAnswers(Quiz quiz) {
+        List<Answer> correct = new ArrayList();
+        List<Question> questions = quiz.getQuestions();
+        for (int i = 0; i < questions.size(); i++) {
+            List<Answer> answers = questions.get(i).getAnswers();
+            for (int j = 0; j < answers.size(); j++) {
+                if (answers.get(j).isRight()) correct.add(answers.get(j));
+            }
+        }
+        return correct;
+    }
 
 }

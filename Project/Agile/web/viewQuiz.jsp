@@ -19,26 +19,27 @@
     </head>
     <body>
         <%
-            User user = (User) session.getAttribute("user");
-            if (user == null || user.getPosition().equals("staff")) {
+            /*User user = (User) session.getAttribute("user");
+            if (user == null || user.getPosition().toLowerCase().equals("student")) {
                 response.sendRedirect("index.jsp");
-            }
+            }*/
             Quiz quiz = (Quiz) session.getAttribute("quiz");
-            ResultController rc = new ResultController();
+            
             ResultModel result = new ResultModel();
-            List<ResultModel> results = rc.fetchResultOverview(quiz.getId());
+            List<ResultModel> results = (List<ResultModel>) session.getAttribute("results");
         %>
         <h1><%=quiz.getTitle()%></h1>
         
-        
+        <ul>
         <%
         for (int i = 0; i < results.size(); i++) {
             result = results.get(i);
             %>
-                <ul>
-                    <li><%=result.getPersonId()%><%=User.getNameFromID(result.getPersonId())%> got <%=result.getScore()%> points on <%=result.getDate()%>.<br>
+                
+                    <li><%=result.getPersonId()%> - <%=User.getNameFromID(result.getPersonId())%> got <%=result.getScore()%> points on <%=result.getDate()%>.<br>
                     </li>
-                </ul>
+                
         <% } %>
+        </ul>
     </body>
 </html>

@@ -6,6 +6,7 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import Misc.ResultController;
 import Models.QuizModel;
 import Stores.Quiz;
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class ViewQuiz extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         QuizModel qm = new QuizModel();
+        ResultController rc = new ResultController();
         
         String[] args = request.getRequestURI().split("/");
         int a = Integer.parseInt(args[3]);
@@ -46,6 +48,7 @@ public class ViewQuiz extends HttpServlet {
         
         
         request.getSession().setAttribute("quiz", quiz);
+        request.getSession().setAttribute("results", rc.fetchResultOverview(quiz.getId()));
         RequestDispatcher rd = request.getRequestDispatcher("/viewQuiz.jsp");
         rd.forward(request, response);
     }
