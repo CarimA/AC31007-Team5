@@ -12,6 +12,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Question</title>
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/skeleton.min.css" />
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
+        <jsp:include page="header.jsp"></jsp:include>
     </head>
     <body>
         <%
@@ -29,12 +33,12 @@
         <%
             }else{
         %>
-        <p><%= q.getNumber()%> <%=q.getQuestion()%> Worth <%=q.getPoints()%> points</p>
+        <h1><%= q.getNumber()%>. <%=q.getQuestion()%> Worth <%=q.getPoints()%> points</h1>
         <p>Edit Question</p>
          <%// change this%>
         <form method="POST" action="EditQuiz">
         <input type="text" name="question">
-        <p>Edit Image</p><img src="/Agile/Thumb/<%//q.getImage()%>"></a><br/>
+        <p>Edit Image</p><img src="/Agile/Thumb/<%//q.getImage()%>"><br/>
         <input type="file" name="image">
         <p>Edit points</p>
         <input type="number" name="points" min="1" max="100" value="<%=q.getPoints()%>">
