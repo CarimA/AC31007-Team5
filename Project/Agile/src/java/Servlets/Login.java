@@ -45,7 +45,6 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             User user = lm.checkLogin(id, password);
-            session.setAttribute("userIDKey",id);
             session.setAttribute("user", user);
             Helpers.successRedirect(request, response, "Home", true, "Successfully logged in!");
         } catch (UsernameInvalidException | PasswordInvalidException ex) {
