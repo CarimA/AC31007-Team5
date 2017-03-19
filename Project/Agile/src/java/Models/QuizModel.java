@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -418,6 +419,36 @@ public class QuizModel {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    public Vector<Quiz> getAllQuizzes()
+    {
+        Vector<Quiz> quizzes = new Vector<Quiz>();
+        Connection connection;
+        
+        try {
+            connection = DriverManager.getConnection(
+       "jdbc:mysql://silva.computing.dundee.ac.uk:3306/16agileteam5db?user=16agileteam5&password=0245.at5.5420");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("Select * from Quiz");
+            while (rs.next())
+            {
+                Quiz q = new Quiz();
+                q.setTitle((rs.getString("Title")));
+                q.setModule ((rs.getString("Module")));
+                q.setDateCreated((rs.getDate("DateCreated")));
+                int uid = rs.getInt("qId");
+                q.setId(uid);
+                quizzes.add(q);
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+            return quizzes;
+        }
+        catch(SQLException e) {
+            return quizzes;  
         }
     }
     
