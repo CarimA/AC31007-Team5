@@ -103,7 +103,7 @@ public class StudentSummary extends HttpServlet {
             }
                 questionss += ("Your answer for the Question " + count + " is " + check 
                         + "\n\n" + "Question " + count + ": " + questions[i] + "\n" + "Your answer: " + studentAnswers[i]
-                         + "\n" + "Correctt answer: " + correctAnswers[i]+ "\n\n");
+                         + "\n" + "Correct answer: " + correctAnswers[i]+ "\n\n");
                 count+=1;
 
 
