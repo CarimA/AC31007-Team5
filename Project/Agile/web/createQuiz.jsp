@@ -35,8 +35,8 @@
                 <ul>
                     <li>How many questions do you want to start with? <input type="number" name="questions"></li>
                 </ul>
-                <br/>
-                <input type="submit" value="Create Quiz"> 
+                <br>
+>                <input type="submit" value="Create Quiz"> 
             </form>
         </div>
     </body>
