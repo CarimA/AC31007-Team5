@@ -51,7 +51,7 @@
                        {
                    %>
                        <a href="/Agile/EditQuiz/<%=q.getId()%>"><h6>Edit Quiz</h6></a>
-                       <a href="/Agile/viewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a>
+                       <a href="/Agile/ViewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a>
                    <%
                        }
                         else if(pos.equalsIgnoreCase("student"))
