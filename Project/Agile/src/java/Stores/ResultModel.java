@@ -130,5 +130,10 @@ public class ResultModel {
         connection.close();
         return rId;
     }
+    
+    
+    public static ResultModel fetchIndividual(int rId) {
+        return null;
+    }
 
 }

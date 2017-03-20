@@ -66,7 +66,7 @@ The score is later recorded in the results to indicate that the user has already
             String correctAnswer = rightAnswers[i];
 
 %>
-<!--        //displaying the question title  -->
+<!--        //displaying the question title  ADD TO TakeQuiz--> 
 <br/><br/><p><%=quizQuestions.get(i).getQuestion()%></p>
 <%
     if (studentAnswer != null) {//student has selected an answer

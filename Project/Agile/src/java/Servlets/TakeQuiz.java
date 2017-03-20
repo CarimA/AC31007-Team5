@@ -79,8 +79,6 @@ public class TakeQuiz extends HttpServlet {
         String pId = user.getId();
         int qId = quiz.getId();
         
-        RequestDispatcher rd = request.getRequestDispatcher("studentsummary.jsp");
-        
         List<Question> questions = quiz.getQuestions();
         List<Integer> answerIDs = new ArrayList();
         
@@ -101,8 +99,19 @@ public class TakeQuiz extends HttpServlet {
         }
         
         ResultController rc = new ResultController();
-        rc.sendResults(score, date, pId, qId, answerIDs);
-        //rd.forward(request, response);
+        int rId = rc.sendResults(score, date, pId, qId, answerIDs);
+        request.getSession().setAttribute("rId", rId);
+        
+        
+        //QuizModel qm2 = new QuizModel();
+        //Quiz quiz2 = qm2.fetchQuiz(rc.getQuizId(rId));
+        List<Answer> studentAns = rc.fetchResultsIndividual(rId);
+        
+        //request.getSession().setAttribute("quiz", quiz2);
+        request.getSession().setAttribute("studentAns", studentAns);
+        
+        response.sendRedirect("studentsummary.jsp");
+        
     }
 
     /**
