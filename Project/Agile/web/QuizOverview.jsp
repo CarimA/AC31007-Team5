@@ -7,7 +7,9 @@
 <%@page import="Stores.User"%>
 <%@page import="Stores.Quiz"%>
 
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" type="text/css" href="/Agile/assets/css/skeleton.min.css" />
+<link rel="stylesheet" type="text/css" href="/Agile/assets/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -49,6 +51,7 @@
                     <a href="StudentResults/<%=q.getId()%>">Student Results Quiz: <%=q.getTitle()%></a> <br>
                    <%
                        }
+                    }
                    %>
                 </div>
 
