@@ -38,8 +38,8 @@
                 {
                 %>
                     <h5>Question <%=i%></h5>
+                    <input type="hidden" name="number<%=i%>" value="<%=1%>" >
                     Question text: <input type="text" name="question<%=i%>" maxlength="255"><br/>
-                    Number: <input type="number" name="number<%=i%>" maxlength="3"><br/>
                     Points awarded: <input type="number" name="points<%=i%>" maxlength="5"><br/>
                     Image: <input type="file" name="file<%=i%>"><br/>
                 
