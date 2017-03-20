@@ -33,10 +33,9 @@
             }
             
                 %>
-            <form method="POST"  action="createQuestion">
-                    Title: <input type="text" name="title" ><br/>
-                    Module: <input type="text" name="module"><br/>
-                <input type="submit" value="Create Quiz"> 
+            <form method="POST"  action="createQuiz">                
+                    How many questions do you want to start with? <input type="number" name="questions">                
+                <br>
             </form>
         </div>
     </body>
