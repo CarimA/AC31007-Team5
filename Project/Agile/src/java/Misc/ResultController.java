@@ -85,7 +85,15 @@ public class ResultController {
         }
     }
     
-    public ResultModel fetchResultsIndividual(int rId) throws SQLException, ClassNotFoundException {
-        return ResultModel.fetchResultsIndividual(rId);
+    public ResultModel fetchResultsIndividual(int rId){
+        try {
+            return ResultModel.fetchResultsIndividual(rId);
+        } catch (SQLException ex) {
+            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }
