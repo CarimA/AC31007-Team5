@@ -36,7 +36,7 @@ public class ResultController {
         return results;
     }
     
-    public List<Answer> fetchResultsIndividual(int rId) {
+    public List<Answer> fetchAnswersIndividual(int rId) {
         List<Answer> answers = null;
         try {
             answers = Answer.getStudentAnswers(Helpers.connect(), rId);
@@ -82,5 +82,9 @@ public class ResultController {
             Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
         }
+    }
+    
+    public ResultModel fetchIndividual(int rId) {
+        return null;
     }
 }

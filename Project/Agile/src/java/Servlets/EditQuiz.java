@@ -84,15 +84,15 @@ public class EditQuiz extends HttpServlet {
         //System.out.println("We got to here");
         String[] args = request.getRequestURI().split("/");
         //System.out.println(args[0]);
-        System.out.println(args[1]);
-        System.out.println(args[2]);
-        System.out.println(args[3]);
+        //System.out.println(args[1]);
+        //System.out.println(args[2]);
+        //System.out.println(args[3]);
         if(args[2].equals("EditQuiz")){
             Quiz quiz = new Quiz();
-            System.out.println(quiz);
+            //System.out.println(quiz);
             QuizModel qm = new QuizModel();
             quiz = qm.fetchQuiz(parseInt(args[3]));
-            System.out.println(quiz);
+            //System.out.println(quiz);
             if(quiz == null){
                 error(request,response);
                 return;
@@ -191,7 +191,7 @@ public class EditQuiz extends HttpServlet {
             String module = request.getParameter("module");
             String available = request.getParameter("available");
             int quizID = parseInt(request.getParameter("QuizID"));
-            System.out.println(available);
+            //.out.println(available);
             boolean a;
             if(available == null){
                 a = false;
@@ -273,7 +273,7 @@ public class EditQuiz extends HttpServlet {
             String right = request.getParameter("right");
             int answerID = parseInt(request.getParameter("AnswerID"));
             // qm.updateAnswer(answer,explanation,right,answerID):
-            System.out.println(right);
+            //System.out.println(right);
             boolean a;
             if(right == null){
                 a = false;
@@ -292,7 +292,7 @@ public class EditQuiz extends HttpServlet {
             response.sendRedirect("/Agile/EditQuiz/"+args[3]+ "/" + args[4]);
         }
         else{
-            System.out.println(a);
+            //System.out.println(a);
             QuizModel qm = new QuizModel();
             qm.updateAnswer(answerID, answer, explanation, a);
             response.sendRedirect("/Agile/EditAnswer/" +answerID);

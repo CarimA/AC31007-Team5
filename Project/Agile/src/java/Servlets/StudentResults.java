@@ -48,7 +48,7 @@ public class StudentResults extends HttpServlet {
         int a = Integer.parseInt(args[3]);
         
         Quiz quiz = qm.fetchQuiz(rc.getQuizId(a));
-        List<Answer> studentAns = rc.fetchResultsIndividual(a);
+        List<Answer> studentAns = rc.fetchAnswersIndividual(a);
         
         request.getSession().setAttribute("quiz", quiz);
         request.getSession().setAttribute("studentAns", studentAns);
