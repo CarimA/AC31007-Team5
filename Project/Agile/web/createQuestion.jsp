@@ -28,31 +28,30 @@
             %>
             <div>  
             <form method="POST"  action="createQuestion">
-                <ul>
-                    <li>Title <input type="text" name="title"></li>
-                    <li>Module <input type="text" name="module"></li>
-                    <li><input type="hidden" name="questions" value="<%=q%>"><%=q%></li>
-                </ul>
+                
+                    Title: <input type="text" name="title" ><br/>
+                    Module: <input type="text" name="module"><br/>
+                    <input type="hidden" name="questions" value="<%=q%>">Amount of questions: <%=q%><br/>
+                
                 <%
                 for(int i = 1; i <= q;  i++)
                 {
                 %>
-                <ul>
-                    <li>Question: <%=i%><input type="text" name="question<%=i%>"></li>
-                    <li>Number <input type="number" name="number<%=i%>"></li>
-                    <li>Points <input type="number" name="points<%=i%>"></li>
-                    <li>Image <input type="file" name="file<%=i%>"></li>
-                </ul>
+                    <h5>Question <%=i%></h5>
+                    Question text: <input type="text" name="question<%=i%>" maxlength="255"><br/>
+                    Number: <input type="number" name="number<%=i%>" maxlength="3"><br/>
+                    Points awarded: <input type="number" name="points<%=i%>" maxlength="5"><br/>
+                    Image: <input type="file" name="file<%=i%>"><br/>
+                
                 <%
                     for(int x = 0; x < 4; x++)
                     {
                         %>
-                        <ul>
-                            <li>Answer <input type="text" name="answer<%=i%><%=x%>"></li>
-                            <li>Number <input type="text" name="number<%=i%><%=x%>"></li>
-                            <li>Explanation <input type="text" name="explanation<%=i%><%=x%>"></li>
-                            <li>Right <input type="checkbox" value="true" name="right<%=i%><%=x%>"></li>
-                        </ul>
+                            <h6>Answer: <%=x + 1%></h6>
+                            Answer: <input type="text" name="answer<%=i%><%=x%>" maxlength="255">
+                            Number: <input type="text" name="number<%=i%><%=x%>"><br/>
+                            Explanation: <input type="text" name="explanation<%=i%><%=x%>" maxlength="255">
+                            Correct Answer: <input type="checkbox" value="true" name="right<%=i%><%=x%>"><br/>
                 <%
                     }
                 }

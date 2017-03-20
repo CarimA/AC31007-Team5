@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -424,9 +423,9 @@ public class QuizModel {
         }
     }
     
-    public Vector<Quiz> getAllQuizzes()
+    public ArrayList<Quiz> getAllQuizzes()
     {
-        Vector<Quiz> quizzes = new Vector<Quiz>();
+        ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
         Connection connection;
         
         try {

@@ -55,7 +55,7 @@ public class ResultControllerTest {
         String expectedResult = "fine";
         int id = 14;
         List<Answer> answers = rc.fetchAnswersIndividual(id);
-        assertEquals(expectedResult, answers.get(0).getExplanation());
+        assertEquals(expectedResult, answers.get(0).getAnswer());
     }
     
     @Test
@@ -102,5 +102,15 @@ public class ResultControllerTest {
         
         int rId = rc.sendResults(score, date, pId, qId, answerIDs);
         assertEquals(expResult, rId);
+    }
+    
+    @Test
+    public void testFetchResultsIndividual() throws ClassNotFoundException, SQLException {
+        Connection connection = Helpers.connect();
+        int rId = 506;
+        ResultController resultController = new ResultController();
+        ResultModel expected = ResultModel.fetchResultsIndividual(rId);
+        
+        assertEquals(expected.getId(), resultController.fetchResultsIndividual(rId).getId());
     }
 }
