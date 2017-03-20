@@ -46,7 +46,7 @@
         <label for="points"><p>Edit points</p></label>
         <input type="number" name="points" min="1" max="100" value="<%=q.getPoints()%>">
         <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
-        
+        <input type="hidden" name="quizID" value="<%=QuizID%>">
         <input type="submit" name="submit" value="Submit">
         </form>
         <br/>
@@ -91,12 +91,14 @@
                 <input type=checkbox name="right"> 
                 <br/>
                 <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
+                <input type="hidden" name="quizID" value="<%=QuizID%>">
                 <input type="hidden" name="number" value="<%=lastNum%>">
                 <input type="submit" name="submit" value="Add">
                 </form>
                 
                 <form method="POST" action="EditQuiz">
                     <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
+                    <input type="hidden" name="quizID" value="<%=QuizID%>">
                 Delete Question (Do not click by accident) <input type="submit" name="submit" value="Delete">
                 </form>
                 

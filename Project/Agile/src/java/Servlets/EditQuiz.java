@@ -218,7 +218,6 @@ public class EditQuiz extends HttpServlet {
                 
             }else if(submit.equals("Delete")){
                 int QuizID = parseInt(request.getParameter("QuizID"));
-                qm.deleteQuiz(QuizID);
                 response.sendRedirect("/Agile/index.jsp");
                 return;
             }
@@ -229,20 +228,30 @@ public class EditQuiz extends HttpServlet {
             response.sendRedirect("/Agile/EditQuiz/"+quizID);
         }
         else if(args[2].equals("EditQuestion")){
-            String question = request.getParameter("question");
-            //String image = request.getParameter("image");
-            int points = parseInt(request.getParameter("points"));
-            int questionID = parseInt(request.getParameter("QuestionID"));
-            // qm.updateQuestion(question,image,points,questionID):
-            QuizModel qm = new QuizModel();
-            // add answer
             String submit = request.getParameter("submit");
-            if(submit.equals("Add")){
+            int questionID = parseInt(request.getParameter("QuestionID"));
+                int quizID = parseInt(request.getParameter("quizID"));
+            QuizModel qm = new QuizModel();
+            if(submit.equals("Submit")){
+                String question = request.getParameter("question");
+                //String image = request.getParameter("image");
+                String test = request.getParameter("points");
+                //System.out.println(test);
+                int points = parseInt(request.getParameter("points"));
+                
+                // qm.updateQuestion(question,image,points,questionID):
+                //System.out.println(1);
+                qm.updateQuestion(questionID, question, points);
+            // add answer
+            }
+            else if(submit.equals("Add")){
+                //System.out.println(2);
                 String answer = request.getParameter("answer");
                 //String image = request.getParameter("image");
                 String explanation = request.getParameter("explanation");
                 String right = request.getParameter("right");
                 int number = parseInt(request.getParameter("number"));
+                
                 boolean a;
                 if(right == null){
                     a = false;
@@ -254,49 +263,53 @@ public class EditQuiz extends HttpServlet {
                     a = false;
                 }
                 if(!answer.equals("")){
+                    //System.out.println(3);
                    qm.addAnswer(answer,number,explanation,a,questionID);
                 }
+                //System.out.println(5);
+                //response.sendRedirect("/Agile/EditQuestion/"+quizID+"/"+questionID);
                 }
             else if(submit.equals("Delete")){
                 qm.deleteQuestion(parseInt(args[4]));
+                
                 response.sendRedirect("/Agile/EditQuiz/"+args[3]);
             }
             else{
             //
-                qm.updateQuestion(questionID, question, points);
+                
                 }
-            response.sendRedirect("/Agile/EditQuestion/"+questionID);
+            //System.out.println(6);
+            response.sendRedirect("/Agile/EditQuestion/"+quizID+"/"+questionID);
         }
         else if(args[2].equals("EditAnswer")){
-            String answer = request.getParameter("answer");
-            String explanation = request.getParameter("explanation");
-            String right = request.getParameter("right");
-            int answerID = parseInt(request.getParameter("AnswerID"));
-            // qm.updateAnswer(answer,explanation,right,answerID):
-            //System.out.println(right);
-            boolean a;
-            if(right == null){
-                a = false;
-            }
-            else if(right.equals("on")){
-                a = true;
-            }
-            else{
-                a = false;
-            }
             String submit = request.getParameter("submit");
-        
-        if(submit.equals("Delete")){
+            if(submit.equals("Submit")){
+                String answer = request.getParameter("answer");
+                String explanation = request.getParameter("explanation");
+                String right = request.getParameter("right");
+                int answerID = parseInt(request.getParameter("AnswerID"));
+                // qm.updateAnswer(answer,explanation,right,answerID):
+                //System.out.println(right);
+                boolean a;
+                if(right == null){
+                    a = false;
+                }
+                else if(right.equals("on")){
+                    a = true;
+                }
+                else{
+                    a = false;
+                }
+                QuizModel qm = new QuizModel();
+                qm.updateAnswer(answerID, answer, explanation, a);
+                response.sendRedirect("/Agile/EditAnswer/"+args[3]+ "/" + args[4] + "/" +answerID);
+            }
+            else if(submit.equals("Delete")){
             QuizModel qm = new QuizModel();
             qm.deleteAnswer(parseInt(args[5]));
-            response.sendRedirect("/Agile/EditQuiz/"+args[3]+ "/" + args[4]);
+            response.sendRedirect("/Agile/EditQuestion/"+args[3]+ "/" + args[4]);
         }
-        else{
-            //System.out.println(a);
-            QuizModel qm = new QuizModel();
-            qm.updateAnswer(answerID, answer, explanation, a);
-            response.sendRedirect("/Agile/EditAnswer/" +answerID);
-        }
+        
         }
     }
 
