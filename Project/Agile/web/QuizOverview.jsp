@@ -38,13 +38,14 @@
                        {
                    %>
                        <a href="EditQuiz/<%=q.getId()%>">Edit Quiz: <%=q.getTitle()%></a>
-                       <a href="takeQuiz/<%=q.getId()%>">View Quiz results: <%=q.getTitle()%></a> <br>
+                       <a href="takeQuiz/<%=q.getId()%>">View Quiz results: <%=q.getTitle()%></a>
+                       <a href="ViewQuiz/<%=q.getId()%>">View Quiz: <%=q.getTitle()%></a><br>
                    <%
                        }
-                       if(pos == "student")
+                        else if(pos == "student")
                        {
                    %>
-                    <a href="ViewQuiz/<%=q.getId()%>">View Quiz: <%=q.getTitle()%></a>
+                    <a href="takeQuiz/<%=q.getId()%>">View Quiz results: <%=q.getTitle()%></a>
                     <a href="StudentResults/<%=q.getId()%>">Student Results Quiz: <%=q.getTitle()%></a> <br>
                    <%
                        }

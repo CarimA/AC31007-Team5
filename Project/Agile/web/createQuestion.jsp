@@ -6,7 +6,9 @@
 
 
 <%@page import="Stores.User"%>
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/Agile/assets/css/skeleton.min.css" />
+<link rel="stylesheet" type="text/css" href="/Agile/assets/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +26,7 @@
                 response.sendRedirect("index.jsp");
             }
             %>
-            <div class="dynamic-row">  
+            <div>  
             <form method="POST"  action="createQuestion">
                 <ul>
                     <li>Title <input type="text" name="title"></li>

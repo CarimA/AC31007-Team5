@@ -292,18 +292,12 @@ public class QuizModel {
         }
     }
     
-    public int addQuestionGetID(String question,int number,int points,int quizID){
+    public int getQuestionID(String question,int number,int points,int quizID){
         try {
             Connection connection = Helpers.connect();
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO Question (Number,Question,Points,QuizID) VALUES (?,?,?,?)");
-            statement.setInt(1, number);
-            statement.setString(2, question);
-            statement.setInt(3, points);
-            statement.setInt(4, quizID);
-            statement.executeUpdate();
             
-            statement = connection.prepareStatement("SELECT 'qId' FROM Question WHERE (Number,Question,Points,QuizID) VALUES (?,?,?,?)");
+            statement = connection.prepareStatement("SELECT 'questionId' FROM Question WHERE (Number,Question,Points,QuizID) VALUES (?,?,?,?)");
             statement.setInt(1, number);
             statement.setString(2, question);
             statement.setInt(3, points);
@@ -314,8 +308,7 @@ public class QuizModel {
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                questionID = rs.getInt("qId");
-                System.out.println(questionID);
+                questionID = rs.getInt("questionId");
             }
             statement.close();
             connection.close();

@@ -86,7 +86,8 @@ public class createQuestion extends HttpServlet {
                 qm.addQuestionWithImage(q,number,points,qID,inputStream);
             }
             
-            int questionID = qm.getIdFromQ(q, number, points, qID);
+            int questionID = qm.getQuestionID(q, number, points, qID);
+            
             for(int x = 0; x < 4; x++)
             {
                 String aString = "answer" + Integer.toString(i) + Integer.toString(x);
