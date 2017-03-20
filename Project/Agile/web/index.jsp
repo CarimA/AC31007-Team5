@@ -15,6 +15,10 @@
 <% Class.forName("com.mysql.jdbc.Driver"); %>
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="content"><jsp:include page="/QuizOverview"></jsp:include></c:set>
 
 <t:wrapper>
     <jsp:attribute name="header">
@@ -24,6 +28,6 @@
         
     </jsp:attribute>
     <jsp:body>
-        
+        ${content}
     </jsp:body>
 </t:wrapper>
