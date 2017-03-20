@@ -18,6 +18,8 @@
         List<Question> questions = quiz.getQuestions();
         Answer a;
         Answer s;
+        String explanation = "";
+        String message = "";
         List<Answer> answersStudent = (List<Answer>) (request.getSession().getAttribute("studentAns"));
 %>
 <h1>Summary for <%=title%> for <%=module%> module</h1> 
@@ -35,16 +37,15 @@
             <h4><%=q.getQuestion()%></h4>
             <%
                 List<Answer> answers = q.getAnswers();
+                s = answersStudent.get(i);
+                if (s.isRight()) message = "Correct!";
                 
+                explanation = s.getExplanation();
                 for (int b=0; b<answers.size(); b++)
                 {
                     a = answers.get(b);
-                    s = answersStudent.get(i);
                     
-                    if (a.isRight());
-                    //{
-                        %><%-- <u><h5><%=a.getAnswer()%></h5></u> --%><%
-                    //}
+                    if (!s.isRight() && a.isRight()) message = "The correct answer was " + a.getAnswer();
                     if(s.getId() == a.getId())
                     {%>
                         <u><h5><%=a.getAnswer()%></h5></u>
@@ -54,10 +55,11 @@
                     {
                         %><h5><%=a.getAnswer()%></h5><%
                     }
-             
-
                     
                 }
+            
+            %><%=message%><br>
+            Explanation: <%=explanation%><%
         }
  
     
