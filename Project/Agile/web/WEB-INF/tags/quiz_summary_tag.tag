@@ -15,53 +15,44 @@
         Stores.Quiz quiz = (Stores.Quiz) (request.getSession().getAttribute("quiz"));
         String title = quiz.getTitle();
         String module = quiz.getModule();
-        List<Question> questions = quiz.getQuestions();
+        
         
         List<Answer> answersStudent = (List<Answer>) (request.getSession().getAttribute("studentAns"));
-        List<Answer> answers = new ArrayList<Answer>();
+        //List<Answer> answers = new ArrayList<Answer>();
         String questionss = "";
         String studentAnswers = "";
         String check = "";
         int count = 1;
-        String q ="";
-        String a = "";
+        Question q;
+        List<Question> questions = quiz.getQuestions();
+        Answer a;
+        
         String correct = "";
         int p;
         int points = 0;
 %>
-<h2>Summary for <%=title%> for <%=module%> module</h2> 
-<h3>ID: <%=id%></h3>
-<h3>Name: <%=displayname%></h3>
-<h3>Email: <%=email%></h3>
-<h3>Grade ......</h3><br><br><br>
+<h1>Summary for <%=title%> for <%=module%> module</h1> 
+<h2>ID: <%=id%></h2>
+<h2>Name: <%=displayname%></h2>
+<h2>Email: <%=email%></h2>
+<h2>Grade ......</h2><br><br><br>
 
 <%
     for (int i=0; i<questions.size(); i++)
         {
-            q = questions.get(i).getQuestion();
-            %> <h4><%
-            p = questions.get(i).getPoints();
-            answers = questions.get(i).getAnswers();
-            a = answers.get(i).getAnswer();
+%> <br><br> <%
+            q = questions.get(i);%>
             
-            if(answersStudent.get(i).isRight())
-            {
-                check = "right";
-                correct = a;
-                points += p;
-                
-            }
-            else 
-            {
-                check = "false";
-                for (int u=0; u<answers.size(); u++)
+            <h4><%=q.getQuestion()%></h4>
+            <%
+                List<Answer> answers = q.getAnswers();
+                for (int b=0; b<answers.size(); b++)
                 {
-                    if (answers.get(u).isRight()) 
-                    {
-                        correct = answers.get(u).getAnswer();
-                    }
+                    a = answers.get(b);%>
+                    <h5><%=a.getAnswer()%></h5>
+                    <%
+                    
                 }
-            }
         }
  
     
