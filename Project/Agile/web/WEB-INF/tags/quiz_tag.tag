@@ -20,7 +20,6 @@ All the quizzes which are not available have the ?Take Quiz? button disabled.
 <%@tag import="java.util.ArrayList"%>
 <%@tag import="java.util.Map"%>
 <%@tag import="java.util.HashMap"%>
-<%@tag import="Stores.QuizModel"%>
 <%@tag import="Misc.Helpers"%>
 <%@tag import="java.sql.Connection"%>
 <%@tag import="java.sql.*" %>

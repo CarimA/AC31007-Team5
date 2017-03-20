@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  *
  * @author Aleksandr
  */
-public class createPdf {
+public class createPdf {/*
     public static void main(String[] args)
     {     
         //Creating PDF document object 
@@ -81,5 +81,5 @@ public class createPdf {
             Logger.getLogger(createPdf.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
-    
+    */
 }

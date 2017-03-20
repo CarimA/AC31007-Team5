@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMailTLS {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		final String username = "agileteam5email@gmail.com";
 		final String password = "Qwerty12345";
@@ -55,5 +55,5 @@ public class SendMailTLS {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
-	}
+	}*/
 }

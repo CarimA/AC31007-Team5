@@ -8,7 +8,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream; 
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
   
-public class loadPdf {
+public class loadPdf {/*
    public static void main (String args[]) throws IOException {
 
       //Loading an existing document
@@ -46,5 +46,5 @@ public class loadPdf {
 
       //Closing the document
       document.close();
-   }
+   }*/
 }

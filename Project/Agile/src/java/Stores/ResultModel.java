@@ -131,9 +131,19 @@ public class ResultModel {
         return rId;
     }
     
-    
     public static ResultModel fetchResultsIndividual(int rId) throws SQLException, ClassNotFoundException {
-        return null;
+        Connection connection = Helpers.connect();
+        
+        String query = "SELECT * FROM results WHERE rId = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, rId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            return new ResultModel(rId, resultSet.getInt("QuizID"), resultSet.getDate("Date"), resultSet.getString("PersonID"), resultSet.getInt("Score"));
+        } else {
+            return null;
+        }
     }
 
 }

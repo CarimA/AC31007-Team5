@@ -6,6 +6,7 @@ package Servlets;
  * and open the template in the editor.
  */
 
+import Misc.Helpers;
 import Misc.ResultController;
 import Models.QuizModel;
 import Stores.Answer;
@@ -74,6 +75,10 @@ public class TakeQuiz extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         Quiz quiz = (Quiz) request.getSession().getAttribute("quiz");
         
+        if (user == null || quiz == null) {
+            Helpers.errorRedirect(request, response, "Home", true, "An unknown error occured.");
+        }
+        
         int score = 0;
         Date date = new Date(System.currentTimeMillis());
         String pId = user.getId();
@@ -101,7 +106,6 @@ public class TakeQuiz extends HttpServlet {
         ResultController rc = new ResultController();
         int rId = rc.sendResults(score, date, pId, qId, answerIDs);
         request.getSession().setAttribute("rId", rId);
-        
         
         //QuizModel qm2 = new QuizModel();
         //Quiz quiz2 = qm2.fetchQuiz(rc.getQuizId(rId));
