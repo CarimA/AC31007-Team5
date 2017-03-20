@@ -138,6 +138,14 @@ input[type="radio"]:checked ~ label {
     background: lightgray;
 }
 
+.correct label {
+    background: #A1D490;
+}
+
+.wrong label {
+    background: #EFA5A5;
+}
+
 /* Larger than mobile */
 @media (min-width: 400px) {}
 

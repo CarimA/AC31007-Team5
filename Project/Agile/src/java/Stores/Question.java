@@ -43,6 +43,7 @@ public class Question {
     public int getId() {
         return id;
     }
+    
 
     public void setId(int id) {
         this.id = id;
@@ -80,7 +81,7 @@ public class Question {
     public void setPoints(int points) {
         this.points = points;
     }
-
+    
     public List<Answer> getAnswers() {
         return answers;
     }

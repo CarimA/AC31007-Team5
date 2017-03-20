@@ -45,8 +45,12 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             User user = lm.checkLogin(id, password);
-            session.setAttribute("user", user);
-            Helpers.successRedirect(request, response, "Home", true, "Successfully logged in!");
+            if (user == null) {
+                Helpers.errorRedirect(request, response, "login.jsp", false, "An unknown error occured."); 
+            } else {
+                session.setAttribute("user", user);
+                Helpers.successRedirect(request, response, "Home", true, "Successfully logged in!");
+            }
         } catch (UsernameInvalidException | PasswordInvalidException ex) {
             Helpers.errorRedirect(request, response, "login.jsp", false, "Username and/or Password incorrect!");
         } catch (Exception e) {
