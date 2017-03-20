@@ -10,7 +10,7 @@ import Models.QuizModel;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Vector;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,8 +40,7 @@ public class QuizOverview extends HttpServlet {
             throws ServletException, IOException {
         //System.out.println(1);
         QuizModel Qm = new QuizModel();
-        Vector<Quiz> quizzes = Qm.getAllQuizzes();
-        System.out.println(quizzes);
+        ArrayList<Quiz> quizzes = Qm.getAllQuizzes();
         RequestDispatcher rd = request.getRequestDispatcher("/QuizOverview.jsp");
         request.setAttribute("quizzes", quizzes);
         rd.forward(request,response);

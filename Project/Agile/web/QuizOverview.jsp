@@ -41,7 +41,7 @@
                 <a href = "createQuiz.jsp" role = "button"><h6>New Quiz</h6></a>
                 <%
                     }
-                    java.util.Vector<Quiz> quizzes = (java.util.Vector<Quiz>) request.getAttribute("quizzes");
+                    java.util.ArrayList<Quiz> quizzes = (java.util.ArrayList<Quiz>) request.getAttribute("quizzes");
                     for(Quiz q : quizzes)
                     {
                 %>
