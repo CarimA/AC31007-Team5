@@ -61,7 +61,7 @@ public class StudentSummary extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("studentsummary.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/studentsummary.jsp");
         rd.forward(request, response);
     }
 
@@ -84,7 +84,7 @@ public class StudentSummary extends HttpServlet {
         String id = user.getId();
         
         Stores.Quiz quiz = (Stores.Quiz) (request.getSession().getAttribute("quiz"));
-        List questions = quiz.getQuestions();
+        List<Question> questions = quiz.getQuestions();
         
         List<Answer> answer = (List<Answer>) (request.getSession().getAttribute("answer"));
         
@@ -96,9 +96,11 @@ public class StudentSummary extends HttpServlet {
         String studentAnswerss = "";
         String check = "";
         int count = 1;
+        String q ="";
         
         for (int i=0; i<questions.size(); i++)
         {
+            q = questions.get(i).getQuestion();
             //if(correctAnswers[i].equals(studentAnswers[i]))
             //{
                //check = "right";
@@ -108,7 +110,7 @@ public class StudentSummary extends HttpServlet {
                 //check = "false";
             //}
                 questionss += ("Your answer for the Question " + count + " is " + check 
-                        + "\n\n" + "Question " + count + ": " + questions.get(i) + "\n" + "Your answer: " //+ studentAnswers[i]
+                        + "\n\n" + "Question " + count + ": " + q + "\n" + "Your answer: " //+ studentAnswers[i]
                          + "\n" + "Correct answer: " + //correctAnswers[i]+ 
                         "\n\n");
                 count+=1;
@@ -127,14 +129,14 @@ public class StudentSummary extends HttpServlet {
                 + questionss + "***********************************************************************\n\n"
                 + "Thank you for participation! \n\nRegards, \nYour Agile Team 5");
         
-        //sendEmail(email, plaintext, quizid);
+        sendEmail(email, plaintext);
         System.out.println(plaintext);
         
         rd = request.getRequestDispatcher("summarysent.jsp");
         rd.forward(request, response);
     }
     
-    public void sendEmail(String email, String plaintext, int quizid) throws FileNotFoundException
+    public void sendEmail(String email, String plaintext) throws FileNotFoundException
     { 
         final String username = "agileteam5email@gmail.com";
         final String password = "Qwerty12345";
@@ -155,7 +157,8 @@ public class StudentSummary extends HttpServlet {
                 message.setFrom(new InternetAddress("agileteam5email@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO,
                 InternetAddress.parse(email));
-                message.setSubject("Quiz summary for quiz " + quizid);
+                message.setSubject("Quiz summary for quiz "); 
+                        //quizid);
                // StringWriter writer = new StringWriter();
                 //IOUtils.copy(new FileInputStream(new File("processResults.jsp")), writer);
                 //message.setContent(writer.toString(), "text/html");

@@ -218,6 +218,7 @@ public class EditQuiz extends HttpServlet {
                 
             }else if(submit.equals("Delete")){
                 int QuizID = parseInt(request.getParameter("QuizID"));
+                qm.deleteQuiz(QuizID);
                 response.sendRedirect("/Agile/index.jsp");
                 return;
             }
