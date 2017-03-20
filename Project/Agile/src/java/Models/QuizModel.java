@@ -11,6 +11,7 @@ import Stores.Question;
 import Stores.Quiz;
 import java.io.InputStream;
 import java.sql.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -341,14 +342,36 @@ public class QuizModel {
         }
     }
     
-    public int createQuiz(String title, String module){
-        int id = 0;
+    public void createQuiz(String title, String module){
         try {
             Connection connection = Helpers.connect();
             PreparedStatement statement;
             statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module) values (?, ?)");
             statement.setString(1, title);
             statement.setString(2, module);
+            statement.execute();
+            
+            statement.close();
+            connection.close();
+        }
+        catch(SQLException e)
+        {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int createQuizReturnId(String title, String module){
+        int id = 0;
+        Date date = new Date(System.currentTimeMillis());
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module, DateCreated, Available) values (?, ?, ?, ?)");
+            statement.setString(1, title);
+            statement.setString(2, module);
+            statement.setDate(3, date);
+            statement.setBoolean(4, false);
             statement.execute();
             
             statement = connection.prepareStatement("SELECT qId FROM Quiz where (Title, Module) = (?, ?)");
@@ -360,6 +383,7 @@ public class QuizModel {
             {
                 id = rs.getInt("qId");
             }
+            rs.close();
             statement.close();
             connection.close();
             return id;
