@@ -114,7 +114,7 @@ public class TakeQuiz extends HttpServlet {
         //request.getSession().setAttribute("quiz", quiz2);
         request.getSession().setAttribute("studentAns", studentAns);
         
-        response.sendRedirect("/Agile/studentsummary.jsp");
+        response.sendRedirect("/Agile/quizSummary.jsp");
         
     }
 

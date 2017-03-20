@@ -61,7 +61,7 @@ public class StudentSummary extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/studentsummary.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/quizSummary.jsp");
         rd.forward(request, response);
     }
 
