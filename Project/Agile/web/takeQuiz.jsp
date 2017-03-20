@@ -32,7 +32,7 @@
         %>
         <h1><%=quiz.getTitle()%></h1>
         
-        <form method="POST" action="takeQuiz">
+        <form method="POST" action="TakeQuiz">
             <%
             for (int i = 0; i < questions.size(); i++) {
                 q = questions.get(i);
