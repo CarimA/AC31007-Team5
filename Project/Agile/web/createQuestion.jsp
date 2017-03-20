@@ -11,7 +11,11 @@
 <link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<c:set var="content">
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Create Questions</title>
     </head>
@@ -60,4 +64,16 @@
             </form>
         </div>
     </body>
-</html>
+
+</c:set>
+<t:wrapper>
+    <jsp:attribute name="header">
+        
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+        
+    </jsp:attribute>
+    <jsp:body>
+        ${content}
+    </jsp:body>
+</t:wrapper>
