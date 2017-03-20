@@ -34,8 +34,13 @@ public class CreateQuiz extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher rd;
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
-        request.setAttribute("number",numberOfQuestions);
-        rd = request.getRequestDispatcher("createQuestion.jsp");
+        //request.setAttribute("number",numberOfQuestions);
+        QuizModel qm = new QuizModel();
+        int quizID = qm.createQuizReturnId("Quiz Name", "Module Name");
+        for(int i=1;i<=numberOfQuestions;i++){
+            qm.addQuestion("Question Name", i, 0, quizID);
+        }
+        rd = request.getRequestDispatcher("/Agile/EditQuiz/" + quizID);
         rd.forward(request,response);
     }
 
