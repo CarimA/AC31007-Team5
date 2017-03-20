@@ -34,7 +34,8 @@
             
                 %>
             <form method="POST"  action="createQuiz">                
-                    How many questions do you want to start with? <input type="number" name="questions">                
+                How many questions do you want to start with? <input type="number" name="questions" value="1">
+                    <input type="submit" name="submit" value="Submit">
                 <br>
             </form>
         </div>

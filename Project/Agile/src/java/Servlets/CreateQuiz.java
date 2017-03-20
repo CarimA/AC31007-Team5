@@ -32,7 +32,7 @@ public class CreateQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd;
+        
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
         //request.setAttribute("number",numberOfQuestions);
         QuizModel qm = new QuizModel();
@@ -40,8 +40,8 @@ public class CreateQuiz extends HttpServlet {
         for(int i=1;i<=numberOfQuestions;i++){
             qm.addQuestion("Question Name", i, 0, quizID);
         }
-        rd = request.getRequestDispatcher("/Agile/EditQuiz/" + quizID);
-        rd.forward(request,response);
+        response.sendRedirect("EditQuiz/" + quizID);
+        
     }
 
 }
