@@ -132,7 +132,7 @@ public class ResultModel {
     }
     
     
-    public static ResultModel fetchIndividual(int rId) {
+    public static ResultModel fetchResultsIndividual(int rId) throws SQLException, ClassNotFoundException {
         return null;
     }
 

@@ -84,7 +84,7 @@ public class ResultController {
         }
     }
     
-    public ResultModel fetchIndividual(int rId) {
-        return null;
+    public ResultModel fetchResultsIndividual(int rId) throws SQLException, ClassNotFoundException {
+        return ResultModel.fetchResultsIndividual(rId);
     }
 }
