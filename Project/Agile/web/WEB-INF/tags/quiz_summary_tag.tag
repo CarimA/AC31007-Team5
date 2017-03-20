@@ -6,6 +6,12 @@
 <%@tag import="Stores.Quiz"%>
 <%@tag import="Stores.User"%>
 <%@tag import="Stores.ResultModel"%>
+<script>
+    function myFunction() {
+        window.print();
+    }
+</script>
+
 
 <%
     Stores.User user = (Stores.User) (request.getSession().getAttribute("user"));
@@ -123,3 +129,8 @@
 <%
     }
 %>
+<form id="submit" method="POST" action="StudentSummary">
+<input type="submit" value="Submit">
+</form>
+<button onclick="myFunction()">Print</button> 
+    
