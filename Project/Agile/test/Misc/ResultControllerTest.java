@@ -105,7 +105,12 @@ public class ResultControllerTest {
     }
     
     @Test
-    public void testFetchResultsIndividual() {
+    public void testFetchResultsIndividual() throws ClassNotFoundException, SQLException {
+        Connection connection = Helpers.connect();
+        int rId = 506;
+        ResultController resultController = new ResultController();
+        ResultModel expected = ResultModel.fetchResultsIndividual(rId);
         
+        assertEquals(expected.getId(), resultController.fetchResultsIndividual(rId).getId());
     }
 }

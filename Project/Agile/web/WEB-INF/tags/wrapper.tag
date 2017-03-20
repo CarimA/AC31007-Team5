@@ -65,7 +65,7 @@
             <jsp:doBody/>    
         </section>
         <footer class="container">
-            Something should be here eventually
+            This website was designed by Team 5
             <jsp:invoke fragment="footer"/>
         </footer>
     </body>

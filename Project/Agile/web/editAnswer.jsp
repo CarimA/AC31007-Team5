@@ -50,7 +50,7 @@
                 <input type=checkbox name="right" <%if(a.isRight()){%> checked="checked" <%}%>> This is the correct answer.
                 <br/>
                 <input type="hidden" name="AnswerID" value="<%=a.getId()%>">
-                <input type="submit" value="Submit">
+                <input type="submit" name="submit" value="Submit">
                 </form>
                        <%}
                        %>

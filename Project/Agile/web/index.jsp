@@ -5,7 +5,6 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="Stores.QuizModel"%>
 <%@page import="Misc.Helpers"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

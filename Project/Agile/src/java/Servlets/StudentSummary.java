@@ -28,6 +28,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage; 
 import Stores.Question;
 import Misc.Helpers;
+import Stores.Answer;
 import Stores.User;
 import java.io.File;
 import java.io.FileInputStream;
@@ -81,29 +82,35 @@ public class StudentSummary extends HttpServlet {
         String email = user.getEmail();
         String displayname = user.getDisplayName();
         String id = user.getId();
-        int quizid = Integer.parseInt(request.getSession().getAttribute("selectedQuizId").toString());
-        int score = Integer.parseInt(request.getParameter("score").toString());
-        String[] questions = request.getParameterValues("questions");
-        String[] studentAnswers = request.getParameterValues("studentanswers");
-        String[] correctAnswers = request.getParameterValues("correctanswers");
+        
+        Stores.Quiz quiz = (Stores.Quiz) (request.getSession().getAttribute("quiz"));
+        List questions = quiz.getQuestions();
+        
+        List<Answer> answer = (List<Answer>) (request.getSession().getAttribute("answer"));
+        
+ 
+
+       // String[] studentAnswers = request.getParameterValues("studentanswers");
+        //String[] correctAnswers = request.getParameterValues("correctanswers");
         String questionss = "";
-        //String studentAnswerss = "";
+        String studentAnswerss = "";
         String check = "";
         int count = 1;
         
-        for (int i=0; i<questions.length; i++)
+        for (int i=0; i<questions.size(); i++)
         {
-            if(correctAnswers[i].equals(studentAnswers[i]))
-            {
-                check = "right";
-            }
-            else
-            {
-                check = "false";
-            }
+            //if(correctAnswers[i].equals(studentAnswers[i]))
+            //{
+               //check = "right";
+            //}
+            //else
+            //{
+                //check = "false";
+            //}
                 questionss += ("Your answer for the Question " + count + " is " + check 
-                        + "\n\n" + "Question " + count + ": " + questions[i] + "\n" + "Your answer: " + studentAnswers[i]
-                         + "\n" + "Correct answer: " + correctAnswers[i]+ "\n\n");
+                        + "\n\n" + "Question " + count + ": " + questions.get(i) + "\n" + "Your answer: " //+ studentAnswers[i]
+                         + "\n" + "Correct answer: " + //correctAnswers[i]+ 
+                        "\n\n");
                 count+=1;
 
 
@@ -113,13 +120,15 @@ public class StudentSummary extends HttpServlet {
         }
         
         String plaintext = ("Hello " + displayname + " (Matric No: " + id + "), \n\n"
-                + "Your overall score for the Quiz " + quizid + " is " + score + " points. \n"
+                + "Your overall score for the Quiz " + //quizid + 
+                " is " + //score + 
+                " points. \n"
                 + "\n\nDescription \n***********************************************************************\n"
                 + questionss + "***********************************************************************\n\n"
                 + "Thank you for participation! \n\nRegards, \nYour Agile Team 5");
         
-        sendEmail(email, plaintext, quizid);
-        
+        //sendEmail(email, plaintext, quizid);
+        System.out.println(plaintext);
         
         rd = request.getRequestDispatcher("summarysent.jsp");
         rd.forward(request, response);
