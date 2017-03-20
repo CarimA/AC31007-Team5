@@ -5,6 +5,7 @@
 <%@tag import="java.util.List"%>
 <%@tag import="Stores.Quiz"%>
 <%@tag import="Stores.User"%>
+<%@tag import="Stores.ResultModel"%>
 
 <%
     Stores.User user = (Stores.User) (request.getSession().getAttribute("user"));
@@ -48,8 +49,9 @@
     
 <%
     } else {
+    ResultModel student = (ResultModel) session.getAttribute("studentRes");
 %>
-}
+
 <div class="dynamic-row">
     <div class="dynamic-column">
         <p>Summary for <b><%=title%></b> for <b><%=module%></b> module</p>
@@ -57,19 +59,17 @@
 </div>
 <div class="dynamic-row">
     <div class="dynamic-column">
-        <%=id%>
+        <%=student.getPersonId()%>
     </div>
     <div class="dynamic-column grow">
-        <%=displayname%>
+        <%=student.getDate()%>
     </div>
     <div class="dynamic-column">
-        <%=email%>
+        <%=student.getScore()%>
     </div>
-    <div class="dynamic-column">
-        ${score}
-    </div>
-</div>
-}
+</div> <%
+    }
+
     for (int i = 0; i < questions.size(); i++) {
         q = questions.get(i);%>
 <div class="row">
