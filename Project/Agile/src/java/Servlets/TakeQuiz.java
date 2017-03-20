@@ -105,7 +105,7 @@ public class TakeQuiz extends HttpServlet {
         
         //QuizModel qm2 = new QuizModel();
         //Quiz quiz2 = qm2.fetchQuiz(rc.getQuizId(rId));
-        List<Answer> studentAns = rc.fetchResultsIndividual(rId);
+        List<Answer> studentAns = rc.fetchAnswersIndividual(rId);
         
         //request.getSession().setAttribute("quiz", quiz2);
         request.getSession().setAttribute("studentAns", studentAns);
