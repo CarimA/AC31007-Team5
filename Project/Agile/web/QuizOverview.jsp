@@ -51,14 +51,14 @@
                        {
                    %>
                        <a href="EditQuiz/<%=q.getId()%>"><h6>Edit Quiz</h6></a>
-                       <a href="viewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a><br>
+                       <a href="viewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a>
                    <%
                        }
                         else if(pos.equalsIgnoreCase("student"))
                        {
                    %>
                     <a href="TakeQuiz/<%=q.getId()%>"><h6>View Quiz results</h6></a>
-                    <a href="StudentResults/<%=q.getId()%>"><h6>Student Results Quiz</h6></a> <br>
+                    <a href="StudentResults/<%=q.getId()%>"><h6>Student Results Quiz</h6></a> 
                    <%
                        }
                     }
