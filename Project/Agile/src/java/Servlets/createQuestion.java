@@ -96,8 +96,7 @@ public class createQuestion extends HttpServlet {
                 qm.addAnswer(answer,aNumber,explanation,right,questionID);
             }
         }
-        rd = request.getRequestDispatcher("quizCreated.jsp");
-        rd.forward(request,response);
+        response.sendRedirect("Home");
     }
 
     /**

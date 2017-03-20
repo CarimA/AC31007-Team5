@@ -20,11 +20,23 @@
     <body>
         <h1>Quiz Overview</h1>
         <div>
-            <div>
                 <%
                     User user = (User) session.getAttribute("user");
-                    String pos = user.getPosition();
-                    if(pos == "staff") {
+                    String pos = " ";
+                    if (user == null ) {
+                        response.sendRedirect("login.jsp");
+                    }
+                    else
+                    {
+                        pos = user.getPosition();   
+                    }
+                    
+                    if(pos.length() <= 0) //Not staff or student
+                    {
+                        response.sendRedirect("login.jsp");
+                    }
+                   
+                    if( pos.equalsIgnoreCase("staff") ) {
                     %>
                 <a href = "createQuiz.jsp" role = "button"> New Quiz </a>
                 <%
@@ -33,27 +45,25 @@
                     for(Quiz q : quizzes)
                     {
                 %>
-                <div>
                    <h3><%=q.getTitle()%> : <%=q.getModule()%></h3> <br>
                    <%
-                       if(pos == "staff")
+                       if(pos.equalsIgnoreCase("staff"))
                        {
                    %>
-                       <a href="EditQuiz/<%=q.getId()%>">Edit Quiz: <%=q.getTitle()%></a>
-                       <a href="takeQuiz/<%=q.getId()%>">View Quiz results: <%=q.getTitle()%></a>
-                       <a href="ViewQuiz/<%=q.getId()%>">View Quiz: <%=q.getTitle()%></a><br>
+                       <a href="EditQuiz/<%=q.getId()%>"><h6>Edit Quiz: <%=q.getTitle()%></h6></a>
+                       <a href="ViewQuiz/<%=q.getId()%>"><h6>View Quiz: <%=q.getTitle()%></h6></a><br>
                    <%
                        }
-                        else if(pos == "student")
+                        else if(pos.equalsIgnoreCase("student"))
                        {
                    %>
-                    <a href="takeQuiz/<%=q.getId()%>">View Quiz results: <%=q.getTitle()%></a>
-                    <a href="StudentResults/<%=q.getId()%>">Student Results Quiz: <%=q.getTitle()%></a> <br>
+                    <a href="takeQuizStudent/<%=q.getId()%>"><h6>View Quiz results: <%=q.getTitle()%></h6></a>
+                    <a href="StudentResults/<%=q.getId()%>"><h6>Student Results Quiz: <%=q.getTitle()%></h6></a> <br>
                    <%
                        }
                     }
                    %>
-                </div>
+              
 
             </div>
             
