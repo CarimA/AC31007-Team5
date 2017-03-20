@@ -341,7 +341,26 @@ public class QuizModel {
         }
     }
     
-    public int createQuiz(String title, String module){
+    public void createQuiz(String title, String module){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("INSERT INTO Quiz (Title, Module) values (?, ?)");
+            statement.setString(1, title);
+            statement.setString(2, module);
+            statement.execute();
+            
+            statement.close();
+            connection.close();
+        }
+        catch(SQLException e)
+        {
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public int createQuizReturnId(String title, String module){
         int id = 0;
         try {
             Connection connection = Helpers.connect();
@@ -360,6 +379,7 @@ public class QuizModel {
             {
                 id = rs.getInt("qId");
             }
+            rs.close();
             statement.close();
             connection.close();
             return id;

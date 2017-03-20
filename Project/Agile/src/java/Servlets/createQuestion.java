@@ -59,7 +59,7 @@ public class createQuestion extends HttpServlet {
                 RequestDispatcher rd;
         int numberOfQuestions = Integer.parseInt(request.getParameter("questions"));
         QuizModel qm = new QuizModel();
-        int qID = qm.createQuiz((String)request.getParameter("title"), (String)request.getParameter("module"));
+        int qID = qm.createQuizReturnId((String)request.getParameter("title"), (String)request.getParameter("module"));
         for(int i = 1; i <= numberOfQuestions; i++)
         {
             String questionString = "question" + Integer.toString(i);
