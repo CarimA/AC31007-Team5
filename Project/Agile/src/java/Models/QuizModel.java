@@ -352,7 +352,7 @@ public class QuizModel {
             statement.setString(2, module);
             statement.execute();
             
-            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Title, Module) values (?, ?)");
+            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Title, Module) = (?, ?)");
             statement.setString(1, title);
             statement.setString(2, module);
             
@@ -399,7 +399,7 @@ public class QuizModel {
         try {
             Connection connection = Helpers.connect();
             PreparedStatement statement;
-            statement = connection.prepareStatement("SELECT qId FROM Quiz where (Question, Number, Points, QuizID) values (?, ?, ?, ?)");
+            statement = connection.prepareStatement("SELECT questionId FROM question where (Question, Number, Points, QuizID) = (?, ?, ?, ?)");
             statement.setString(1, question);
             statement.setInt(2, number);
             statement.setInt(3, points);
@@ -408,10 +408,11 @@ public class QuizModel {
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                id = rs.getInt("qId");
+                id = rs.getInt("questionId");
             }
             statement.close();
             connection.close();
+            System.out.println(id);
             return id;
         }
         catch(SQLException e)
