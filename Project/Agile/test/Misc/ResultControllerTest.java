@@ -51,10 +51,10 @@ public class ResultControllerTest {
     }
     
     @Test
-    public void testFetchResultsIndividual() {
+    public void testfetchAnswersIndividual() {
         String expectedResult = "fine";
         int id = 14;
-        List<Answer> answers = rc.fetchResultsIndividual(id);
+        List<Answer> answers = rc.fetchAnswersIndividual(id);
         assertEquals(expectedResult, answers.get(0).getExplanation());
     }
     

@@ -38,7 +38,7 @@
                    
                     if( pos.equalsIgnoreCase("staff") ) {
                     %>
-                <a href = "createQuiz.jsp" role = "button"> New Quiz </a>
+                <a href = "createQuiz.jsp" role = "button"><h6>New Quiz</h6></a>
                 <%
                     }
                     java.util.Vector<Quiz> quizzes = (java.util.Vector<Quiz>) request.getAttribute("quizzes");
@@ -51,7 +51,7 @@
                        {
                    %>
                        <a href="EditQuiz/<%=q.getId()%>"><h6>Edit Quiz: <%=q.getTitle()%></h6></a>
-                       <a href="ViewQuiz/<%=q.getId()%>"><h6>View Quiz: <%=q.getTitle()%></h6></a><br>
+                       <a href="viewQuiz/<%=q.getId()%>"><h6>View Quiz: <%=q.getTitle()%></h6></a><br>
                    <%
                        }
                         else if(pos.equalsIgnoreCase("student"))
