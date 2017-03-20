@@ -82,7 +82,7 @@ public class ResultModel {
     
     public static List<ResultModel> fetch(Connection connection, int id) throws SQLException {
         List<ResultModel> results = new ArrayList();
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM results WHERE QuizID = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM results WHERE QuizID = ? ORDER BY PersonID, rId");
         statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();
         

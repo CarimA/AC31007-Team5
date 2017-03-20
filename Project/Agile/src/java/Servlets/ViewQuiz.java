@@ -8,9 +8,11 @@ package Servlets;
 
 import Misc.ResultController;
 import Models.QuizModel;
+import Stores.Answer;
 import Stores.Quiz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jimiwesterholm
  */
-@WebServlet(urlPatterns = {"/viewQuiz", "/viewQuiz/*"})
+@WebServlet(urlPatterns = {"/ViewQuiz", "/ViewQuiz/*"})
 public class ViewQuiz extends HttpServlet {
 
 
@@ -65,7 +67,11 @@ public class ViewQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        ResultController rc = new ResultController();
+        int rId = (Integer) request.getSession().getAttribute("rId");
+        List<Answer> studentAns = rc.fetchAnswersIndividual(rId);
+        request.getSession().setAttribute("studentAns", studentAns);
+        response.sendRedirect("/Agile/quizSummary.jsp");
     }
 
     /**
