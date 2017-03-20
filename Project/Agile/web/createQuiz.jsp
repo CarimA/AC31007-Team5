@@ -19,17 +19,22 @@
             <h3>Create a Quiz</h3>
             <%
                 User user = (User) session.getAttribute("user");
-            if (user == null || user.getPosition().equals("student")) {
-                response.sendRedirect("QuizOverview");
+            if (user == null)
+            {
+                response.sendRedirect("Home");
+            }
+            else if(user.getPosition().equals("student"))
+            {
+                response.sendRedirect("QuizOverview");   
             }
             
                 %>
             <form method="POST"  action="createQuiz">
-                <ul>
-                    <li>How many questions do you want to start with? <input type="number" name="questions"></li>
-                </ul>
+                
+                    How many questions do you want to start with? <input type="number" name="questions">
+                
                 <br>
->                <input type="submit" value="Create Quiz"> 
+                <input type="submit" value="Create Quiz"> 
             </form>
         </div>
     </body>

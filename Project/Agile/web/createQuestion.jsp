@@ -48,8 +48,8 @@
                     {
                         %>
                             <h6>Answer: <%=x + 1%></h6>
-                            Answer: <input type="text" name="answer<%=i%><%=x%>" maxlength="255">
-                            Number: <input type="text" name="number<%=i%><%=x%>"><br/>
+                            <input type="hidden" name="number<%=i%><%=x%>" value="<%=x + 1%>" >
+                            Answer: <input type="text" name="answer<%=i%><%=x%>" maxlength="255"><br/>
                             Explanation: <input type="text" name="explanation<%=i%><%=x%>" maxlength="255">
                             Correct Answer: <input type="checkbox" value="true" name="right<%=i%><%=x%>"><br/>
                 <%
