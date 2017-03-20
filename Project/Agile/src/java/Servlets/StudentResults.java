@@ -10,6 +10,7 @@ import Misc.ResultController;
 import Models.QuizModel;
 import Stores.Answer;
 import Stores.Quiz;
+import Stores.ResultModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -41,20 +42,19 @@ public class StudentResults extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        QuizModel qm = new QuizModel();
-        ResultController rc = new ResultController();
         
         String[] args = request.getRequestURI().split("/");
-        int a = Integer.parseInt(args[3]);
+        int rId = Integer.parseInt(args[3]);
         
-        Quiz quiz = qm.fetchQuiz(rc.getQuizId(a));
-        List<Answer> studentAns = rc.fetchAnswersIndividual(a);
+        ResultController rc = new ResultController();
+        ResultModel rm = rc.fetchResultsIndividual(rId);
+        List<Answer> studentAns = rc.fetchAnswersIndividual(rId);
         
-        request.getSession().setAttribute("quiz", quiz);
+        //request.getSession().setAttribute("quiz", quiz2);
         request.getSession().setAttribute("studentAns", studentAns);
+        request.getSession().setAttribute("studentRes", rm);
         
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/studentResults.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/quizSummary.jsp");
         rd.forward(request, response);
     }
 

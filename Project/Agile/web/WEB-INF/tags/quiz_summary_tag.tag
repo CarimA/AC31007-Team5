@@ -42,12 +42,34 @@
         <%=email%>
     </div>
     <div class="dynamic-column">
-        
+        ${score}
     </div>
 </div>
     
 <%
-    }
+    } else {
+%>
+}
+<div class="dynamic-row">
+    <div class="dynamic-column">
+        <p>Summary for <b><%=title%></b> for <b><%=module%></b> module</p>
+    </div>
+</div>
+<div class="dynamic-row">
+    <div class="dynamic-column">
+        <%=id%>
+    </div>
+    <div class="dynamic-column grow">
+        <%=displayname%>
+    </div>
+    <div class="dynamic-column">
+        <%=email%>
+    </div>
+    <div class="dynamic-column">
+        ${score}
+    </div>
+</div>
+}
     for (int i = 0; i < questions.size(); i++) {
         q = questions.get(i);%>
 <div class="row">

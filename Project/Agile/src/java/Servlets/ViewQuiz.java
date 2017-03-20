@@ -10,6 +10,7 @@ import Misc.ResultController;
 import Models.QuizModel;
 import Stores.Answer;
 import Stores.Quiz;
+import Stores.ResultModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -67,11 +68,13 @@ public class ViewQuiz extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ResultController rc = new ResultController();
-        int rId = (Integer) request.getSession().getAttribute("rId");
-        List<Answer> studentAns = rc.fetchAnswersIndividual(rId);
-        request.getSession().setAttribute("studentAns", studentAns);
-        response.sendRedirect("/Agile/quizSummary.jsp");
+//        ResultController rc = new ResultController();
+//        int rId = (Integer) request.getSession().getAttribute("rId");
+//        List<Answer> studentAns = rc.fetchAnswersIndividual(rId);
+//        ResultModel rm = rc.fetchResultsIndividual(rId);
+//        request.getSession().setAttribute("studentAns", studentAns);
+//        request.getSession().setAttribute("studentRes", rm);
+//        response.sendRedirect("/Agile/quizSummary.jsp");
     }
 
     /**

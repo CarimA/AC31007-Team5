@@ -8,10 +8,10 @@
 
 
 <%
-    /*User user = (User) session.getAttribute("user");
+    User user = (User) session.getAttribute("user");
             if (user == null || user.getPosition().toLowerCase().equals("student")) {
                 response.sendRedirect("index.jsp");
-            }*/
+            }
     Quiz quiz = (Quiz) session.getAttribute("quiz");
 
     ResultModel result = new ResultModel();
@@ -42,6 +42,9 @@
 
                 %>
                 <%= sdf.format(result.getDate()) %>
+            </div>
+            <div class="dynamic-column">
+                <a href="/Agile/StudentResults/<%= result.getId() %>">View Details</a>
             </div>
         </div>
 <% 
