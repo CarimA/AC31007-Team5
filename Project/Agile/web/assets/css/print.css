@@ -1,0 +1,149 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22-Feb-2017, 12:13:18
+    Author     : carimakeju
+*/
+
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Pangolin');
+
+@media print {
+    body { font-family: 'PT Sans', sans-serif !important; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Pangolin', cursive; }
+
+    .success, .error {
+        border-radius: 5px;
+        padding: 0.2px;
+    }
+
+    .success i, .error i {
+        margin-left: 0.2em;    
+    }
+
+    .error {
+        background: #EFA5A5;
+        border: 1px solid #E06767;
+    }
+
+    .success {
+        background: #A1D490;
+        border: 1px solid #579E65;
+    }
+
+    .error span {
+        display: block;
+        font-style: italic;
+        font-size: 0.65em;
+        margin-left: 0.2em;
+    }
+
+    header { 
+        margin: 1em auto !important;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+    footer {
+        margin: 1em auto !important;
+        padding: 1em 0 !important;
+        border-top: 1px solid #e1e1e1;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    header h1 a {
+        text-decoration: none;
+        color: #555;
+    }
+
+    header ul {
+        list-style: none;
+        text-align: right;
+    }
+
+    header ul li {
+        display: inline !important;
+    }
+
+    header ul li a {
+        padding: 0.45em 0.8em;
+        margin: 0 0.25em;
+        border-radius: 5px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #555;
+        background: #e1e1e1;
+        letter-spacing: .1rem;
+        text-size: 11px;
+        font-weight: 600;
+    }
+
+    header ul li a:hover {
+        background: #0FA0CE;
+        color: #fff;
+    }
+
+    input[type=text] {
+        padding: 0.2em;
+    }
+
+    .row-center {
+        text-align: center;
+        line-height: 1.5em;
+    }
+
+    .quiz-row {
+
+    }
+
+    .quiz-row:hover {
+        background: #0FA0CE;
+        color: #fff;
+    }
+
+    .quiz-alt {
+        background: #eee;
+    }
+
+    form {
+        margin: 0;
+    }
+
+    p, h3 {
+        margin-bottom: 0 !important;
+    }
+
+    h3 {
+        margin-top: 0.2em;
+    }
+
+    .answer {
+        margin: 0.2em;
+    }
+
+    .answer label {
+        padding: 0.1em;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+    }
+
+    .answer input[type="radio"] {
+        display: none;
+    }
+
+    input[type="radio"]:checked ~ label {
+        background: lightgray;
+    }
+
+    .correct label {
+        border: 3px solid black !important;
+    }
+
+    .wrong label {
+        border: 3px dotted grey !important;
+    }
+}
