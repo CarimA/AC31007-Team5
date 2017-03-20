@@ -100,6 +100,7 @@ public class StudentSummary extends HttpServlet {
         int count = 1;
         String q ="";
         String a = "";
+        String e = "";
         String correct = "";
         int p;
         int points = 0;
