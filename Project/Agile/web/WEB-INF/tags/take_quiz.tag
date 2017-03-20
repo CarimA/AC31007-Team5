@@ -18,7 +18,7 @@
 %>
 <h1><%=quiz.getTitle()%></h1>
 
-<form method="POST" action="TakeQuiz">
+<form method="POST" action="/Agile/TakeQuiz">
     <%
         for (int i = 0; i < questions.size(); i++) {
             q = questions.get(i);
