@@ -35,14 +35,15 @@
         <%
             }else{
         %>
-        <h1><%= q.getNumber()%> <%=q.getQuestion()%> Worth <%=q.getPoints()%> points</h1>
-        <p>Edit Question</p>
-         <%// change this%>
+        <h1><%= q.getNumber()%>: <%=q.getQuestion()%></h1>
+        <h2>Worth <%=q.getPoints()%> points</h2>
+      
         <form method="POST" action="EditQuiz">
+            <label for="question"><p>Edit Question</p></label>
         <input type="text" name="question">
-        <p>Edit Image</p><img src="/Agile/Thumb/<%//q.getImage()%>"></a><br/>
+        <label for="image"><p>Edit Image</p></label><img src="/Agile/Thumb/<%//q.getImage()%>"></a><br/>
         <input type="file" name="image">
-        <p>Edit points</p>
+        <label for="points"><p>Edit points</p></label>
         <input type="number" name="points" min="1" max="100" value="<%=q.getPoints()%>">
         <input type="hidden" name="QuestionID" value="<%=q.getId()%>">
         
