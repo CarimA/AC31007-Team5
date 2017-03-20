@@ -18,7 +18,6 @@
     </head>
 
     <body>
-        <h1>Quiz Overview</h1>
         <div>
                 <%
                     User user = (User) session.getAttribute("user");
@@ -42,16 +41,25 @@
                 <%
                     }
                     java.util.ArrayList<Quiz> quizzes = (java.util.ArrayList<Quiz>) request.getAttribute("quizzes");
-                    for(Quiz q : quizzes)
-                    {
+                    boolean alt =false;
+                    for (Quiz q : quizzes)
+                    {  
+                        alt = !alt;
                 %>
-                   <h3><%=q.getTitle()%> : <%=q.getModule()%></h3> <br>
+                <div class="dynamic-row <%= alt ? "quiz-alt": "" %>">
+                    <div class="dynamic-column grow">
+                        <b><%=q.getTitle()%> : <%=q.getModule()%></b>
+                    </div>
                    <%
                        if(pos.equalsIgnoreCase("staff"))
                        {
                    %>
-                       <a href="/Agile/EditQuiz/<%=q.getId()%>"><h6>Edit Quiz</h6></a>
-                       <a href="/Agile/ViewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a>
+                    <div class="dynamic-column">
+                       <a href="/Agile/EditQuiz/<%=q.getId()%>">Edit Quiz</a>
+                    </div>
+                    <div class="dynamic-column">
+                       <a href="/Agile/ViewQuiz/<%=q.getId()%>">View Quiz Results</a>
+                    </div>
                    <%
                        }
                         else if(pos.equalsIgnoreCase("student"))
@@ -61,6 +69,9 @@
                     <a href="/Agile/StudentResults/<%=q.getId()%>"><h6>Student Results Quiz</h6></a> 
                    <%
                        }
+%>
+                </div>
+                <%
                     }
                    %>
               
