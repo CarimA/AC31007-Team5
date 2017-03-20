@@ -19,8 +19,13 @@
             <h3>Create a Quiz</h3>
             <%
                 User user = (User) session.getAttribute("user");
-            if (user == null || user.getPosition().equals("student")) {
-                response.sendRedirect("QuizOverview");
+            if (user == null)
+            {
+                response.sendRedirect("Home");
+            }
+            else if(user.getPosition().equals("student"))
+            {
+                response.sendRedirect("QuizOverview");   
             }
             
                 %>
