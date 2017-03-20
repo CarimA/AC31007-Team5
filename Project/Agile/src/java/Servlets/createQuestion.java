@@ -71,22 +71,17 @@ public class createQuestion extends HttpServlet {
             
             InputStream inputStream = null;
             String imageString = "image" + Integer.toString(i);
-            Part fp = request.getPart(imageString);
-            if(fp != null)
-            {
-                inputStream = fp.getInputStream();
+            try{
+                Part fp = request.getPart(imageString);
+                inputStream = fp.getInputStream(); 
+                qm.addQuestionWithImage(q,number,points,qID,inputStream);
             }
-            
-            if( inputStream.available() == 0)
+            catch(IllegalStateException e)
             {
                 qm.addQuestion(q,number,points,qID);
             }
-            else
-            {
-                qm.addQuestionWithImage(q,number,points,qID,inputStream);
-            }
-            
-            int questionID = qm.getQuestionID(q, number, points, qID);
+
+            int questionID = qm.getIdFromQ(q, number, points, qID);
             
             for(int x = 0; x < 4; x++)
             {
