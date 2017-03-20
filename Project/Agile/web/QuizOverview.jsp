@@ -50,15 +50,15 @@
                        if(pos.equalsIgnoreCase("staff"))
                        {
                    %>
-                       <a href="EditQuiz/<%=q.getId()%>"><h6>Edit Quiz: <%=q.getTitle()%></h6></a>
-                       <a href="viewQuiz/<%=q.getId()%>"><h6>View Quiz: <%=q.getTitle()%></h6></a><br>
+                       <a href="EditQuiz/<%=q.getId()%>"><h6>Edit Quiz</h6></a>
+                       <a href="viewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a><br>
                    <%
                        }
                         else if(pos.equalsIgnoreCase("student"))
                        {
                    %>
-                    <a href="takeQuizStudent/<%=q.getId()%>"><h6>View Quiz results: <%=q.getTitle()%></h6></a>
-                    <a href="StudentResults/<%=q.getId()%>"><h6>Student Results Quiz: <%=q.getTitle()%></h6></a> <br>
+                    <a href="TakeQuiz/<%=q.getId()%>"><h6>View Quiz results</h6></a>
+                    <a href="StudentResults/<%=q.getId()%>"><h6>Student Results Quiz</h6></a> <br>
                    <%
                        }
                     }
