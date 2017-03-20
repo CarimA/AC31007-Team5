@@ -7,15 +7,17 @@
 <%@page import="Stores.User"%>
 <%@page import="Stores.Answer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<c:set var="content">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Answer</title>
         <link rel="stylesheet" type="text/css" href="/Agile/assets/css/skeleton.min.css" />
         <link rel="stylesheet" type="text/css" href="/Agile/assets/css/style.css" />
         <link rel="stylesheet" type="text/css" href="/Agile/assets/css/font-awesome.min.css"/>
-        <jsp:include page="header.jsp"></jsp:include>
+      
     </head>
     <body>
         <%
@@ -59,5 +61,16 @@
                 Delete Answer (Do not click by accident) <input type="submit" name="submit" value="Delete">
                 </form>
                        <h3>Go back to <a href="/Agile/EditQuestion/<%=QuizID%>/<%=QuestionID%>">Question</a></h3>
-    </body>
-</html>
+    </body></c:set>
+<t:wrapper>
+    <jsp:attribute name="header">
+        
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+        
+    </jsp:attribute>
+    <jsp:body>
+        ${content}
+    </jsp:body>
+</t:wrapper>
+
