@@ -38,7 +38,7 @@
                    
                     if( pos.equalsIgnoreCase("staff") ) {
                     %>
-                <a href = "createQuiz.jsp" role = "button"><h6>New Quiz</h6></a>
+                <a href = "/Agile/createQuiz.jsp" role = "button"><h6>New Quiz</h6></a>
                 <%
                     }
                     java.util.ArrayList<Quiz> quizzes = (java.util.ArrayList<Quiz>) request.getAttribute("quizzes");
@@ -50,15 +50,15 @@
                        if(pos.equalsIgnoreCase("staff"))
                        {
                    %>
-                       <a href="EditQuiz/<%=q.getId()%>"><h6>Edit Quiz</h6></a>
-                       <a href="viewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a>
+                       <a href="/Agile/EditQuiz/<%=q.getId()%>"><h6>Edit Quiz</h6></a>
+                       <a href="/Agile/viewQuiz/<%=q.getId()%>"><h6>View Quiz Results</h6></a>
                    <%
                        }
                         else if(pos.equalsIgnoreCase("student"))
                        {
                    %>
-                    <a href="TakeQuiz/<%=q.getId()%>"><h6>View Quiz results</h6></a>
-                    <a href="StudentResults/<%=q.getId()%>"><h6>Student Results Quiz</h6></a> 
+                    <a href="/Agile/TakeQuiz/<%=q.getId()%>"><h6>View Quiz results</h6></a>
+                    <a href="/Agile/StudentResults/<%=q.getId()%>"><h6>Student Results Quiz</h6></a> 
                    <%
                        }
                     }
