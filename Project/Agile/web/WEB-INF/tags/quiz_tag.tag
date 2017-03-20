@@ -58,7 +58,7 @@ All the quizzes which are not available have the ?Take Quiz? button disabled.
 	
         boolean alt = false;
 	for (Quiz quiz : quizzes) {
-            if(!quiz.isAvailable()){break;}
+            if(!quiz.isAvailable()){continue;}
             alt = !alt;
 %>
             <div class="dynamic-row <%= alt ? "quiz-alt": "" %>">

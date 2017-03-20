@@ -219,6 +219,7 @@ public class QuizModel {
             state.executeUpdate();
             state.close();
             connection.close();
+            deleteResultByQuizID(id);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -262,6 +263,39 @@ public class QuizModel {
             Connection connection = Helpers.connect();
             PreparedStatement statement;
             statement = connection.prepareStatement("DELETE FROM answer WHERE aId=?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            deleteResultByAnswerID(id);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteResultByAnswerID(int id){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("DELETE FROM result_answer WHERE aId=?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteResultByQuizID(int id){
+        try {
+            Connection connection = Helpers.connect();
+            PreparedStatement statement;
+            statement = connection.prepareStatement("DELETE FROM results WHERE QuizID=?");
             statement.setInt(1, id);
             statement.executeUpdate();
             statement.close();
